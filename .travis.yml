@@ -35,7 +35,7 @@ before_script:
 script:
   - ./test.sh
 after_script:
-  - if [ "$TRAVIS_BRANCH" = "devel-fe" ]; then coveralls; fi
+  - if [ "$TRAVIS_BRANCH" = "devel-fe" ]; then npm run coveralls; fi
 
 notifications:
   slack: swpp2018s:eXObOVtbqFO42dFDWrUr23gh
