@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import MxM, Reply, Rating
 
-# Register your models here.
+admin.site.register(MxM)
+admin.site.register(Reply)
+admin.site.register(Rating)
