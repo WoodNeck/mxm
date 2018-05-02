@@ -1,6 +1,11 @@
 from app.models import MxM, Reply, Rating
 from app.serializers import MxMSerializer, ReplySerializer, RatingSerializer
 from rest_framework import generics
+from django.shortcuts import render
+
+
+def home(request):
+    return render(request, 'home.html')
 
 
 class MxMList(generics.ListAPIView):
