@@ -17,7 +17,7 @@ You have to install [Python](https://www.python.org/)(>=3.5) and [node.js](https
 
 # Installing
 Next set of commands will install all python & javascript dependencies.
-``` bash
+```
 # install dependencies
 npm install
 
@@ -33,25 +33,25 @@ npm run build --report
 
 # Running the tests
 ## Run all tests
-``` bash
-npm test
+```
+npm test_all
 ```
 
 ## E2E tests
 We're using [Nightwatch.js](http://nightwatchjs.org/) for E2E test.
-``` bash
+```
 npm run e2e
 ```
 
 ## Unit tests
 #### Frontend
 We're using [Jest](https://facebook.github.io/jest/) for unit test.
-``` bash
+```
 npm run unit
 ```
 
 #### Backend
-``` bash
+```
 python3 manage.py test backend
 ```
 
@@ -59,55 +59,49 @@ python3 manage.py test backend
 #### Javascript
 We're using [standard](https://github.com/standard/standard) style for javascript files.
 
-``` bash
-npm install standardx --global
-npm install snazzy --global
-standardx --fix --verbose "assets/**/*.js" | snazzy
+```
+npm run lint
 ```
 
 #### Python
 We're using [PEP8](https://www.python.org/dev/peps/pep-0008/) style for python files.
 
 ```
-    pip install flake8
-    flake8 .
+pip install flake8
+flake8 .
 ```
-
-# Deployment
-
 
 # Deployment
 #### Tested on Ubuntu 16.04 LTS
 We're using [nginx](https://nginx.org/en/) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) configs for deployment web server deployment.
 Simply use deploy.sh shell script for deploy
-``` bash
+```
 ./deploy.sh
 ```
 
 Install nginx & uwsgi first
 ```
-    sudo apt-get install nginx
-    pip install uwsgi
+sudo apt-get install nginx
+pip install uwsgi
 ```
 You should provide proper absolute path for these files
 - mxm_nginx.conf
 - mxm_uwsgi.ini
 Make a symbolic link for nginx
 ```
-    cd /etc/nginx/sites-enabled
-    sudo ln -s path/to/mix_x_match/mxm_nginx.conf /etc/nginx/sites-enabled/
+cd /etc/nginx/sites-enabled
+sudo ln -s path/to/mix_x_match/mxm_nginx.conf /etc/nginx/sites-enabled/
 ```
 Now you can run nginx & uwsgi with django
 ```
-    // At the root of project directory
-    sudo systemctl start nginx
-    uwsgi --ini mxm_uwsgi.ini
+// At the root of project directory
+sudo systemctl start nginx
+uwsgi --ini mxm_uwsgi.ini
 ```
 You can stop nginx with
 ```
-    sudo systemctl stop nginx
+sudo systemctl stop nginx
 ```
-
 
 # Built With
 #### Overall
@@ -124,7 +118,7 @@ You can stop nginx with
 #### Backend
 - [Django](https://www.djangoproject.com/) - Main framework
 - [Django rest framework](http://www.django-rest-framework.org/) - Web API building
-- [Django webpack loader](https://github.com/owais/django-webpack-loader) - Django integration with frontend webpack
+- [Django-nose](https://github.com/django-nose/django-nose) - Django test runner using nose
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/WoodNeck/mxm/blob/master/CONTRIBUTING.md) for details.

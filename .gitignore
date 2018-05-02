@@ -11,6 +11,7 @@ selenium-debug.log
 # Editor directories and files
 .idea
 .vscode
+.history
 *.suo
 *.ntvs*
 *.njsproj
@@ -34,7 +35,12 @@ coverage.xml
 
 # Django stuff:
 *.log
+*.pot
+*.pyc
+__pycache__/
 local_settings.py
+db.sqlite3
+media
 
 # dotenv
 .env
@@ -52,3 +58,5 @@ ENV/
 
 # Staticfiles
 staticfiles/
+
+
