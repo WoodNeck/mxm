@@ -2,11 +2,11 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
-| Branches       | Build Status |
-|----------------|--------------|
-| devel          |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel)](https://travis-ci.org/WoodNeck/mxm)|
-| devel-frontend |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-fe)](https://travis-ci.org/WoodNeck/mxm)|
-| devel-backend  |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-be)](https://travis-ci.org/WoodNeck/mxm)|
+| Branches       | Build Status | Coverage Status |
+|----------------|--------------|-----------------|
+| devel          |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel)](https://travis-ci.org/WoodNeck/mxm)|-----|
+| devel-frontend |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-fe)](https://travis-ci.org/WoodNeck/mxm)|[![Coverage Status](https://coveralls.io/repos/github/WoodNeck/mxm/badge.svg?branch=devel-fe)](https://coveralls.io/github/WoodNeck/mxm?branch=devel-fe)|
+| devel-backend  |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-be)](https://travis-ci.org/WoodNeck/mxm)|-----|
 
 - Principles and Practices of Software Development, 2018 Spring, Team 6
 
