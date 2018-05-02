@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $TRAVIS_BRANCH = 'devel_fe' ]
+if [[ $TRAVIS_BRANCH == 'devel_fe' ]
 then
   npm run test_fe
 elif [[ $TRAVIS_BRANCH == 'devel_be' ]]

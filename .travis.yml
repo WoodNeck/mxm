@@ -11,13 +11,13 @@ matrix:
       before_script:
         - pip install -r requirements.txt
       script:
-        - .travis/test.sh
+        - ./test.sh
     - language: node_js
       node_js: "lts/*"
       before_script:
         - npm install
       script:
-        - .travis/test.sh
+        - ./test.sh
 
 notifications:
   slack: swpp2018s:eXObOVtbqFO42dFDWrUr23gh
