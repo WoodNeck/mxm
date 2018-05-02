@@ -9,6 +9,19 @@ const devConfigPromise = require('../../build/webpack.dev.conf')
 
 let server
 
+var selenium = require('selenium-standalone');
+selenium.install({
+  version: '2.45.0',
+  baseURL: 'http://selenium-release.storage.googleapis.com',
+  drivers: {
+    chrome: {
+      version: '2.15',
+      arch: process.arch,
+      baseURL: 'http://chromedriver.storage.googleapis.com'
+    },
+  }
+});
+
 devConfigPromise.then(devConfig => {
   const devServerOptions = devConfig.devServer
   const compiler = webpack(webpackConfig)
