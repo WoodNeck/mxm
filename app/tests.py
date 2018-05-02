@@ -4,7 +4,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vuedj.settings")
 django.setup()
 
 from django.test import TestCase
-from app.views import index
 
 class TestView(TestCase):
     """Test the views of the application"""
