@@ -5,15 +5,17 @@ branches:
     - devel
     - devel-fe
     - devel-be
-language: python
-python: "3.5"
+language: java
+jdk:
+    - oraclejdk8
+node_js: "9.10.1"
+
 addons:
 apt:
   sources:
     - google-chrome
   packages:
     - google-chrome-stable
-node_js: "lts/*"
 before_script:
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
@@ -21,6 +23,7 @@ before_script:
   - pip install -r requirements.txt
   - npm install
   - chmod +x ./test.sh
+  - sleep 5
 script:
   - ./test.sh
 
