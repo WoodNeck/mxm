@@ -11,14 +11,13 @@ matrix:
       before_script:
         - pip install -r requirements.txt
       script:
-        - if [ "$TRAVIS_BRANCH" = "devel_be" ]; then python manage.py test
+        - .travis/test.sh
     - language: node_js
       node_js: "lts/*"
       before_script:
         - npm install
       script:
-        - if [ "$TRAVIS_BRANCH" = "devel_fe" ]; then npm test_fe
-        - if [ "$TRAVIS_BRANCH" = "devel" ]; then npm test
+        - .travis/test.sh
 
 notifications:
   slack: swpp2018s:eXObOVtbqFO42dFDWrUr23gh
