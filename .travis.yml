@@ -9,9 +9,9 @@ branches:
     - /^fe-.*$/
     - /^be-.*$/
 
-language: java
-jdk:
-  - oraclejdk8
+language: python
+python:
+  - 3.5
 node_js: "9.10.1"
 addons:
   chrome: stable
@@ -19,14 +19,8 @@ env:
   - PYTHONPATH=. COVERALLS_SERVICE_NAME=travis-pro
 
 before_script:
-  - sudo add-apt-repository ppa:fkrull/deadsnakes -y
-  - sudo apt-get update
-  - sudo apt-get install python3.5
-  - alias python3=/usr/bin/python3
-  - sudo apt-get install python3-pip
-  - sudo pip3 install --upgrade pip
-  - sudo pip3 install -r requirements.txt
-  - sudo pip3 install pyyaml # for coveralls
+  - pip install -r requirements.txt
+  - pip install pyyaml # for coveralls
   - export COVERALLS_SERVICE_NAME=travis-ci
   - export COVERALLS_REPO_TOKEN=qBBVD53FS9tIsJy4i6GcMCZKcUY7ZO4dG
   - npm install
