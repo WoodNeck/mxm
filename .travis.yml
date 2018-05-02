@@ -26,6 +26,8 @@ before_script:
   - sudo pip3 install --upgrade pip
   - sudo pip3 install -r requirements.txt
   - sudo pip3 install pyyaml # for coveralls
+  - export COVERALLS_SERVICE_NAME=travis-ci
+  - export COVERALLS_REPO_TOKEN=qBBVD53FS9tIsJy4i6GcMCZKcUY7ZO4dG
   - npm install
   - chmod +x ./test.sh
   - export CHROME_BIN=chromium-browser
