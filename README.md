@@ -4,7 +4,7 @@
 
 | Branches       | Build Status | Coverage Status |
 |----------------|--------------|-----------------|
-| devel          |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel)](https://travis-ci.org/WoodNeck/mxm)|-----|
+| devel          |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel)](https://travis-ci.org/WoodNeck/mxm)|     |
 | devel-frontend |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-fe)](https://travis-ci.org/WoodNeck/mxm)|[![Coverage Status](https://coveralls.io/repos/github/WoodNeck/mxm/badge.svg?branch=devel-fe)](https://coveralls.io/github/WoodNeck/mxm?branch=devel-fe)|
 | devel-backend  |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-be)](https://travis-ci.org/WoodNeck/mxm)|-----|
 

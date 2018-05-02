@@ -15,5 +15,5 @@ class TestView(TestCase):
         pass
 
     def test_index_view(self):
-        response = self.client.get('/')
+        response = self.client.get('/mxms/')
         self.assertEqual(response.status_code, 200)
