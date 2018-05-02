@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Running test on branch: " $TRAVIS_BRANCH
 if [[ $TRAVIS_BRANCH == 'devel_fe' ]]
 then
   npm run test_fe
