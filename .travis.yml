@@ -8,18 +8,18 @@ branches:
   except:
     - /^fe-.*$/
     - /^be-.*$/
+
 language: java
 jdk:
-    - oraclejdk8
+  - oraclejdk8
 node_js: "9.10.1"
-
 addons:
-apt:
-  sources:
-    - google-chrome
-  packages:
-    - google-chrome-stable
+  chrome: stable
+
 before_script:
+  - sudo add-apt-repository ppa:fkrull/deadsnakes
+  - sudo apt-get update
+  - sudo apt-get install python3.5
   - sudo apt-get install python3-pip
   - sudo pip3 install --upgrade pip
   - sudo pip3 install -r requirements.txt

@@ -5,7 +5,7 @@ then
   npm run test_fe
 elif [[ $TRAVIS_BRANCH == 'devel_be' ]]
 then
-  python manage.py test
+  python3 manage.py test
 else
   npm run test_all
 fi
