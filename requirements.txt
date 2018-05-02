@@ -3,3 +3,5 @@ coveralls==1.2.0
 Django==2.0.5
 django-nose==1.4.5
 djangorestframework==3.8.2
+social-auth-app-django==2.1.0
+social-auth-core==1.7.0
