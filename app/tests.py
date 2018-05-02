@@ -1,6 +1,10 @@
-from django.test import TestCase
+import django
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vuedj.settings")
+django.setup()
 
-from views import index
+from django.test import TestCase
+from app.views import index
 
 
 # Create your tests here.
