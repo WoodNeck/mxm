@@ -2,11 +2,11 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
-| Branches       | Build Status | Coverage Status |
-|----------------|--------------|-----------------|
+| Branches       |  Build Status  |  Coverage Status  |
+|----------------|:--------------:|:-----------------:|
 | devel          |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel)](https://travis-ci.org/WoodNeck/mxm)|     |
 | devel-frontend |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-fe)](https://travis-ci.org/WoodNeck/mxm)|[![Coverage Status](https://coveralls.io/repos/github/WoodNeck/mxm/badge.svg?branch=devel-fe)](https://coveralls.io/github/WoodNeck/mxm?branch=devel-fe)|
-| devel-backend  |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-be)](https://travis-ci.org/WoodNeck/mxm)|-----|
+| devel-backend  |[![Build Status](https://travis-ci.org/WoodNeck/mxm.svg?branch=devel-be)](https://travis-ci.org/WoodNeck/mxm)|[![Coverage Status](https://coveralls.io/repos/github/WoodNeck/mxm/badge.svg?branch=devel-be)](https://coveralls.io/github/WoodNeck/mxm?branch=devel-be)|
 
 - Principles and Practices of Software Development, 2018 Spring, Team 6
 
@@ -16,9 +16,9 @@
 You have to install [Python](https://www.python.org/)(>=3.5) and [node.js](https://nodejs.org/ko/)&[npm](https://www.npmjs.com/)(>=5.8.0) before starting.
 
 # Installing
-Next set of commands will install all python & javascript dependencies.
 ```
 # install dependencies
+pip install -r requirements.txt
 npm install
 
 # serve with hot reload at localhost:8080
@@ -43,12 +43,23 @@ We're using [Nightwatch.js](http://nightwatchjs.org/) for E2E test.
 npm run e2e
 ```
 
+- Run tests in multiple browsers in parallel.
+- Works with one command out of the box:
+  - Selenium and chromedriver dependencies automatically handled.
+  - Automatically spawns the Selenium server.
+
+
 ## Unit tests
 #### Frontend
 We're using [Jest](https://facebook.github.io/jest/) for unit test.
 ```
 npm run unit
 ```
+
+- Supports ES2015 in test files.
+- Supports all webpack loaders.
+- Easy mock injection.
+
 
 #### Backend
 ```
@@ -94,7 +105,7 @@ sudo ln -s path/to/mix_x_match/mxm_nginx.conf /etc/nginx/sites-enabled/
 ```
 Now you can run nginx & uwsgi with django
 ```
-// At the root of project directory
+# At the root of project directory
 sudo systemctl start nginx
 uwsgi --ini mxm_uwsgi.ini
 ```
@@ -106,6 +117,7 @@ sudo systemctl stop nginx
 # Built With
 #### Overall
 - [Travis.ci](https://travis-ci.org/WoodNeck/mxm) - Continuous Integration
+- [Coveralls.io](https://coveralls.io/github/WoodNeck/mxm) - Coverage test status automatization
 
 #### Frontend
 - [Vue.js](https://vuejs.org/) - Main web framework
