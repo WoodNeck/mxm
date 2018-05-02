@@ -21,8 +21,8 @@ apt:
     - google-chrome-stable
 before_script:
   - sudo apt-get install python3-pip
-  - pip3 install --upgrade pip
-  - pip3 install -r requirements.txt
+  - sudo pip3 install --upgrade pip
+  - sudo pip3 install -r requirements.txt
   - npm install
   - chmod +x ./test.sh
   - export CHROME_BIN=chromium-browser
