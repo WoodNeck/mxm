@@ -6,7 +6,7 @@ class MxM(models.Model):
 	created_time = models.DateTimeField(auto_now_add=True)
 	comment = models.CharField(max_length=1000, default='')
 	is_on_recommendation = models.BooleanField(default=False)
-	is_on_evalutaion = models.BooleanField(default=False)
+	is_on_evaluation = models.BooleanField(default=False)
 
 class Reply(models.Model):
 	created_time = models.DateTimeField(auto_now_add=True)
