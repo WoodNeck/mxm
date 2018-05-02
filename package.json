@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "coveralls": "jest --config test/unit/jest.conf.js --coverage --coverageReporters=text-lcov | coveralls",
+    "coveralls": "jest --config test/unit/jest.conf.js --coverage --coverageReporters=text-lcov",
     "e2e": "node test/e2e/install.js",
     "test_all": "npm run test_fe && npm run e2e",
     "test_fe": "npm run coveralls && npm run lint",
