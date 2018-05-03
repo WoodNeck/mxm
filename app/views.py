@@ -36,7 +36,7 @@ class TagList(generics.ListCreateAPIView):
     serializer_class = TagSerializer
 
 
-class MxMList(generics.ListAPIView):
+class MxMList(generics.ListCreateAPIView):
     queryset = MxM.objects.all()
     serializer_class = MxMSerializer
 
@@ -46,7 +46,7 @@ class MxMDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MxMSerializer
 
 
-class ReplyList(generics.ListAPIView):
+class ReplyList(generics.ListCreateAPIView):
     queryset = Reply.objects.all()
     serializer_class = ReplySerializer
 
@@ -56,7 +56,7 @@ class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReplySerializer
 
 
-class RatingList(generics.ListAPIView):
+class RatingList(generics.CreateListAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 
