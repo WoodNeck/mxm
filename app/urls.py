@@ -3,6 +3,11 @@ from app import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
+    url(r'^users/$', views.UserList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    url(r'^clothes/$', views.ClothesList.as_view()),
+    url(r'^clothes/(?P<pk>[0-9]+)/$', views.ClothesDetail.as_view()),
+    url(r'^tag/$', views.TagList.as_view()),
     url(r'^mxms/$', views.MxMList.as_view()),
     url(r'^mxms/(?P<pk>[0-9]+)/$', views.MxMDetail.as_view()),
     url(r'^replies/$', views.ReplyList.as_view()),
