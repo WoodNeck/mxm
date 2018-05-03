@@ -1,5 +1,34 @@
 from rest_framework import serializers
-from app.models import MxM, Reply, Rating
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from app.models import Clothes, Tag, MxM, Reply, Rating
+
+class UserSerializer(serializers.ModelSerializer):
+    mxm = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=MxM.objects.all()
+    )
+    clothes = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Clothes.objects.all()
+    )
+    class Meta:
+        model = User
+        fields = ('id','username','mxm','clothes')
+
+
+class ClothesSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+    tag = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Tag.objects.all()
+    )
+    class Meta:
+        model = Clothes
+        fields = ('id', 'created_time','image','is_wildcard','tag')
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('content', 'type')
 
 
 class MxMSerializer(serializers.ModelSerializer):

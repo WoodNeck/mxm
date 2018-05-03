@@ -56,7 +56,7 @@ class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReplySerializer
 
 
-class RatingList(generics.CreateListAPIView):
+class RatingList(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 

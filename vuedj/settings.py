@@ -159,3 +159,7 @@ NOSE_ARGS = [
     '--cover-erase',
     '--cover-package=app',
 ]
+
+# Image
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
