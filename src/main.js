@@ -2,14 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
+//import 'buefy/lib/buefy.css'
 import App from './App'
 import store from './store'
 import router from './router'
 
-Vue.use(Buefy, {
-  defaultIconPack: 'fab'
-})
+Vue.use(Buefy)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
