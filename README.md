@@ -1,4 +1,5 @@
 # MIX X MATCH
+[![Vue2.9.3](https://img.shields.io/badge/vue-2.9.3-green.svg)](https://kr.vuejs.org/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
