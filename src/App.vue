@@ -7,10 +7,23 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import { CHANGE_PAGE } from '@/store/types'
 export default {
   name: 'app',
   components: {
     'Navbar': Navbar
+  },
+  watch: {
+    $route (to, from) {
+      this.$store.commit(CHANGE_PAGE, {
+        pageName: to.path
+      })
+    }
+  },
+  mounted () {
+    this.$store.commit(CHANGE_PAGE, {
+      pageName: this.$route.path
+    })
   }
 }
 </script>

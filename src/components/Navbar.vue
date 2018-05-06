@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-fixed-top" id="nav">
+  <nav :class="navClasses" id="nav">
     <div class="container">
       <div class="navbar-brand">
         <span class="navbar-item">
@@ -40,7 +40,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import {NAVBAR_SET_BACKGROUND, NAVBAR_UNSET_BACKGROUND} from '@/store/types'
+
 export default {
+  computed: {
+    ...mapGetters({
+      navClasses: 'navClasses'
+    })
+  },
+
   data () {
     return {
       scrollPosition: null
@@ -51,11 +60,10 @@ export default {
     updateScroll () {
       this.scrollPosition = window.scrollY
       const height = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)
-      var nav = document.getElementById('nav')
       if (this.scrollPosition >= height) {
-        nav.classList.add('scrolled')
+        this.$store.commit(NAVBAR_SET_BACKGROUND)
       } else {
-        nav.classList.remove('scrolled')
+        this.$store.commit(NAVBAR_UNSET_BACKGROUND)
       }
     }
   },
@@ -80,6 +88,11 @@ export default {
   }
   .navbar {
     background-color: transparent;
+    -webkit-transition: background-color 300ms ease-in;
+    -moz-transition: background-color 300ms ease-in;
+    -o-transition: background-color 300ms ease-in;
+    -ms-transition: background-color 300ms ease-in;
+    transition: background-color 300ms ease-in;
   }
   .navbar-item {
     color: #4c4c4c;

@@ -18,10 +18,7 @@
 
 <script>
 export default {
-  mounted () {
-    const html = document.documentElement
-    html.classList.add('has-navbar-fixed-top')
-  }
+
 }
 </script>
 

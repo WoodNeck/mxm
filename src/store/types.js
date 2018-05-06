@@ -1,0 +1,4 @@
+// navbar
+export const CHANGE_PAGE = 'navbar/CHANGE_PAGE'
+export const NAVBAR_SET_BACKGROUND = 'navbar/NAVBAR_SET_BACKGROUND'
+export const NAVBAR_UNSET_BACKGROUND = 'navbar/NAVBAR_UNSET_BACKGROUND'

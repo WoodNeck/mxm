@@ -44,10 +44,7 @@
 
 <script>
 export default {
-  mounted () {
-    const html = document.documentElement
-    html.classList.remove('has-navbar-fixed-top')
-  }
+
 }
 </script>
 
