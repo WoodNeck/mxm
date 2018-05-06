@@ -1,17 +1,5 @@
 <template>
   <div>
-    <section class="hero is-large is-bold">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title">
-            Mix X Match
-          </h1>
-          <h2 class="subtitle">
-            Subtitle
-          </h2>
-        </div>
-      </div>
-    </section>
     <section class="hero is-fullheight is-info">
       <div class="hero-body">
         <div class="container has-text-centered">
@@ -19,12 +7,9 @@
             Mix X Match
           </h1>
           <h2 class="subtitle">
-            Subtitle
+            Build your own closet on web
           </h2>
         </div>
-      </div>
-      <div class="hero-foot has-text-centered is-size-7-moblie">
-        Hanger graphic from <a href="https://logomakr.com/">Logomakr</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>.
       </div>
     </section>
   </div>
@@ -42,5 +27,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  h1.title {
+    font-family: 'Luckiest Guy', cursive;
+  }
+  h2.subtitle {
+    font-family: 'Shrikhand', cursive;
+  }
+  .hero.is-info {
+    background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url('../assets/images/main_bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
 </style>
