@@ -1,6 +1,18 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3">
+        <aside class="menu">
+          <ul class="menu-list">
+            <li><router-link to="/closet/all" class="is-active">All Clothes</router-link></li>
+            <li><router-link to="/closet/mxm">All MxMs</router-link></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-9">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -8,19 +20,12 @@
 export default {
   data () {
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
-      msg: 'Hello World!'
+
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  color: #42b983;
-}
+
 </style>
