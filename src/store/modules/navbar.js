@@ -1,8 +1,9 @@
 import * as types from '../types'
 
 const state = {
-  currentPage: null,
-  scrolled: false
+  isMainPage: true,
+  scrolled: false,
+  burgerOpen: false
 }
 
 const getters = {
@@ -10,29 +11,56 @@ const getters = {
     return {
       'navbar': true,
       'is-fixed-top': true,
-      'scrolled': state.scrolled
+      'is-background-white': !state.isMainPage || state.burgerOpen,
+      'transparent': state.isMainPage && !state.scrolled && !state.burgerOpen,
+      'half-alpha': state.isMainPage && state.scrolled && !state.burgerOpen
+    }
+  },
+  navBrandClasses: (state, getters) => {
+    return {
+      'has-text-white': state.isMainPage && !state.burgerOpen,
+      'has-text-grey-dark': !state.isMainPage || state.burgerOpen
+    }
+  },
+  navBurgerClasses: (state, getters) => {
+    return {
+      'is-active': state.burgerOpen
+    }
+  },
+  navButtonClasses: (state, getters) => {
+    return {
+      'button': !state.burgerOpen,
+      'is-outlined': state.isMainPage && !state.burgerOpen,
+      'is-white': !state.isMainPage || !state.burgerOpen,
+      'has-text-grey-dark': !state.isMainPage || state.burgerOpen
     }
   }
 }
 
 const mutations = {
   [types.CHANGE_PAGE] (state, payload) {
-    state.currentPage = payload.pageName
+    state.currentPage = payload.path
     const html = document.documentElement
-    if (state.currentPage === '/') {
+    if (payload.path === '/') {
       html.classList.remove('has-navbar-fixed-top')
+      state.isMainPage = true
     } else {
       html.classList.add('has-navbar-fixed-top')
       state.scrolled = false
+      state.isMainPage = false
     }
   },
   [types.NAVBAR_SET_BACKGROUND] (state) {
-    if (state.currentPage === '/') {
-      state.scrolled = true
-    }
+    state.scrolled = true
   },
   [types.NAVBAR_UNSET_BACKGROUND] (state) {
     state.scrolled = false
+  },
+  [types.NAVBAR_TOGGLE_BURGER] (state) {
+    state.burgerOpen = !state.burgerOpen
+  },
+  [types.NAVBAR_CLOSE_BURGER] (state) {
+    state.burgerOpen = false
   }
 }
 

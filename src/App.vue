@@ -16,13 +16,13 @@ export default {
   watch: {
     $route (to, from) {
       this.$store.commit(CHANGE_PAGE, {
-        pageName: to.path
+        path: to.path
       })
     }
   },
   mounted () {
     this.$store.commit(CHANGE_PAGE, {
-      pageName: this.$route.path
+      path: this.$route.path
     })
   }
 }
