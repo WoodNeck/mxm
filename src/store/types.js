@@ -6,4 +6,4 @@ export const NAVBAR_TOGGLE_BURGER = 'navbar/NAVBAR_TOGGLE_BURGER'
 export const NAVBAR_CLOSE_BURGER = 'navbar/NAVBAR_CLOSE_BURGER'
 
 // closet
-export const CLOSET_MENU_CHANGE = 'closet/CLOSET_MENU_CHANGE'
+export const CLOSET_CHANGE_MENU = 'closet/CLOSET_CHANGE_MENU'

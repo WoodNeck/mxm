@@ -41,7 +41,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import {NAVBAR_SET_BACKGROUND, NAVBAR_UNSET_BACKGROUND, NAVBAR_TOGGLE_BURGER, NAVBAR_CLOSE_BURGER} from '@/store/types'
+import { NAVBAR_SET_BACKGROUND,
+         NAVBAR_UNSET_BACKGROUND,
+         NAVBAR_TOGGLE_BURGER,
+         NAVBAR_CLOSE_BURGER } from '@/store/types'
 
 export default {
   computed: {
