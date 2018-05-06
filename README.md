@@ -128,7 +128,7 @@ sudo systemctl stop nginx
 - [Jest](https://facebook.github.io/jest/) - Unit test
 - [npm](https://www.npmjs.com/) - Package manager
 - [Buefy](https://buefy.github.io/#/) - CSS framework
-- [vue-parallaxy](https://github.com/apertureless/vue-parallax) - parallax image scroll effects
+- [vue-scroll-revealpublic](https://www.npmjs.com/package/vue-scroll-reveal) - Scroll reveal effect for Vue
 
 #### Backend
 - [Django](https://www.djangoproject.com/) - Main framework

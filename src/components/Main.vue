@@ -3,7 +3,7 @@
     <section class="hero is-fullheight is-info">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <figure class="image is-128x128 is-horizontal-center">
+          <figure class="image is-128x128 is-horizontal-center" v-scroll-reveal.reset>
             <img src="@/assets/images/wardrobe.svg">
           </figure>
           <br>
@@ -22,7 +22,7 @@
     <section class="hero is-fullheight is-danger">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <figure class="image is-128x128 is-horizontal-center">
+          <figure class="image is-128x128 is-horizontal-center" v-scroll-reveal.reset>
             <img src="@/assets/images/wardrobe.svg">
           </figure>
           <br>

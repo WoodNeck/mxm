@@ -20,6 +20,7 @@
     "sass-loader": "^7.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue-scroll-reveal": "^1.0.8",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
