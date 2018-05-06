@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-fixed-top">
+  <nav class="navbar is-fixed-top" id="nav">
     <div class="container">
       <div class="navbar-brand">
         <span class="navbar-item">
@@ -22,12 +22,6 @@
       <div id="navbarMenuHeroA" class="navbar-menu">
         <div class="navbar-end">
           <span class="navbar-item">
-            <router-link to="/" class="button is-white is-outlined">
-              <b-icon pack="fas" icon="home"></b-icon>
-              <span>Home</span>
-            </router-link>
-          </span>
-          <span class="navbar-item">
             <router-link to="/closet" class="button is-white is-outlined">
               <b-icon pack="fas" icon="user"></b-icon>
               <span>My Closet</span>
@@ -47,8 +41,31 @@
 
 <script>
 export default {
-  computed () {
+  data () {
+    return {
+      scrollPosition: null
+    }
+  },
 
+  methods: {
+    updateScroll () {
+      this.scrollPosition = window.scrollY
+      const height = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)
+      var nav = document.getElementById('nav')
+      if (this.scrollPosition >= height) {
+        nav.classList.add('scrolled')
+      } else {
+        nav.classList.remove('scrolled')
+      }
+    }
+  },
+
+  mounted () {
+    window.addEventListener('scroll', this.updateScroll)
+  },
+
+  destroy () {
+    window.removeEventListener('scroll', this.updateScroll)
   }
 }
 </script>
@@ -62,9 +79,17 @@ export default {
     background: transparent;
   }
   .navbar {
-    background: transparent;
+    background-color: transparent;
   }
   .navbar-item {
     color: #4c4c4c;
+  }
+  .scrolled {
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-transition: background-color 300ms ease-in;
+    -moz-transition: background-color 300ms ease-in;
+    -o-transition: background-color 300ms ease-in;
+    -ms-transition: background-color 300ms ease-in;
+    transition: background-color 300ms ease-in;
   }
 </style>

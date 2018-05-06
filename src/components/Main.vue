@@ -11,21 +11,46 @@
           </h2>
         </div>
       </div>
+      <div class="hero-foot has-text-centered">
+        <i class="fas fa-angle-down fa-5x"></i>
+      </div>
+    </section>
+    <section class="hero is-fullheight is-danger">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            Mix X Match
+          </h1>
+          <h2 class="subtitle">
+            Build your own closet on web
+          </h2>
+        </div>
+      </div>
+    </section>
+    <section class="hero is-fullheight is-alert">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            Mix X Match
+          </h1>
+          <h2 class="subtitle">
+            Build your own closet on web
+          </h2>
+        </div>
+      </div>
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-
-    }
+  mounted () {
+    const html = document.documentElement
+    html.classList.remove('has-navbar-fixed-top')
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h1.title {
     font-family: 'Luckiest Guy', cursive;
