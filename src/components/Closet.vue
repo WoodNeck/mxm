@@ -4,8 +4,8 @@
       <div class="column is-3">
         <aside class="menu">
           <ul class="menu-list">
-            <li><router-link to="/closet/all" class="is-active">All Clothes</router-link></li>
-            <li><router-link to="/closet/mxm">All MxMs</router-link></li>
+            <li><router-link to="/closet/clothes/all" class="is-active">All Clothes</router-link></li>
+            <li><router-link to="/closet/mxm/all">All MxMs</router-link></li>
           </ul>
         </aside>
       </div>

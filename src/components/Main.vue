@@ -3,6 +3,10 @@
     <section class="hero is-fullheight is-info">
       <div class="hero-body">
         <div class="container has-text-centered">
+          <figure class="image is-128x128 is-horizontal-center">
+            <img src="@/assets/images/wardrobe.svg">
+          </figure>
+          <br>
           <h1 class="title">
             Mix X Match
           </h1>
@@ -18,6 +22,10 @@
     <section class="hero is-fullheight is-danger">
       <div class="hero-body">
         <div class="container has-text-centered">
+          <figure class="image is-128x128 is-horizontal-center">
+            <img src="@/assets/images/wardrobe.svg">
+          </figure>
+          <br>
           <h1 class="title">
             Mix X Match
           </h1>
@@ -37,6 +45,9 @@
             Build your own closet on web
           </h2>
         </div>
+      </div>
+      <div class="hero-foot has-text-centered">
+        <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
       </div>
     </section>
   </div>

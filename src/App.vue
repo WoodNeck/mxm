@@ -7,7 +7,7 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import { CHANGE_PAGE } from '@/store/types'
+import { NAVBAR_CHANGE_PAGE } from '@/store/types'
 export default {
   name: 'app',
   components: {
@@ -15,13 +15,13 @@ export default {
   },
   watch: {
     $route (to, from) {
-      this.$store.commit(CHANGE_PAGE, {
+      this.$store.commit(NAVBAR_CHANGE_PAGE, {
         path: to.path
       })
     }
   },
   mounted () {
-    this.$store.commit(CHANGE_PAGE, {
+    this.$store.commit(NAVBAR_CHANGE_PAGE, {
       path: this.$route.path
     })
   }
@@ -52,4 +52,10 @@ export default {
 
   @import "~bulma";
   @import "~buefy/src/scss/buefy";
+
+  .is-horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+  }
 </style>

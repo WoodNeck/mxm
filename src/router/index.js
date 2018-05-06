@@ -16,16 +16,16 @@ export default new Router({
     },
     {
       path: '/closet',
-      redirect: '/closet/all',
+      redirect: '/closet/clothes/all',
       name: 'My Closet',
       component: Closet,
       children: [
         {
-          path: 'all',
+          path: 'clothes/all',
           component: AllClothes
         },
         {
-          path: 'mxm',
+          path: 'mxm/all',
           component: AllMxMs
         }
       ]

@@ -38,7 +38,7 @@ const getters = {
 }
 
 const mutations = {
-  [types.CHANGE_PAGE] (state, payload) {
+  [types.NAVBAR_CHANGE_PAGE] (state, payload) {
     state.currentPage = payload.path
     const html = document.documentElement
     if (payload.path === '/') {
