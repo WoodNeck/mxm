@@ -50,17 +50,19 @@ const mutations = {
       state.isMainPage = false
     }
   },
-  [types.NAVBAR_SET_BACKGROUND] (state) {
-    state.scrolled = true
-  },
-  [types.NAVBAR_UNSET_BACKGROUND] (state) {
-    state.scrolled = false
-  },
   [types.NAVBAR_TOGGLE_BURGER] (state) {
     state.burgerOpen = !state.burgerOpen
   },
   [types.NAVBAR_CLOSE_BURGER] (state) {
     state.burgerOpen = false
+  },
+  [types.NAVBAR_UPDATE_SCROLL] (state) {
+    const height = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)
+    if (window.scrollY >= height) {
+      state.scrolled = true
+    } else {
+      state.scrolled = false
+    }
   }
 }
 

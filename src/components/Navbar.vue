@@ -8,7 +8,7 @@
           </router-link>
         </span>
         <span class="navbar-item">
-          <a href="https://github.com/WoodNeck/mxm" :class="navBrandClasses">
+          <a href="https://github.com/WoodNeck/mxm" id="mxm-github" :class="navBrandClasses">
             <b-icon pack="fab" icon="github"></b-icon>
           </a>
         </span>
@@ -41,8 +41,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { NAVBAR_SET_BACKGROUND,
-         NAVBAR_UNSET_BACKGROUND,
+import { NAVBAR_UPDATE_SCROLL,
          NAVBAR_TOGGLE_BURGER,
          NAVBAR_CLOSE_BURGER } from '@/store/types'
 
@@ -56,12 +55,6 @@ export default {
     })
   },
 
-  data () {
-    return {
-      scrollPosition: null
-    }
-  },
-
   methods: {
     toggleBurger () {
       this.$store.commit(NAVBAR_TOGGLE_BURGER)
@@ -72,13 +65,7 @@ export default {
     },
 
     updateScroll () {
-      this.scrollPosition = window.scrollY
-      const height = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)
-      if (this.scrollPosition >= height) {
-        this.$store.commit(NAVBAR_SET_BACKGROUND)
-      } else {
-        this.$store.commit(NAVBAR_UNSET_BACKGROUND)
-      }
+      this.$store.commit(NAVBAR_UPDATE_SCROLL)
     }
   },
 
