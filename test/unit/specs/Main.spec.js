@@ -14,7 +14,7 @@ describe('Main.vue', () => {
   beforeEach(() => {
     router = new VueRouter()
     store = new Vuex.Store()
-  });
+  })
 
   it('is instance of Vue', () => {
     const wrapper = shallow(Main, { localVue, store, router })

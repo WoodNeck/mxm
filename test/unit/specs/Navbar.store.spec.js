@@ -52,8 +52,8 @@ test('navClasses case of other pages', () => {
     burgerOpen: true
   }
   for (let i = 0; i < 4; i += 1) {
-    if (i % 2 == 0) state.scrolled = !state.scrolled
-    if (i % 2 == 1) state.burgerOpen = !state.burgerOpen
+    if (i % 2 === 0) state.scrolled = !state.scrolled
+    if (i % 2 === 1) state.burgerOpen = !state.burgerOpen
     expect(navbar.getters.navClasses(state)['is-background-white']).toBeTruthy()
     expect(navbar.getters.navClasses(state)['transparent']).not.toBeTruthy()
     expect(navbar.getters.navClasses(state)['half-alpha']).not.toBeTruthy()
@@ -66,7 +66,7 @@ test('navBurgerClasses activity test', () => {
   }
   expect(navbar.getters.navBurgerClasses(state)['is-active']).toBeTruthy()
 
-  state.burgerOpen = false;
+  state.burgerOpen = false
   expect(navbar.getters.navBurgerClasses(state)['is-active']).not.toBeTruthy()
 })
 
@@ -78,9 +78,9 @@ test('change page state mutation test', () => {
   }
 
   for (let i = 0; i < 8; i += 1) {
-    if (i % 2 == 0) state.scrolled = !state.scrolled
-    if (i % 2 == 1) state.burgerOpen = !state.burgerOpen
-    if (i % 4 == 0) state.isMainPage = !state.isMainPage
+    if (i % 2 === 0) state.scrolled = !state.scrolled
+    if (i % 2 === 1) state.burgerOpen = !state.burgerOpen
+    if (i % 4 === 0) state.isMainPage = !state.isMainPage
 
     let payload = {path: '/'}
     navbar.mutations[types.NAVBAR_CHANGE_PAGE](state, payload)
@@ -109,9 +109,9 @@ test('toggle burger test of all state cases', () => {
   }
 
   for (let i = 0; i < 8; i += 1) {
-    if (i % 2 == 0) state.scrolled = !state.scrolled
-    if (i % 2 == 1) state.burgerOpen = !state.burgerOpen
-    if (i % 4 == 0) state.isMainPage = !state.isMainPage
+    if (i % 2 === 0) state.scrolled = !state.scrolled
+    if (i % 2 === 1) state.burgerOpen = !state.burgerOpen
+    if (i % 4 === 0) state.isMainPage = !state.isMainPage
 
     const prevState = state.burgerOpen
     navbar.mutations[types.NAVBAR_TOGGLE_BURGER](state)
@@ -127,9 +127,9 @@ test('close burger test of all state cases', () => {
   }
 
   for (let i = 0; i < 8; i += 1) {
-    if (i % 2 == 0) state.scrolled = !state.scrolled
-    if (i % 2 == 1) state.burgerOpen = !state.burgerOpen
-    if (i % 4 == 0) state.isMainPage = !state.isMainPage
+    if (i % 2 === 0) state.scrolled = !state.scrolled
+    if (i % 2 === 1) state.burgerOpen = !state.burgerOpen
+    if (i % 4 === 0) state.isMainPage = !state.isMainPage
 
     navbar.mutations[types.NAVBAR_CLOSE_BURGER](state)
     expect(state.burgerOpen).not.toBeTruthy()
@@ -144,12 +144,11 @@ test('update scroll test', () => {
   }
 
   for (let i = 0; i < 8; i += 1) {
-    if (i % 2 == 0) state.scrolled = !state.scrolled
-    if (i % 2 == 1) state.burgerOpen = !state.burgerOpen
-    if (i % 4 == 0) state.isMainPage = !state.isMainPage
+    if (i % 2 === 0) state.scrolled = !state.scrolled
+    if (i % 2 === 1) state.burgerOpen = !state.burgerOpen
+    if (i % 4 === 0) state.isMainPage = !state.isMainPage
 
     const heights = [...Array(15).keys()].map(x => x * 100)
-
 
     heights.forEach(height => {
       window.innerHeight = height

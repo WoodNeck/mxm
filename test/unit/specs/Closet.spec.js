@@ -48,7 +48,7 @@ describe('Closet.vue', () => {
         closet
       }
     })
-  });
+  })
 
   it('is a Vue instance', () => {
     const wrapper = shallow(Closet, { localVue, store, router })

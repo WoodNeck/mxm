@@ -30,7 +30,7 @@ describe('Navbar.vue', () => {
         navbar
       }
     })
-  });
+  })
 
   it('is a Vue instance', () => {
     const wrapper = shallow(Navbar, { localVue, store, router })

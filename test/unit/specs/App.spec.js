@@ -33,7 +33,7 @@ describe('App.vue', () => {
       mutations,
       state: {}
     })
-  });
+  })
 
   it('is instance of Vue', () => {
     const wrapper = shallow(App, { localVue, store, router })
@@ -42,8 +42,9 @@ describe('App.vue', () => {
 
   it('should init page with "/" by default.', () => {
     const wrapper = shallow(App, { localVue, store, router })
-    expect(mutations[types.NAVBAR_CHANGE_PAGE]).toBeCalledWith({}, {path: '/'});
-  });
+    expect(wrapper.exists()).toBeTruthy()
+    expect(mutations[types.NAVBAR_CHANGE_PAGE]).toBeCalledWith({}, {path: '/'})
+  })
 
   it('should have Navbar and Main', () => {
     const wrapper = shallow(App, { localVue, store, router })
