@@ -39,15 +39,18 @@ const getters = {
 
 const mutations = {
   [types.NAVBAR_CHANGE_PAGE] (state, payload) {
-    state.currentPage = payload.path
-    const html = document.documentElement
-    if (payload.path === '/') {
-      html.classList.remove('has-navbar-fixed-top')
-      state.isMainPage = true
-    } else {
-      html.classList.add('has-navbar-fixed-top')
-      state.scrolled = false
-      state.isMainPage = false
+    const urlRegex = /^\/((\w)\/)?/
+    if (urlRegex.test(payload.path)) {
+      state.currentPage = payload.path
+      const html = document.documentElement
+      if (payload.path === '/') {
+        html.classList.remove('has-navbar-fixed-top')
+        state.isMainPage = true
+      } else {
+        html.classList.add('has-navbar-fixed-top')
+        state.scrolled = false
+        state.isMainPage = false
+      }
     }
   },
   [types.NAVBAR_TOGGLE_BURGER] (state) {
