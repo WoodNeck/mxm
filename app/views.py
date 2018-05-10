@@ -34,17 +34,18 @@ class ClothesDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ClothesOfUser(APIView):
+    cpp = 10 # number of clothes per page
     def get_all_clothes_of_user(self, userID):
 	    return [clothes for clothes in Clothes.objects.all() 
             if clothes.owner.id == int(userID)]
 
-    def get(self, request, userID, format=None):
-        clothes = self.get_all_clothes_of_user(userID)
-        print(len(clothes))
+    def get(self, request, userID, page, format=None): #page starts from 1
+        page = int(page)
+        clothes = self.get_all_clothes_of_user(userID)[(page-1)*self.cpp : page*self.cpp]
         serializer = ClothesSerializer(clothes, many=True)
         return Response(serializer.data)
 
-    def post(self, request, userID, format=None):
+    def post(self, request, userID, page, format=None):
         serializer = ClothesSerializer(data=request.data)
         if(serializer.is_valid()):
             serializer.save(owner=User.objects.get(pk=userID))
@@ -68,16 +69,18 @@ class MxMDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class MxMsOfUser(APIView):
+    mpp = 5 #number of mxms per page
     def get_all_mxms_of_user(self, userID):
         return [mxm for mxm in MxM.objects.all() 
              if mxm.owner.id == int(userID)]
 
-    def get(self, request, userID, format=None):
-        mxms = self.get_all_mxms_of_user(userID)
+    def get(self, request, userID, page, format=None):
+        page = int(page)
+        mxms = self.get_all_mxms_of_user(userID)[(page-1)*self.mpp : page*self.mpp]
         serializer = MxMSerializer(mxms, many=True)
         return Response(serializer.data)
 
-    def post(self, request, userID, format=None):
+    def post(self, request, userID, page, format=None):
         serializer = MxMSerializer(data=request.data)
         if(serializer.is_valid()):
             serializer.save(owner=User.objects.get(pk=userID))
@@ -96,16 +99,18 @@ class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class RepliesOfMxM(APIView):
+    rpp = 10 # number of replies per page
     def get_all_replies_of_mxm(self, mxmID):
         return [reply for reply in Reply.objects.all() 
             if reply.mxm.id == int(mxmID)]
 
-    def get(self, request, mxmID, format=None):
-        replies = self.get_all_replies_of_mxm(mxmID)
+    def get(self, request, mxmID, page, format=None):
+        page = int(page)
+        replies = self.get_all_replies_of_mxm(mxmID)[(page-1)*self.rpp : page*self.rpp]
         serializer = ReplySerializer(replies, many=True)
         return Response(serializer.data)
 
-    def post(self, request, mxmID, format=None):
+    def post(self, request, mxmID, page, format=None):
         serializer = ReplySerializer(data=request.data)
         if(serializer.is_valid()):
             serializer.save(mxm=MxM.objects.get(pk=mxmID))
@@ -124,16 +129,18 @@ class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class RatingsOfMxM(APIView):
+    rpp = 10 # number of ratings per page
     def get_all_ratings_of_mxm(self, mxmID):
         return [rating for rating in Rating.objects.all() 
             if rating.mxm.id == int(mxmID)]
 
-    def get(self, request, mxmID, format=None):
-        ratings = self.get_all_ratings_of_mxm(mxmID)
+    def get(self, request, mxmID, page, format=None):
+        page = int(page)
+        ratings = self.get_all_ratings_of_mxm(mxmID)[(page-1)*self.rpp : page*self.rpp]
         serializer = RatingSerializer(ratings, many=True)
         return Response(serializer.data)
 
-    def post(self, request, mxmID, format=None):
+    def post(self, request, mxmID, page, format=None):
         serializer = RatingSerializer(data=request.data)
         if(serializer.is_valid()):
             serializer.save(mxm=MxM.objects.get(pk=mxmID))
