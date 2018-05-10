@@ -10,11 +10,11 @@
         </h2>
       </div>
 
-      <div id="Clotheslist">
+      <div id="AllClothesclasses">
         <ul>
           <li v-for="cloth in clothes">
-            <Cloth v-bind:cloth="cloth" v-bind:id="cloth.id">
-            </Cloth>
+            <Cloth v-bind:cloth="cloth" v-bind:id="cloth.id"> </Cloth>
+            {{cloth.id}} <br />
             <img class="pic" v-bind:src="cloth.image" width='150'>
           </li>
         </ul>
@@ -24,12 +24,7 @@
 </template>
 
 <script>
-import Cloth from './Cloth.vue'
-
 export default {
-  components: {
-    Cloth
-  },
   data: function () {
     return {
       clothes: [
