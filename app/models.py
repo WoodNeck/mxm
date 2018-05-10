@@ -48,7 +48,7 @@ class Reply(models.Model):
     reply_content = models.CharField(max_length=1000, default='')
     mxm = models.ForeignKey(
         'MxM', related_name='replies',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, default=1
     )
 
 
@@ -61,5 +61,5 @@ class Rating(models.Model):
     stars = models.IntegerField()
     mxm = models.ForeignKey(
         'MxM', related_name='ratings',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, default=1
     )

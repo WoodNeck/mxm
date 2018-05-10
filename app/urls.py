@@ -7,13 +7,17 @@ urlpatterns = [
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     url(r'^clothes/$', views.ClothesList.as_view()),
     url(r'^clothes/(?P<pk>[0-9]+)/$', views.ClothesDetail.as_view()),
+    url(r'^clothes/user=(?P<userID>[0-9]+)/$', views.ClothesOfUser.as_view()),
     url(r'^tag/$', views.TagList.as_view()),
     url(r'^mxms/$', views.MxMList.as_view()),
     url(r'^mxms/(?P<pk>[0-9]+)/$', views.MxMDetail.as_view()),
+    url(r'^mxms/user=(?P<userID>[0-9]+)/$', views.MxMsOfUser.as_view()),
     url(r'^replies/$', views.ReplyList.as_view()),
     url(r'^replies/(?P<pk>[0-9]+)/$', views.ReplyDetail.as_view()),
+    url(r'^replies/mxm=(?P<mxmID>[0-9]+)/$', views.RepliesOfMxM.as_view()),
     url(r'^ratings/$', views.RatingList.as_view()),
     url(r'^ratings/(?P<pk>[0-9]+)/$', views.RatingDetail.as_view()),
+    url(r'^ratings/mxm=(?P<mxmID>[0-9]+)/$', views.RatingsOfMxM.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
