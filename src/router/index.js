@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
+import Closet from '@/components/Closet'
 import AllClothes from '@/components/AllClothes'
+import AllMxMs from '@/components/AllMxMs'
 
 Vue.use(Router)
 
@@ -13,9 +15,20 @@ export default new Router({
       component: Main
     },
     {
-      path: '/closet/clothes/all',
-      name: 'All Clothes',
-      component: AllClothes
+      path: '/closet',
+      redirect: '/closet/clothes/all',
+      name: 'My Closet',
+      component: Closet,
+      children: [
+        {
+          path: 'clothes/all',
+          component: AllClothes
+        },
+        {
+          path: 'mxm/all',
+          component: AllMxMs
+        }
+      ]
     }
   ]
 })
