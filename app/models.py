@@ -28,6 +28,11 @@ class Tag(models.Model):
         )
 
 class MxM(models.Model):
+    owner = models.ForeignKey(
+        'auth.User', related_name = 'mxms',
+        on_delete=models.CASCADE, default = 1
+    )
+    clothes = models.ManyToManyField('Clothes')
     created_time = models.DateTimeField(auto_now_add=True)
     comment = models.CharField(max_length=1000, default='')
     is_on_recommendation = models.BooleanField(default=False)

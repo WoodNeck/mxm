@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from app.models import Clothes, Tag, MxM, Reply, Rating
 
 class UserSerializer(serializers.ModelSerializer):
-    mxm = serializers.PrimaryKeyRelatedField(
+    mxms = serializers.PrimaryKeyRelatedField(
         many=True, queryset=MxM.objects.all()
     )
     clothes = serializers.PrimaryKeyRelatedField(
@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = User
-        fields = ('id','username','mxm','clothes')
+        fields = ('id','username','mxms','clothes')
 
 
 class ClothesSerializer(serializers.ModelSerializer):
@@ -42,7 +42,7 @@ class MxMSerializer(serializers.ModelSerializer):
     class Meta:
         model = MxM
         fields = (
-            'id', 'created_time', 'comment', 'ratings',
+            'id', 'created_time', 'clothes', 'comment', 'ratings',
             'replies', 'is_on_recommendation', 'is_on_evaluation'
         )
 

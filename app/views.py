@@ -26,7 +26,7 @@ class ClothesList(generics.ListCreateAPIView):
     serializer_class = ClothesSerializer
 
 
-class ClothesDetail(generics.RetrieveAPIView):
+class ClothesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Clothes.objects.all()
     serializer_class = ClothesSerializer
 
