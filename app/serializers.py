@@ -26,19 +26,28 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class MxMSerializer(serializers.ModelSerializer):
-    ratings = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Rating.objects.all()
-    )
-    replies = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Reply.objects.all()
-    )
+    average_rating = serializers.SerializerMethodField()
+    num_replies = serializers.SerializerMethodField()
 
+    def get_average_rating(self, obj):
+        result = 0
+        count = 0
+        for rating in obj.ratings.all():
+            result += rating.stars
+            count += 1
+        if(count == 0):
+            return 0
+        return float(result) / float(count)
+    
+    def get_num_replies(self, obj):
+        return len(obj.replies.all())
+    
     class Meta:
         model = MxM
         fields = (
             'id', 'owner', 'created_time', 'clothes', 'description', 
-            'ratings', 'replies', 'is_on_recommendation',
-            'is_on_evaluation'
+            'is_on_recommendation', 'is_on_evaluation',
+            'average_rating', 'num_replies'
         )
 
 
