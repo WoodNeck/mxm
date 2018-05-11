@@ -29,10 +29,10 @@ export default {
     return {
       clothes: [
         { id: '1',
-          image: require('@/assets/image/jacket.png')
+          image: require('../assets/jacket.png')
         },
         { id: '2',
-          image: require('@/assets/image/top.jpg')
+          image: require('../assets/top.jpg')
         }
       ]
     }
