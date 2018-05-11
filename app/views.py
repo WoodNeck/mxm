@@ -53,6 +53,13 @@ class ClothesOfUser(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)      
 
 
+class ClothesOfMxM(APIView):
+    def get(self, request, mxmID, format=None):
+        mxm = MxM.objects.get(pk=mxmID)
+        serializer = ClothesSerializer(mxm.clothes, many=True)
+        return Response(serializer.data)
+
+
 class TagList(generics.ListCreateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
