@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero-body">
-      <div class="container has-text-centered">
+      <div class="container">
         <h1 class="title">
           All Clothes
         </h1>
@@ -29,16 +29,17 @@ export default {
     return {
       clothes: [
         { id: '1',
-          image: require('@/assets/jacket.png')
+          image: require('@/assets/image/jacket.png')
         },
         { id: '2',
-          image: require('@/assets/top.jpg')
+          image: require('@/assets/image/top.jpg')
         }
       ]
     }
   }
 }
 </script>
+
 
 <style scoped>
 h1 {
