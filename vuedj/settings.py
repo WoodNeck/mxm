@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'django_nose',
-	'rest_framework',
-	'social_django'
+    'rest_framework',
+    'social_django'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -70,26 +70,26 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-				 'social_django.context_processors.backends', # login
-				 'social_django.context_processors.login_redirect', # login
+                'social_django.context_processors.backends',   # login
+                'social_django.context_processors.login_redirect',   # login
             ],
         },
     },
 ]
 
 AUTHENTICATION_BACKENDS = (
- 'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
- 'social_core.backends.google.GoogleOpenId',  # for Google authentication
- 'social_core.backends.google.GoogleOAuth2',  # for Google authentication
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
 
- 'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='662164166006-ffuj1ap69phef6vv9n5hg29n6l71ve1a.apps.googleusercontent.com'  # CLient Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n3TFsnlAJU-Rmi9bzb8wPyUx' #Secret Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '662164166006-ffuj1ap69phef6vv9n5hg29n6l71ve1a.apps.googleusercontent.com'   # CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n3TFsnlAJU-Rmi9bzb8wPyUx'  # Secret Key
 
 
 WSGI_APPLICATION = 'vuedj.wsgi.application'

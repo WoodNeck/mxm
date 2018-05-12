@@ -22,10 +22,10 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-	url(r'^', include('app.urls')),
-	url(r'^login/$', views.login, name='login'),
-	url(r'^logout/$', views.logout, name='logout'),
-	url(r'^auth/', include('social_django.urls', namespace='social')),
-	url(r'^$', home, name='home'),
+    url(r'^api/admin/', admin.site.urls),
+    url(r'^api/', include('app.urls')),
+    url(r'^api/login/$', views.login, name='login'),
+    url(r'^api/logout/$', views.logout, name='logout'),
+    url(r'^api/auth/', include('social_django.urls', namespace='social')),
+    url(r'^api/$', home, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
