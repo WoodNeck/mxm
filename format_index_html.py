@@ -1,5 +1,10 @@
 import sys
 import fileinput
+import re
+
+
+def static_repl(match):
+    return "{{% static '{}' %}}".format(match.group().replace('/static/', ''))
 
 file = 'templates/index.html'
 
@@ -9,8 +14,5 @@ with open(file, "r+") as f:
     f.write("{% load staticfiles %}\n" + s)
 
 for i, line in enumerate(fileinput.input(file, inplace=1)):
-    sys.stdout.write(line.replace('/static/', "{% static '"))
-for i, line in enumerate(fileinput.input(file, inplace=1)):
-    sys.stdout.write(line.replace('.css', ".css' %}"))
-for i, line in enumerate(fileinput.input(file, inplace=1)):
-    sys.stdout.write(line.replace('.js', ".js' %}"))
+    replaced_line = re.sub(r'\/static\/(\w+\/).(\w+\.)+(js|css)', static_repl, line)
+    sys.stdout.write(replaced_line)
