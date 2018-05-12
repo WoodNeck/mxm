@@ -1,11 +1,16 @@
 from app.models import Clothes, Tag, MxM, Reply, Rating
 from app.serializers import (
-    UserSerializer, ClothesSerializer, TagSerializer, 
+    UserSerializer, ClothesSerializer, TagSerializer,
     MxMSerializer, ReplySerializer, RatingSerializer
 )
 from django.contrib.auth.models import User
 from rest_framework import generics
 from django.shortcuts import render
+
+
+def index(request):
+    return render(request, 'index.html')
+
 
 def home(request):
     return render(request, 'home.html')
