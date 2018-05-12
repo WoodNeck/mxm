@@ -10,7 +10,7 @@
         </h2>
       </div>
 
-      <div id="AllClothesclasses">
+      <div id="allClothes-list-wrapper">
         <ul>
           <li v-for="cloth in clothes">
             <Cloth v-bind:cloth="cloth" v-bind:id="cloth.id"> </Cloth>
@@ -24,18 +24,20 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data: function () {
     return {
-      clothes: [
-        { id: '1',
-          image: require('../assets/jacket.png')
-        },
-        { id: '2',
-          image: require('../assets/top.jpg')
-        }
-      ]
+      clothes: []
     }
+  },
+  created () {
+    axios.get('http://127.0.0.1:8000/clothes/'
+    )
+    .then(res => {
+      this.clothes = res.data
+    })
+    .catch(error => console.log(error))
   }
 }
 </script>
