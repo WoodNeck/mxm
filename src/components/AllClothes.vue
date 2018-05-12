@@ -1,21 +1,21 @@
 <template>
   <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          All Clothes
-        </h1>
-        <h2 class="subtitle">
-          Check your clothes
-        </h2>
-      </div>
+    <div class="hero-title">
+      <h1 class="title">
+        All Clothes
+      </h1>
+      <h2 class="subtitle">
+        Check your clothes
+      </h2>
+      <br/>
+    </div>
 
+    <div class="container">
       <div id="allClothes-list-wrapper">
         <ul>
           <li v-for="cloth in clothes">
-            <Cloth v-bind:cloth="cloth" v-bind:id="cloth.id"> </Cloth>
-            {{cloth.id}} <br />
-            <img class="pic" v-bind:src="cloth.image" width='150'>
+            <img class="pic" v-bind:src="cloth.image" width='300'>
+            <br/><br/>
           </li>
         </ul>
       </div>
@@ -32,8 +32,7 @@ export default {
     }
   },
   created () {
-    axios.get('http://127.0.0.1:8000/clothes/'
-    )
+    axios.get('http://localhost:8000/clothes/')
     .then(res => {
       this.clothes = res.data
     })
