@@ -14,7 +14,9 @@
       <div id="allClothes-list-wrapper">
         <ul>
           <li v-for="cloth in clothes">
-            <img class="pic" v-bind:src="cloth.image" width='300'>
+            <router-link to="/closet/clothes/detail" class="is-active">
+              <img class="pic" v-bind:src="cloth.image" width='300'>
+            </router-link>
             <br/><br/>
           </li>
         </ul>
