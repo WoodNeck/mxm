@@ -16,16 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views
-from app.views import home
+from app.views import index
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+  url(r'^$', index, name='home'),
+  url(r'^admin/', admin.site.urls),
 	url(r'^', include('app.urls')),
 	url(r'^login/$', views.login, name='login'),
 	url(r'^logout/$', views.logout, name='logout'),
 	url(r'^auth/', include('social_django.urls', namespace='social')),
-	url(r'^$', home, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
