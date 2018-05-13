@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import { shallow, createLocalVue } from 'vue-test-utils'
 import Closet from '@/components/Closet'
 import AllClothes from '@/components/AllClothes'
+import ClothesDetail from '@/components/ClothesDetail'
 import AllMxMs from '@/components/AllMxMs'
 import closet from '@/store/modules/closet'
 import * as types from '@/store/types'
@@ -32,6 +33,10 @@ describe('Closet.vue', () => {
             {
               path: 'clothes/all',
               component: AllClothes
+            },
+            {
+              path: 'clothes/detail',
+              component: ClothesDetail
             },
             {
               path: 'mxm/all',

@@ -5,7 +5,7 @@
         All MxMs
       </h1>
       <h2 class="subtitle">
-        Check your MxM
+        Check your MxMs
       </h2>
       <br/>
     </div>
