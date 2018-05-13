@@ -4,6 +4,7 @@ import Main from '@/components/Main'
 import Closet from '@/components/Closet'
 import AllClothes from '@/components/AllClothes'
 import AllMxMs from '@/components/AllMxMs'
+import ClothesDetail from '@/components/ClothesDetail'
 
 Vue.use(Router)
 
@@ -23,6 +24,10 @@ export default new Router({
         {
           path: 'clothes/all',
           component: AllClothes
+        },
+        {
+          path: 'clothes/detail',
+          component: ClothesDetail
         },
         {
           path: 'mxm/all',
