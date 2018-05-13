@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'app',
     'django_nose',
     'rest_framework',
-    'social_django'
+    'social_django',
     'corsheaders'
 ]
 
