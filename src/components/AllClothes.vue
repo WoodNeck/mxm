@@ -34,7 +34,7 @@ export default {
     }
   },
   created () {
-    axios.get('http://localhost:8000/clothes/')
+    axios.get('http://localhost:8000/api/clothes/')
     .then(res => {
       this.clothes = res.data
     })
