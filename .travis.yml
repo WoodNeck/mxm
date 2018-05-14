@@ -6,6 +6,7 @@ branches:
     - devel-fe
     - devel-be
   except:
+    - master
     - /^fe-.*$/
     - /^be-.*$/
 

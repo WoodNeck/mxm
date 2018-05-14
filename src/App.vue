@@ -1,48 +1,61 @@
 <template>
   <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <br>
-    <img class="logo" src="./assets/dj.png">
+    <navbar/>
     <router-view/>
-    <p>
-      Welcome to your Django - Vue.js app!
-    </p>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue'
+import { NAVBAR_CHANGE_PAGE } from '@/store/types'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    'Navbar': Navbar
+  },
+  watch: {
+    $route (to, from) {
+      this.$store.commit(NAVBAR_CHANGE_PAGE, {
+        path: to.path
+      })
+    }
+  },
+  mounted () {
+    this.$store.commit(NAVBAR_CHANGE_PAGE, {
+      path: this.$route.path
+    })
+  }
 }
 </script>
 
-<style>
-html {
-  height: 100%;
-}
+<style lang="scss">
+  @import "~bulma/sass/utilities/_all";
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
+  $primary: #00d1b2;
+  $primary-invert: findColorInvert($primary);
 
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
-  text-align: center;
-}
+  $colors: (
+      "white": ($white, $black),
+      "black": ($black, $white),
+      "light": ($light, $light-invert),
+      "dark": ($dark, $dark-invert),
+      "primary": ($primary, $primary-invert),
+      "info": ($info, $info-invert),
+      "success": ($success, $success-invert),
+      "warning": ($warning, $warning-invert),
+      "danger": ($danger, $danger-invert)
+  );
 
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
+  $link: $primary;
+  $link-invert: $primary-invert;
+  $link-focus-border: $primary;
 
-.logo {
-  width: 100px;
-  height: 100px
-}
+  @import "~bulma";
+  @import "~buefy/src/scss/buefy";
+
+  .is-horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+  }
 </style>
