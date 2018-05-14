@@ -58,5 +58,6 @@ ENV/
 
 # Staticfiles
 staticfiles/
+templates/static/
 
 
