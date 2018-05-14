@@ -11,10 +11,7 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
-      .assert.elementPresent('.logo')
-      .assert.elementCount('p', 1)
-      .assert.containsText('h1', 'Hello World!')
+      .assert.elementPresent('#mxm-logo')
       .end()
   }
 }
