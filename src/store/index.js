@@ -4,6 +4,7 @@ import navbar from './modules/navbar'
 import closet from './modules/closet'
 import allClothes from './modules/allClothes'
 import allMxMs from './modules/allMxMs'
+import clothesDetail from './modules/clothesDetail'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     navbar,
     closet,
     allClothes,
-    allMxMs
+    allMxMs,
+    clothesDetail
   },
   strict: debug
 })

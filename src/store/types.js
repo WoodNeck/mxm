@@ -14,3 +14,6 @@ export const ALLCLOTHES_LOAD = 'allClothes/ALLCLOTHES_LOAD'
 
 // allMxMs
 export const ALLMXMS_LOAD = 'allMxMs/ALLMXMS_LOAD'
+
+// clothesDetail
+export const CLOTHES_LOAD = 'clothesDetail/CLOTHES_LOAD'
