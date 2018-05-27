@@ -26,19 +26,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-  data: function () {
-    return {
-      clothes: []
-    }
-  },
   created () {
-    axios.get('http://localhost:8000/api/clothes/')
-    .then(res => {
-      this.clothes = res.data
-    })
-    .catch(error => console.log(error))
+    this.$store.dispatch('ALLCLOTHES_LOAD')
+  },
+  computed: {
+    clothes () {
+      return this.$store.getters.clothes
+    }
   }
 }
 </script>

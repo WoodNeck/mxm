@@ -26,19 +26,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-  data: function () {
-    return {
-      mxms: []
-    }
-  },
   created () {
-    axios.get('http://localhost:8000/api/mxms/')
-    .then(res => {
-      this.mxms = res.data
-    })
-    .catch(error => console.log(error))
+    this.$store.dispatch('ALLMXMS_LOAD')
+  },
+  computed: {
+    mxms () {
+      return this.$store.getters.mxms
+    }
   }
 }
 </script>
