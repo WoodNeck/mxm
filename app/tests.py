@@ -1,5 +1,6 @@
 from .models import Tag, Clothes, MxM, Reply, Rating
 from django.contrib.auth.models import User
+import app.constants as constants
 import django
 import os
 
@@ -93,9 +94,10 @@ class TestView(TestCase):
     # test for /api/clothes/user=(id)/page=(page)/
     def test_api_clothes_user_id_page_page(self):
         print('testing for /api/clothes/user=(id)/page=(page)/')
+        cpp = constants.clothes_per_page
         # test for GET method
         for user in User.objects.all():
-            maxPage = int((len(user.clothes.all()) + 9) / 10)
+            maxPage = int((len(user.clothes.all()) + cpp - 1) / cpp)
             for page in range(1, maxPage + 1):
                 response = self.client.get('/api/clothes/user=' + str(user.id) + 
                     '/page=' + str(page) + '/')
@@ -140,8 +142,9 @@ class TestView(TestCase):
     def test_api_mxms_user_id_page_page(self):
         print('testing for /api/mxms/user=(id)/page=(page)/')
         # test for GET method
+        mpp = constants.mxms_per_page
         for user in User.objects.all():
-            maxPage = int((len(user.mxms.all()) + 4) / 5)
+            maxPage = int((len(user.mxms.all()) + mpp - 1) / mpp)
             for page in range(1, maxPage + 1):
                 response = self.client.get('/api/mxms/user=' + str(user.id) +
                     '/page=' + str(page) + '/')
@@ -184,9 +187,10 @@ class TestView(TestCase):
     # test for /api/ratings/mxm=(id)/page=(page)/
     def test_api_ratings_mxm_id_page_page(self):
         print('testing for /api/ratings/mxm=(id)/page=(page)/')
+        rpp = constants.ratings_per_page
         # test for GET method
         for mxm in MxM.objects.all():
-            maxPage = int((len(mxm.ratings.all()) + 9) / 10)
+            maxPage = int((len(mxm.ratings.all()) + rpp - 1) / rpp)
             for page in range(1, maxPage + 1):
                 response = self.client.get('/api/ratings/mxm=' + str(mxm.id) +
                     '/page=' + str(page) + '/')
@@ -229,9 +233,10 @@ class TestView(TestCase):
     # test for /api/replies/mxm=(id)/page=(page)/
     def test_api_replies_mxm_id_page_page(self):
         print('testing for /api/replies/mxm=(id)/page=(page)/')
+        rpp = constants.replies_per_page
         # test for GET method
         for mxm in MxM.objects.all():
-            maxPage = int((len(mxm.replies.all()) + 9) / 10)
+            maxPage = int((len(mxm.replies.all()) + rpp - 1) / rpp)
             for page in range(1, maxPage + 1):
                 response = self.client.get('/api/replies/mxm=' + str(mxm.id) +
                     '/page=' + str(page) + '/')

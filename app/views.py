@@ -8,7 +8,7 @@ from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import render
-
+import app.constants as constants
 
 def index(request):
     return render(request, 'index.html')
@@ -39,7 +39,7 @@ class ClothesDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ClothesOfUser(APIView):
-    cpp = 10 # number of clothes per page
+    cpp = constants.clothes_per_page # number of clothes per page
     def get_all_clothes_of_user(self, userID):
 	    return [clothes for clothes in Clothes.objects.all() 
             if clothes.owner.id == int(userID)]
@@ -81,7 +81,7 @@ class MxMDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class MxMsOfUser(APIView):
-    mpp = 5 #number of mxms per page
+    mpp = constants.mxms_per_page #number of mxms per page
     def get_all_mxms_of_user(self, userID):
         return [mxm for mxm in MxM.objects.all() 
              if mxm.owner.id == int(userID)]
@@ -111,7 +111,7 @@ class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class RepliesOfMxM(APIView):
-    rpp = 10 # number of replies per page
+    rpp = constants.replies_per_page # number of replies per page
     def get_all_replies_of_mxm(self, mxmID):
         return [reply for reply in Reply.objects.all() 
             if reply.mxm.id == int(mxmID)]
@@ -141,7 +141,7 @@ class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class RatingsOfMxM(APIView):
-    rpp = 10 # number of ratings per page
+    rpp = constants.ratings_per_page # number of ratings per page
     def get_all_ratings_of_mxm(self, mxmID):
         return [rating for rating in Rating.objects.all() 
             if rating.mxm.id == int(mxmID)]
