@@ -5,7 +5,7 @@
         Clothes Detail
       </h1>
       <h2 class="subtitle">
-        Check your clothes' detail
+        Check your clothes detail
       </h2>
       <br/>
     </div>
