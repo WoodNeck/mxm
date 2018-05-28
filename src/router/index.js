@@ -26,7 +26,7 @@ export default new Router({
           component: AllClothes
         },
         {
-          path: 'clothes/detail',
+          path: 'clothes/detail/:id',
           component: ClothesDetail
         },
         {
