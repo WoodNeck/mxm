@@ -29,7 +29,6 @@ describe('AllMxMs.vue', () => {
     })
   })
 
-
   it('is instance of Vue', () => {
     const wrapper = shallow(AllMxMs, { localVue, store, router })
     expect(wrapper.isVueInstance()).toBe(true)
@@ -50,4 +49,3 @@ describe('AllMxMs.vue', () => {
     expect(wrapper.find('.subtitle').text()).toBe('Check your MxMs')
   })
 })
-

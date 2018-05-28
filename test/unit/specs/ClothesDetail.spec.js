@@ -14,22 +14,21 @@ describe('ClothesDetail.vue', () => {
   let router
   let mutations
 
-    mutations = {
-      [types.CLOTHES_LOAD]: jest.fn(),
-      [types.TAGS_LOAD]: jest.fn()
-    }
+  mutations = {
+    [types.CLOTHES_LOAD]: jest.fn(),
+    [types.TAGS_LOAD]: jest.fn()
+  }
 
-    beforeEach(() => {
-      router = new VueRouter()
-      store = new Vuex.Store({
-        mutations,
-        state: {},
-        modules: {
-          clothesDetail
-        }
-      })
+  beforeEach(() => {
+    router = new VueRouter()
+    store = new Vuex.Store({
+      mutations,
+      state: {},
+      modules: {
+        clothesDetail
+      }
     })
-
+  })
 
   it('is instance of Vue', () => {
     const wrapper = shallow(ClothesDetail, { localVue, store, router })
