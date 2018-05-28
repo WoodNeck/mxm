@@ -17,3 +17,4 @@ export const ALLMXMS_LOAD = 'allMxMs/ALLMXMS_LOAD'
 
 // clothesDetail
 export const CLOTHES_LOAD = 'clothesDetail/CLOTHES_LOAD'
+export const TAGS_LOAD = 'clothesDetail/TAGS_LOAD'

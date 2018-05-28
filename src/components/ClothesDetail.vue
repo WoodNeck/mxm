@@ -10,13 +10,21 @@
       <br/>
     </div>
 
-    <div class="container has-text-centered">
+    <div class="container">
       <div id="clothes-detail-wrapper">
         <img class="pic" v-bind:src="cloth.image" width='300'><br/><br/>
         CLOTHES #{{ cloth.id }} <br/>
         Added at {{ cloth.created_time }} <br/>
-        {{ cloth.tag }}
+        <ul v-for="(tag, index) in tags">
+          <div v-if="cloth.tag.includes(index+1)">
+            {{ tag.type}}: {{ tag.content }}
+          </div>
+        </ul>
+        <br/>
       </div>
+      <router-link :to="`/closet/clothes/all/`" class="is-active">
+        <a class="button">Back to List</a>
+      </router-link>
     </div>
   </section>
 </template>
@@ -25,10 +33,14 @@
 export default {
   created () {
     this.$store.dispatch('CLOTHES_LOAD', this.$route.params.id)
+    this.$store.dispatch('TAGS_LOAD')
   },
   computed: {
     cloth () {
       return this.$store.getters.cloth
+    },
+    tags () {
+      return this.$store.getters.tags
     }
   }
 }
