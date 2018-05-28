@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^api/login/$', views.login, name='login'),
     url(r'^api/logout/$', views.logout, name='logout'),
     url(r'^api/auth/', include('social_django.urls', namespace='social')),
-    url(r'^api/$', index, name='home'),
+    url(r'^$', index, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
