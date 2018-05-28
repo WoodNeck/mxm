@@ -10,14 +10,12 @@
       <br/>
     </div>
 
-    <div class="container">
+    <div class="container has-text-centered">
       <div id="clothes-detail-wrapper">
-        <ul>
-          <li v-for="cloth in cloth">
-            <img class="pic" v-bind:src="cloth.image" width='300'>
-            <br/><br/>
-          </li>
-        </ul>
+        <img class="pic" v-bind:src="cloth.image" width='300'><br/><br/>
+        CLOTHES #{{ cloth.id }} <br/>
+        Added at {{ cloth.created_time }} <br/>
+        {{ cloth.tag }}
       </div>
     </div>
   </section>
@@ -26,7 +24,7 @@
 <script>
 export default {
   created () {
-    this.$store.dispatch('CLOTHES_LOAD')
+    this.$store.dispatch('CLOTHES_LOAD', this.$route.params.id)
   },
   computed: {
     cloth () {
