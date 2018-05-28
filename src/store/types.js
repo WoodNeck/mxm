@@ -8,3 +8,13 @@ export const NAVBAR_UPDATE_SCROLL = 'navbar/NAVBAR_UPDATE_SCROLL'
 
 // closet
 export const CLOSET_CHANGE_MENU = 'closet/CLOSET_CHANGE_MENU'
+
+// allClothes
+export const ALLCLOTHES_LOAD = 'allClothes/ALLCLOTHES_LOAD'
+
+// allMxMs
+export const ALLMXMS_LOAD = 'allMxMs/ALLMXMS_LOAD'
+
+// clothesDetail
+export const CLOTHES_LOAD = 'clothesDetail/CLOTHES_LOAD'
+export const TAGS_LOAD = 'clothesDetail/TAGS_LOAD'
