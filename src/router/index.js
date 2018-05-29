@@ -5,6 +5,7 @@ import Closet from '@/components/Closet'
 import AllClothes from '@/components/AllClothes'
 import AllMxMs from '@/components/AllMxMs'
 import ClothesDetail from '@/components/ClothesDetail'
+import MxMPlaza from '@/components/MxMPlaza'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
           component: AllMxMs
         }
       ]
+    },
+    {
+      path: '/plaza',
+      name: 'Plaza',
+      component: MxMPlaza
     }
   ]
 })
