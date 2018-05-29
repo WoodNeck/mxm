@@ -2,16 +2,16 @@ import * as types from '../types'
 import axios from 'axios'
 
 const state = {
-  mxms: []
+  mxmsInPlaza: []
 }
 
 const getters = {
-  mxms: state => state.mxms
+  mxmsInPlaza: state => state.mxmsInPlaza
 }
 
 const mutations = {
-  [types.MXMPLAZA_LOAD] (state, mxms) {
-    state.mxms = mxms
+  [types.MXMPLAZA_LOAD] (state, mxmsInPlaza) {
+    state.mxmsInPlaza = mxmsInPlaza
   }
 }
 
@@ -22,8 +22,8 @@ const actions = {
     axios
     .get('http://localhost:8000/api/mxms/')
     .then(res => res.data)
-    .then(mxms => {
-      commit(types.MXMPLAZA_LOAD, mxms)
+    .then(mxmsInPlaza => {
+      commit(types.MXMPLAZA_LOAD, mxmsInPlaza)
     })
   }
 }

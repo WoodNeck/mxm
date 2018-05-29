@@ -38,7 +38,7 @@ export default new Router({
     },
     {
       path: '/plaza',
-      name: 'Plaza',
+      name: 'MxMPlaza',
       component: MxMPlaza
     }
   ]

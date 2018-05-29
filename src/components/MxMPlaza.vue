@@ -15,11 +15,11 @@
         <ul>
           <li v-for="mxm in mxms">
             {{mxm.id}}<br/>
-            <ul>
-              <li v-for="cloth in mxm.clothes">
-                <img class="pic" v-bind:src="cloth.image" width='300'>
-              </li>
-            </ul>
+            <div class="row">
+              <span v-for="cloth in mxm.clothes">
+                <img class="pic" v-bind:src="cloth.image" width='200'>
+              </span>
+            </div>
           </li>
         </ul>
       </div>
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     mxms () {
-      return this.$store.getters.mxms
+      return this.$store.getters.mxmsInPlaza
     }
   }
 }
