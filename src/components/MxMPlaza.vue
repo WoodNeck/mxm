@@ -1,4 +1,5 @@
 <template>
+  <div class="container">
   <section class="hero">
     <div class="hero-title">
       <h1 class="title">
@@ -9,9 +10,9 @@
       </h2>
       <br/>
     </div>
-    <button v-on:click="filterAll" :class="{ active: filter == 'all' }"> all</button>
-    <button v-on:click="filterRecom" :class="{ active: filter == 'recommendation' }"> recommendation</button>
-    <button v-on:click="filterEval" :class="{ active: filter == 'evaluation' }"> evaluation</button>
+    <button style="width:250px" v-on:click="filterAll" :class="{ active: filter == 'all' }"> all</button>
+    <button style="width:250px" v-on:click="filterRecom" :class="{ active: filter == 'recommendation' }"> recommendation</button>
+    <button style="width:250px"  v-on:click="filterEval" :class="{ active: filter == 'evaluation' }"> evaluation</button>
     <div class="container">
       <div id="mxm-plaza-wrapper">
         <ul>
@@ -27,6 +28,7 @@
       </div>
     </div>
   </section>
+  </div>
 </template>
 
 <script>
