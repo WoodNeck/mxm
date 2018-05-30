@@ -20,7 +20,7 @@ const actions = {
     commit
   }) {
     axios
-    .get('http://localhost:8000/api/mxms/')
+    .get('/api/mxms/')
     .then(res => res.data)
     .then(mxmsInPlaza => {
       commit(types.MXMPLAZA_LOAD, mxmsInPlaza)

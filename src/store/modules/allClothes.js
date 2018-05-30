@@ -20,7 +20,7 @@ const actions = {
     commit
   }) {
     axios
-    .get('http://localhost:8000/api/clothes/')
+    .get('/api/clothes/')
     .then(res => res.data)
     .then(clothes => {
       commit(types.ALLCLOTHES_LOAD, clothes)
