@@ -13,6 +13,12 @@ const mutations = {
   [types.ALLMXMS_LOAD] (state, mxms) {
     state.mxms = mxms
   }
+  // [types.ALLMXMS_SET_RECOMMEND] (state, mxms) {
+  //   state.mxms = mxms
+  // },
+  // [types.ALLMXMS_SET_EVAL] (state, mxms) {
+  //   state.mxms = mxms
+  // }
 }
 
 const actions = {
@@ -26,6 +32,11 @@ const actions = {
       commit(types.ALLMXMS_LOAD, mxms)
     })
   }
+  // ALLMXMS_SET_RECOMMEND ({ commit }, checkedMxMs) {
+  //   axios
+  //   .post('/api/mxms/' + checkedMxMs)
+  //   .then()
+  // }
 }
 
 export default {
