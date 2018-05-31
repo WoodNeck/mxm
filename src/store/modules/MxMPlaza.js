@@ -2,28 +2,28 @@ import * as types from '../types'
 import axios from 'axios'
 
 const state = {
-  clothes: []
+  mxmsInPlaza: []
 }
 
 const getters = {
-  clothes: state => state.clothes
+  mxmsInPlaza: state => state.mxmsInPlaza
 }
 
 const mutations = {
-  [types.ALLCLOTHES_LOAD] (state, clothes) {
-    state.clothes = clothes
+  [types.MXMPLAZA_LOAD] (state, mxmsInPlaza) {
+    state.mxmsInPlaza = mxmsInPlaza
   }
 }
 
 const actions = {
-  ALLCLOTHES_LOAD ({
+  MXMPLAZA_LOAD ({
     commit
   }) {
     axios
-    .get('/api/clothes/')
+    .get('/api/mxms/')
     .then(res => res.data)
-    .then(clothes => {
-      commit(types.ALLCLOTHES_LOAD, clothes)
+    .then(mxmsInPlaza => {
+      commit(types.MXMPLAZA_LOAD, mxmsInPlaza)
     })
   }
 }
