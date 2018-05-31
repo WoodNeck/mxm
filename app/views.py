@@ -1,7 +1,8 @@
 from app.models import Clothes, Tag, MxM, Reply, Rating
 from app.serializers import (
     UserSerializer, ClothesSerializer, TagSerializer,
-    MxMSerializer, ReplySerializer, RatingSerializer
+    MxMSerializer, MxMReadSerializer,
+    ReplySerializer, RatingSerializer
 )
 from django.contrib.auth.models import User
 from rest_framework import status, generics
@@ -72,12 +73,18 @@ class TagList(generics.ListCreateAPIView):
 
 class MxMList(generics.ListCreateAPIView):
     queryset = MxM.objects.all()
-    serializer_class = MxMSerializer
+    def get_serializer_class(self):
+        if self.request.method in ('GET', ):
+            return MxMReadSerializer
+        return MxMSerializer
 
 
 class MxMDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = MxM.objects.all()
-    serializer_class = MxMSerializer
+    def get_serializer_class(self):
+        if self.request.method in ('GET', ):
+            return MxMReadSerializer
+        return MxMSerializer
 
 
 class MxMsOfUser(APIView):
