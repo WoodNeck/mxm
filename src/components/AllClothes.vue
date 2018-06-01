@@ -1,5 +1,14 @@
 <template>
   <section class="hero">
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item" />
+      </div>
+      <div class="level-right">
+        <router-link to="/closet/clothes/new" class="button is-primary level-item">New</router-link>
+      </div>
+    </div>
+
     <div class="hero-title">
       <h1 class="title">
         All Clothes

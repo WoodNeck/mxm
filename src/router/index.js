@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Closet from '@/components/Closet'
 import AllClothes from '@/components/AllClothes'
-import AllMxMs from '@/components/AllMxMs'
 import ClothesDetail from '@/components/ClothesDetail'
 import MxMPlaza from '@/components/MxMPlaza'
+import NewClothes from '@/components/NewClothes'
+import AllMxMs from '@/components/AllMxMs'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
         {
           path: 'clothes/detail/:id',
           component: ClothesDetail
+        },
+        {
+          path: 'clothes/new',
+          component: NewClothes
         },
         {
           path: 'mxm/all',
