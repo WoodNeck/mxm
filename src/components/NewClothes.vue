@@ -2,7 +2,7 @@
   <div>
     <section>
       <b-field class="file">
-        <b-upload v-model="files">
+        <b-upload v-model="files" @input="previewImage">
           <a class="button is-primary">
             <b-icon pack="fas" icon="upload"></b-icon>
             <span>Click to upload</span>
@@ -13,6 +13,9 @@
           {{ files[0].name }}
         </span>
       </b-field>
+      <div class="image-preview" v-if="imageData.length > 0">
+        <img class="preview" :src="imageData">
+      </div>
       <b-taginput
         v-model="tags"
         :data="filteredTags"
@@ -48,7 +51,8 @@ export default {
   data () {
     return {
       files: [],
-      tags: []
+      tags: [],
+      imageData: ''
     }
   },
 
@@ -66,6 +70,16 @@ export default {
         file: this.files[0],
         tags: this.tags
       })
+    },
+
+    previewImage () {
+      if (this.files[0]) {
+        var reader = new FileReader()
+        reader.onload = (e) => {
+          this.imageData = e.target.result
+        }
+        reader.readAsDataURL(this.files[0])
+      }
     }
   }
 }

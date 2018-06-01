@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const state = {
   tags: [],
-  text: ""
+  text: ''
 }
 
 const getters = {
@@ -34,6 +34,8 @@ const actions = {
     let formData = new FormData()
 
     formData.append('image', file)
+    formData.append('owner', '')
+    formData.append('tag', tags)
 
     axios.post('/api/clothes', formData)
       .then(response => {
