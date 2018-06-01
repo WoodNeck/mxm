@@ -33,6 +33,12 @@
               <span>MxM Plaza</span>
             </router-link>
           </span>
+          <span class="navbar-item" @click="closeBurger">
+            <a href="/api/logout/" :class="navButtonClasses">
+              <b-icon pack="fas" icon="sign-out-alt"></b-icon>
+              <span>Logout</span>
+            </a>
+          </span>
         </div>
       </div>
     </div>

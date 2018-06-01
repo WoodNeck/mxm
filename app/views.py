@@ -26,11 +26,6 @@ def home(request):
     return render(request, 'home.html')
 
 
-def logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
-
-
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
