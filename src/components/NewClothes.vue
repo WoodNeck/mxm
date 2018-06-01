@@ -1,5 +1,21 @@
 <template>
   <div>
+    <div class="level">
+      <div class="level-left">
+        <a @click="$router.go(-1)" class="button is-primary level-item">
+          <b-icon pack="fas" icon="arrow-circle-left"></b-icon>
+          <span>Back</span>
+        </a>
+      </div>
+      <div class="level-right">
+        <div class="level-item" />
+      </div>
+    </div>
+    <section class="hero is-primary" id="header">
+      <div class="hero-body">
+        <h1 class="title is-1">Submit New Clothes</h1>
+      </div>
+    </section>
     <section>
       <b-field class="file">
         <b-upload v-model="files" @input="previewImage">
@@ -25,7 +41,7 @@
         @typing="updateInput">
       </b-taginput>
     </section>
-    <div class="level">
+    <div class="level" id="footer">
       <div class="level-left">
         <div class="level-item" />
       </div>
@@ -57,7 +73,7 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch(NEW_CLOTHES_INIT)
+    this.$store.dispatch(NEW_CLOTHES_INIT, this.$toast)
   },
 
   methods: {
@@ -67,6 +83,7 @@ export default {
 
     submit () {
       this.$store.dispatch(NEW_CLOTHES_SUBMIT, {
+        snackbar: this.$snackbar,
         file: this.files[0],
         tags: this.tags
       })
@@ -86,5 +103,11 @@ export default {
 </script>
 
 <style scoped>
+  #header {
+    margin-bottom: 48px;
+  }
 
+  #footer {
+    margin-top: 48px;
+  }
 </style>
