@@ -15,12 +15,6 @@ const mutations = {
   [types.ALLMXMS_LOAD] (state, mxms) {
     state.mxms = mxms
   }
-  // [types.ALLMXMS_SET_RECOMMEND] (state, mxms) {
-  //   state.mxms = mxms
-  // },
-  // [types.ALLMXMS_SET_EVAL] (state, mxms) {
-  //   state.mxms = mxms
-  // }
 }
 
 const actions = {
@@ -34,35 +28,65 @@ const actions = {
       commit(types.ALLMXMS_LOAD, mxms)
     })
   },
+
   ALLMXMS_SET_RECOMMEND ({ commit }, checkedMxMs) {
-    // let formData = new FormData()
-    // formData.append('is_on_recommendation', true)
-    axios
-    .put('/api/mxms/1/', {
-      is_on_recommendation: true
-    })
-    .then(res => {})
-    .catch(function (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data)
-        console.log(error.response.status)
-        console.log(error.response.headers)
-      }
-      else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-        // http.ClientRequest in node.js
-        console.log(error.request)
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log('Error', error.message)
-      }
-      console.log(error.config)
-    });
-  }
+    console.log(checkedMxMs)
+    for (var i = 0; i < checkedMxMs.length; i++) {
+      axios.patch('mxms/' + checkedMxMs[i] + '/', {
+        is_on_recommendation: true
+      })
+      .then(res => {})
+      .catch(function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request)
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message)
+        }
+        console.log(error.config)
+      })
+    }
+  },
+
+  ALLMXMS_SET_EVAL ({ commit }, checkedMxMs) {
+    console.log(checkedMxMs)
+    for (var i = 0; i < checkedMxMs.length; i++) {
+      axios.patch('mxms/' + checkedMxMs[i] + '/', {
+        is_on_evaluation: true
+      })
+      .then(res => {})
+      .catch(function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request)
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message)
+        }
+        console.log(error.config)
+      })
+    }
+  }  
 }
+
+
 
 export default {
   state,
