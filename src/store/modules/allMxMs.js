@@ -29,13 +29,15 @@ const actions = {
     })
   },
 
-  ALLMXMS_SET_RECOMMEND ({ commit }, checkedMxMs) {
+  ALLMXMS_SET_RECOMMEND ({ commit, dispatch }, checkedMxMs) {
     console.log(checkedMxMs)
     for (var i = 0; i < checkedMxMs.length; i++) {
       axios.patch('mxms/' + checkedMxMs[i] + '/', {
         is_on_recommendation: true
       })
-      .then(res => {})
+      .then(res => {
+        dispatch('ALLMXMS_LOAD')
+      })
       .catch(function (error) {
         if (error.response) {
           // The request was made and the server responded with a status code
@@ -57,13 +59,15 @@ const actions = {
     }
   },
 
-  ALLMXMS_SET_EVAL ({ commit }, checkedMxMs) {
+  ALLMXMS_SET_EVAL ({ commit, dispatch }, checkedMxMs) {
     console.log(checkedMxMs)
     for (var i = 0; i < checkedMxMs.length; i++) {
       axios.patch('mxms/' + checkedMxMs[i] + '/', {
         is_on_evaluation: true
       })
-      .then(res => {})
+      .then(res => {
+        dispatch('ALLMXMS_LOAD')
+      })
       .catch(function (error) {
         if (error.response) {
           // The request was made and the server responded with a status code
@@ -83,10 +87,8 @@ const actions = {
         console.log(error.config)
       })
     }
-  }  
+  }
 }
-
-
 
 export default {
   state,

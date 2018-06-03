@@ -47,6 +47,9 @@ export default {
   created () {
     this.$store.dispatch('ALLMXMS_LOAD')
   },
+  // updated () {
+  //   this.$store.dispatch('ALLMXMS_LOAD')
+  // },
   computed: {
     mxms () {
       return this.$store.getters.mxms
