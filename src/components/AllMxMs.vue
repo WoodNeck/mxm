@@ -12,7 +12,7 @@
 
     <div class="container">
       <div id="allMxMs-buttons-wrapper">
-        <a class="button">RECOMMENDATION</a>
+        <a class="button" v-on:click="setRecommend">RECOMMENDATION</a>
         <a class="button">EVALUATION</a>
         <br/><br/>
       </div>
@@ -22,7 +22,9 @@
             <input type="checkbox" :id="mxm.id" :value="mxm.id" v-model="checkedMxMs">
             <label :for="mxm.id">
             MxM #{{ mxm.id }}<br/>
-            clothes id: {{ mxm.clothes }}<br/>
+            <span v-for="cloth in mxm.clothes">
+              <img class="pic" v-bind:src="cloth.image" width='200'>
+            </span><br/>
             when created? {{ mxm.created_time }}<br/>
             for recommendation? {{ mxm.is_on_recommendation }}<br/>
             for evaluation? {{ mxm.is_on_evaluation }}
@@ -63,3 +65,4 @@ h1 {
   color: #42b983;
 }
 </style>
+
