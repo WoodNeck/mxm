@@ -22,7 +22,12 @@
         <img v-for="(cloth, index) in clothesNotInMxM" v-on:click="addToMxM(index)" class="pic" v-bind:src="cloth.image" width='200' :key="cloth.id" >
       </transition-group>
       <br/>
-      <button v-on:click="save">Save</button>
+      <br/>
+      Description
+      <br/>
+      <textarea v-model="mxm.description" rows='6' cols='80'  placeholder="add your own description about mxm"></textarea>
+      <br/>
+      <button v-on:click="save">save</button>
       <br/>
     </div>
   </section>
@@ -68,7 +73,8 @@ export default {
     },
     save: function () {
       axios.patch('/api/mxms/' + this.$route.params.id + '/', {
-        clothes: this.mxm.clothes.map(cloth => cloth.id)
+        clothes: this.mxm.clothes.map(cloth => cloth.id),
+        description: this.mxm.description
       })
     }
   }
