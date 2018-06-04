@@ -6,6 +6,7 @@ import AllClothes from '@/components/AllClothes'
 import AllMxMs from '@/components/AllMxMs'
 import ClothesDetail from '@/components/ClothesDetail'
 import MxMPlaza from '@/components/MxMPlaza'
+import MxMDetail from '@/components/MxMDetail'
 
 Vue.use(Router)
 
@@ -33,6 +34,10 @@ export default new Router({
         {
           path: 'mxm/all',
           component: AllMxMs
+        },
+        {
+          path: 'mxm/detail/:id',
+          component: MxMDetail
         }
       ]
     },
