@@ -26,14 +26,15 @@ const actions = {
     .then(res => {
       state.tags = res.data
     })
-    .catch(
+    .catch(error => {
+      console.log(error.response)
       toast.open({
         duration: 5000,
         message: `Couldn't connect to backend server`,
         position: 'is-bottom',
         type: 'is-danger'
       })
-    )
+    })
   },
   [types.NEW_CLOTHES_SUBMIT] ({commit, state}, payload) {
     let file = payload.file
@@ -63,7 +64,7 @@ const actions = {
     formData.append('owner', '')
     formData.append('tag', tags)
 
-    axios.post('/api/clothes', formData)
+    axios.post('/api/clothes/', formData)
       .then(response => {
 
       })
