@@ -28,6 +28,12 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
+class CurrentUser(APIView):
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+
 class ClothesList(generics.ListCreateAPIView):
     queryset = Clothes.objects.all()
     serializer_class = ClothesSerializer
