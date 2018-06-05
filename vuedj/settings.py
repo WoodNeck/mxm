@@ -32,6 +32,14 @@ ALLOWED_HOSTS = []
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_EXPOSE_HEADERS = (
+    'Access-Control-Allow-Origin: *',
+)
+
+CSRF_COOKIE_NAME = "csrftoken"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -90,7 +98,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '662164166006-ffuj1ap69phef6vv9n5hg29n6l71ve1a.apps.googleusercontent.com'   # CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n3TFsnlAJU-Rmi9bzb8wPyUx'  # Secret Key

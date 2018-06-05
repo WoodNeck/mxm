@@ -23,7 +23,7 @@ const mutations = {
 const actions = {
   CLOTHES_LOAD ({ commit }, id) {
     axios
-    .get('http://localhost:8000/api/clothes/' + id)
+    .get('/api/clothes/' + id)
     .then(res => res.data)
     .then(cloth => {
       commit(types.CLOTHES_LOAD, cloth)
