@@ -27,7 +27,10 @@
       <br/>
       <textarea v-model="mxm.description" rows='6' cols='80'  placeholder="add your own description about mxm"></textarea>
       <br/>
-      <button v-on:click="save">save</button>
+      <router-link :to="`/closet/mxm/all/`" class="is-active">
+        <button v-on:click="save">Save</button>
+        <button>Back</button>
+      </router-link>
       <br/>
     </div>
   </section>
@@ -38,13 +41,13 @@
 import axios from 'axios'
 export default {
   created () {
-    axios.get('/api/mxms/' + this.$route.params.id)
+    axios.get('http://localhost:8000/api/mxms/' + this.$route.params.id)
     .then(res => res.data)
     .then(mxm => {
       this.mxm = mxm
       this.clothesInMxM = mxm.clothes
     })
-    axios.get('/api/clothes/')
+    axios.get('http://localhost:8000/api/clothes/')
     .then(res => res.data)
     .then(clothes => {
       this.allClothes = clothes
@@ -72,7 +75,7 @@ export default {
       this.mxm.clothes.splice(this.mxm.clothes.length, 0, this.clothesNotInMxM[index])
     },
     save: function () {
-      axios.patch('/api/mxms/' + this.$route.params.id + '/', {
+      axios.patch('http://localhost:8000/api/mxms/' + this.$route.params.id + '/', {
         clothes: this.mxm.clothes.map(cloth => cloth.id),
         description: this.mxm.description
       })
