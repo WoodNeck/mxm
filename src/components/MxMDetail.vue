@@ -41,13 +41,13 @@
 import axios from 'axios'
 export default {
   created () {
-    axios.get('http://localhost:8000/api/mxms/' + this.$route.params.id)
+    axios.get('/api/mxms/' + this.$route.params.id)
     .then(res => res.data)
     .then(mxm => {
       this.mxm = mxm
       this.clothesInMxM = mxm.clothes
     })
-    axios.get('http://localhost:8000/api/clothes/')
+    axios.get('/api/clothes/')
     .then(res => res.data)
     .then(clothes => {
       this.allClothes = clothes
@@ -75,7 +75,7 @@ export default {
       this.mxm.clothes.splice(this.mxm.clothes.length, 0, this.clothesNotInMxM[index])
     },
     save: function () {
-      axios.patch('http://localhost:8000/api/mxms/' + this.$route.params.id + '/', {
+      axios.patch('/api/mxms/' + this.$route.params.id + '/', {
         clothes: this.mxm.clothes.map(cloth => cloth.id),
         description: this.mxm.description
       })
