@@ -98,7 +98,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '662164166006-ffuj1ap69phef6vv9n5hg29n6l71ve1a.apps.googleusercontent.com'   # CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n3TFsnlAJU-Rmi9bzb8wPyUx'  # Secret Key

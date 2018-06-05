@@ -4,15 +4,22 @@ from app.serializers import (
     MxMSerializer, MxMReadSerializer,
     ReplySerializer, RatingSerializer
 )
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import render
 import app.constants as constants
 
+@login_required
 def index(request):
     return render(request, 'index.html')
+
+
+def login(request):
+    return render(request, 'login.html')
 
 
 def home(request):
@@ -42,7 +49,7 @@ class ClothesDetail(generics.RetrieveUpdateDestroyAPIView):
 class ClothesOfUser(APIView):
     cpp = constants.clothes_per_page # number of clothes per page
     def get_all_clothes_of_user(self, userID):
-	    return [clothes for clothes in Clothes.objects.all() 
+	    return [clothes for clothes in Clothes.objects.all()
             if clothes.owner.id == int(userID)]
 
     def get(self, request, userID, page, format=None): #page starts from 1
@@ -56,7 +63,7 @@ class ClothesOfUser(APIView):
         if(serializer.is_valid()):
             serializer.save(owner=User.objects.get(pk=userID))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)      
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ClothesOfMxM(APIView):
@@ -90,7 +97,7 @@ class MxMDetail(generics.RetrieveUpdateDestroyAPIView):
 class MxMsOfUser(APIView):
     mpp = constants.mxms_per_page #number of mxms per page
     def get_all_mxms_of_user(self, userID):
-        return [mxm for mxm in MxM.objects.all() 
+        return [mxm for mxm in MxM.objects.all()
              if mxm.owner.id == int(userID)]
 
     def get(self, request, userID, page, format=None):
@@ -104,7 +111,7 @@ class MxMsOfUser(APIView):
         if(serializer.is_valid()):
             serializer.save(owner=User.objects.get(pk=userID))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)      
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ReplyList(generics.ListCreateAPIView):
@@ -120,7 +127,7 @@ class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
 class RepliesOfMxM(APIView):
     rpp = constants.replies_per_page # number of replies per page
     def get_all_replies_of_mxm(self, mxmID):
-        return [reply for reply in Reply.objects.all() 
+        return [reply for reply in Reply.objects.all()
             if reply.mxm.id == int(mxmID)]
 
     def get(self, request, mxmID, page, format=None):
@@ -134,7 +141,7 @@ class RepliesOfMxM(APIView):
         if(serializer.is_valid()):
             serializer.save(mxm=MxM.objects.get(pk=mxmID))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)      
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RatingList(generics.ListCreateAPIView):
@@ -150,7 +157,7 @@ class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
 class RatingsOfMxM(APIView):
     rpp = constants.ratings_per_page # number of ratings per page
     def get_all_ratings_of_mxm(self, mxmID):
-        return [rating for rating in Rating.objects.all() 
+        return [rating for rating in Rating.objects.all()
             if rating.mxm.id == int(mxmID)]
 
     def get(self, request, mxmID, page, format=None):
@@ -164,6 +171,6 @@ class RatingsOfMxM(APIView):
         if(serializer.is_valid()):
             serializer.save(mxm=MxM.objects.get(pk=mxmID))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)      
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
