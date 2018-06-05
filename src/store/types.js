@@ -1,4 +1,5 @@
 // navbar
+export const NAVBAR_INIT = 'navbar/NAVBAR_INIT'
 export const NAVBAR_CHANGE_PAGE = 'navbar/NAVBAR_CHANGE_PAGE'
 export const NAVBAR_SET_BACKGROUND = 'navbar/NAVBAR_SET_BACKGROUND'
 export const NAVBAR_UNSET_BACKGROUND = 'navbar/NAVBAR_UNSET_BACKGROUND'
