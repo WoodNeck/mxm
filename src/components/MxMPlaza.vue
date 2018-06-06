@@ -18,11 +18,13 @@
         <ul>
           <li v-for="mxm in filteredMxMs">
             {{mxm.id}}<br/>
+            <router-link :to="`/plaza/detail/${mxm.id}`" class="is-active">
             <div class="row">
               <span v-for="cloth in mxm.clothes">
                 <img class="pic" v-bind:src="cloth.image" width='200'>
               </span>
             </div>
+             </router-link>
           </li>
         </ul>
       </div>
