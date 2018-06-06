@@ -24,7 +24,7 @@
        <a class="button" @click="showAll()">ALL</a>
        <a class="button" v-for="(tag, index) in tags" :vale="index" @click="filterTag(index+1)">
          {{ tag.content }}
-       </button>
+       </a>
       </div>
       <br/><br/>
 
@@ -93,4 +93,3 @@ h1 {
   color: #42b983;
 }
 </style>
-

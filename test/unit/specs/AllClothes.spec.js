@@ -15,7 +15,8 @@ describe('AllClothes.vue', () => {
   let mutations
 
   mutations = {
-    [types.ALLCLOTHES_LOAD]: jest.fn()
+    [types.ALLCLOTHES_LOAD]: jest.fn(),
+    [types.TAGS_LOAD]: jest.fn()
   }
 
   beforeEach(() => {
@@ -49,3 +50,4 @@ describe('AllClothes.vue', () => {
     expect(wrapper.find('.subtitle').text()).toBe('Check your clothes')
   })
 })
+
