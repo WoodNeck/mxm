@@ -50,4 +50,3 @@ describe('AllClothes.vue', () => {
     expect(wrapper.find('.subtitle').text()).toBe('Check your clothes')
   })
 })
-
