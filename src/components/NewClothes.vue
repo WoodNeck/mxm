@@ -83,9 +83,11 @@ export default {
 
     submit () {
       this.$store.dispatch(NEW_CLOTHES_SUBMIT, {
+        toast: this.$toast,
         snackbar: this.$snackbar,
         file: this.files[0],
-        tags: this.tags
+        tags: this.tags,
+        router: this.$router
       })
     },
 

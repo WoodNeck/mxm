@@ -85,6 +85,7 @@ const actions = {
       console.log(res.data)
     })
     .catch(error => {
+      console.log(error)
       toast.open({
         duration: 5000,
         message: `Failed to retrieve user info`,
