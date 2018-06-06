@@ -2,7 +2,10 @@ import * as types from '../types'
 import axios from 'axios'
 
 const state = {
-  user: undefined,
+  user: {
+    id: -1,
+    username: ''
+  },
   isMainPage: true,
   scrolled: false,
   burgerOpen: false

@@ -172,6 +172,15 @@ NOSE_ARGS = [
     '--cover-package=app',
 ]
 
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication'
+  )
+}
+
+SESSION_COOKIE_HTTPONLY = False
+
 # Image
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

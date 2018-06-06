@@ -1,5 +1,6 @@
 import * as types from '../types'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const state = {
   tags: [],
@@ -36,7 +37,7 @@ const actions = {
       })
     })
   },
-  [types.NEW_CLOTHES_SUBMIT] ({commit, state}, payload) {
+  [types.NEW_CLOTHES_SUBMIT] ({rootGetters}, payload) {
     let file = payload.file
     let tags = payload.tags
     let snackbar = payload.snackbar
@@ -61,14 +62,25 @@ const actions = {
 
     let formData = new FormData()
     formData.append('image', file)
-    formData.append('owner', '')
-    formData.append('tag', tags)
+    formData.append('owner', rootGetters.user.id)
+    //formData.append('tag', tags)
 
-    axios.post('/api/clothes/', formData)
-      .then(response => {
+    let sessionid = Cookies.get('sessionid')
+    Cookies.remove('sessionid')
 
-      })
-      .catch(response => {})
+    axios.post('/api/clothes/',
+      formData,
+      {
+        withCredentials: true
+      }
+    )
+    .then(response => {
+      Cookies.set('sessionid', sessionid)
+      console.log(document.cookie)
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 }
 
