@@ -3,13 +3,12 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 const state = {
-  tags: [],
   text: ''
 }
 
 const getters = {
-  filteredTags: state => {
-    return state.tags.filter(tag =>
+  filteredTags: (state, _, rootState) => {
+    return rootState.allClothes.tags.filter(tag =>
       tag.content.toLowerCase().indexOf(state.text.toLowerCase()) >= 0
     )
   }
@@ -22,24 +21,6 @@ const mutations = {
 }
 
 const actions = {
-  [types.NEW_CLOTHES_INIT] ({commit, state}, toast) {
-    axios.get('/api/tag/')
-    .then(res => {
-      for (let i = 0; i < res.data.length; i += 1) {
-        res.data[i].index = i
-      }
-      state.tags = res.data
-    })
-    .catch(error => {
-      console.log(error.response)
-      toast.open({
-        duration: 5000,
-        message: `Couldn't connect to backend server`,
-        position: 'is-bottom',
-        type: 'is-danger'
-      })
-    })
-  },
   [types.NEW_CLOTHES_SUBMIT] ({rootState, rootGetters}, payload) {
     let file = payload.file
     let tags = payload.tags
