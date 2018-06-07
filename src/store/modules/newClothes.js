@@ -21,7 +21,7 @@ const mutations = {
 }
 
 const actions = {
-  [types.NEW_CLOTHES_SUBMIT] ({rootState, rootGetters}, payload) {
+  [types.NEW_CLOTHES_SUBMIT] ({commit, rootState, rootGetters}, payload) {
     let file = payload.file
     let tags = payload.tags
     let toast = payload.toast
@@ -49,9 +49,9 @@ const actions = {
     let formData = new FormData()
     formData.append('image', file)
     formData.append('owner', rootGetters.user.id)
-    formData.append('tag', tags.map(tag => {
-      return tag.index
-    }))
+    tags.forEach(tag => {
+      formData.append('tag', tag.index)
+    })
 
     let sessionid = Cookies.get('sessionid')
     Cookies.remove('sessionid')
@@ -61,7 +61,8 @@ const actions = {
     )
     .then(response => {
       Cookies.set('sessionid', sessionid)
-      rootState.allClothes.clothes = [...rootState.allClothes.clothes, response.data]
+      let newCloth = response.data
+      commit(types.ALLCLOTHES_CLOTHES_ADD, newCloth)
       router.go(-1)
       toast.open({
         duration: 5000,

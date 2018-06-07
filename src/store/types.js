@@ -14,6 +14,8 @@ export const CLOSET_CHANGE_MENU = 'closet/CLOSET_CHANGE_MENU'
 export const ALLCLOTHES_LOAD = 'allClothes/ALLCLOTHES_LOAD'
 export const ALLCLOTHES_CLOTHES_LOAD = 'allClothes/ALLCLOTHES_CLOTHES_LOAD'
 export const ALLCLOTHES_TAGS_LOAD = 'allClothes/ALLCLOTHES_TAGS_LOAD'
+export const ALLCLOTHES_CLOTHES_ADD = 'allClothes/ALLCLOTHES_CLOTHES_ADD'
+export const ALLCLOTHES_SET_PAGE = 'allClothes/ALLCLOTHES_SET_PAGE'
 
 // allMxMs
 export const ALLMXMS_LOAD = 'allMxMs/ALLMXMS_LOAD'

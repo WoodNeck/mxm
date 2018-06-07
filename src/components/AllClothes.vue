@@ -21,6 +21,7 @@
     </div>
 
     <div class="section">
+      <b-loading :is-full-page="false" :active.sync="isLoading" />
       <div v-for="(clothes, arrayIndex) in clothes_row" v-bind:key="arrayIndex" class="columns is-3">
         <div v-for="cloth in clothes" :key="cloth.id" class="column">
           <router-link :to="`/closet/clothes/detail/${cloth.id}`" class="is-active">
@@ -34,28 +35,36 @@
       :total="total"
       :current.sync="page"
       :rounded="false"
-      :per-page="10">
+      :per-page="10"
+      @change="pageChange">
     </b-pagination>
   </section>
 </template>
 
 <script>
 import Clothes from '@/components/Clothes.vue'
+import { mapGetters } from 'vuex'
+import { ALLCLOTHES_LOAD } from '@/store/types'
 export default {
   data () {
     return {
-      filter: 0,
-      page: 1,
-      total: 1
+      filter: 0
     }
   },
-  mounted () {
-    this.$store.dispatch('ALLCLOTHES_LOAD', {
+  created () {
+    this.$store.dispatch(ALLCLOTHES_LOAD, {
       page: this.page,
       toast: this.$toast
     })
   },
   computed: {
+    ...mapGetters({
+      clothes: 'clothes',
+      tags: 'tags',
+      total: 'total',
+      page: 'page',
+      isLoading: 'isLoading'
+    }),
     clothes_row () {
       let clothes = this.clothes()
       let size = Math.ceil(clothes.length / 4.0)
@@ -63,8 +72,7 @@ export default {
       for (let i = 0; i < size; i += 1) {
         packedClothes.push(clothes.slice(4 * i, (4 * i + 4) < clothes.length ? 4 * i + 4 : clothes.length))
       }
-      console.log(clothes.length)
-      if (size % 4) {
+      if (clothes.length % 4 !== 0) {
         for (let i = 0; i < 4 - (clothes.length % 4); i += 1) {
           packedClothes[packedClothes.length - 1].push({
             id: -1
@@ -102,6 +110,14 @@ export default {
       this.filter = tagIndex
       console.log('this filter: ' + this.filter)
 
+    }
+  },
+  methods: {
+    pageChange (page) {
+      this.$store.dispatch(ALLCLOTHES_LOAD, {
+        page: page,
+        toast: this.$toast
+      })
     }
   },
   components: {
