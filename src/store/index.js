@@ -6,6 +6,7 @@ import allClothes from './modules/allClothes'
 import allMxMs from './modules/allMxMs'
 import clothesDetail from './modules/clothesDetail'
 import MxMPlaza from './modules/MxMPlaza'
+import MxMPlazaDetail from './modules/MxMPlazaDetail'
 import newClothes from './modules/new_clothes'
 
 Vue.use(Vuex)
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     allMxMs,
     clothesDetail,
     MxMPlaza,
+    MxMPlazaDetail,
     newClothes
   },
   strict: debug
