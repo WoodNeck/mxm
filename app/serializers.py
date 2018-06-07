@@ -47,7 +47,7 @@ class MxMReadSerializer(serializers.ModelSerializer):
         model = MxM
         fields = (
             'id', 'owner', 'created_time', 'clothes', 'description', 
-            'is_on_recommendation', 'is_on_evaluation',
+            'clothes_layout', 'is_on_recommendation', 'is_on_evaluation',
             'average_rating', 'num_replies'
         )
 
@@ -57,7 +57,7 @@ class MxMSerializer(serializers.ModelSerializer):
         model = MxM
         fields = (
             'id', 'owner', 'created_time', 'clothes', 'description',
-            'is_on_recommendation', 'is_on_evaluation'
+            'clothes_layout', 'is_on_recommendation', 'is_on_evaluation'
         )
 
 

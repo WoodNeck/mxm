@@ -14,13 +14,6 @@ echo 'Collect static'
 python3 manage.py collectstatic --noinput
 echo 'Done...'
 
-echo 'Migrating'
-rm -f db.sqlite3
-rm -rf app/migrations
-python3 manage.py makemigrations app
-python3 manage.py migrate
-echo 'Done...'
-
 export PORT=80
 echo 'Server runnning on port ' $PORT
 python3 manage.py runserver

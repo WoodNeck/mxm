@@ -8,19 +8,30 @@
     </div>
     <div id="mxm-detail-wrapper">
       <br/>
+      {{ clothesLayout }}
+      <br/>
       MxM
       <br/>
-      <transition-group>  
-        <img v-for="(cloth, index) in clothesInMxM" v-on:click="removeFromMxM(index)" class="pic" v-bind:src="cloth.image" width='200' :key="cloth.id">
-      </transition-group>
-      <br/>
+      <grid-layout class="MxMArea" :layout="clothesLayout" ref=gridLayout
+        :col-num=col_num :row-height=row_height :max-rows=max_rows
+        :verticalCompact="false" :autoSize="false"
+        :is-draggable="true" :is-resizable="true" :is-mirrored="false"
+        :use-css-transforms="true">
+        <grid-item v-for="(item, key) in clothesLayout" ref=grid
+          :x="item.x" :y="item.y" :w="item.w" :h="item.h" :maxH="20" :i="item.i"
+          @resized="resizedEvent">
+          <img class="pic" ref=image v-bind:src="getClothById(item.i).image" 
+            v-on:dblclick="removeFromMxM(key)">
+        </grid-item>
+      </grid-layout>
       <br/>
       <br/>
       allClothes
       <br/>
-      <transition-group>
-        <img v-for="(cloth, index) in clothesNotInMxM" v-on:click="addToMxM(index)" class="pic" v-bind:src="cloth.image" width='200' :key="cloth.id" >
-      </transition-group>
+      <div>
+        <img v-for="(cloth, key) in clothesNotInMxM" class="pic" ref=notMxMImg
+          v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
+      </div>
       <br/>
       <br/>
       Description
@@ -39,13 +50,19 @@
 
 <script>
 import axios from 'axios'
+import { GridLayout, GridItem } from 'vue-grid-layout'
+
 export default {
+  components: {
+    GridLayout,
+    GridItem
+  },
   created () {
     axios.get('/api/mxms/' + this.$route.params.id)
     .then(res => res.data)
     .then(mxm => {
       this.mxm = mxm
-      this.clothesInMxM = mxm.clothes
+      this.clothesLayout = JSON.parse(mxm.clothes_layout)
     })
     axios.get('/api/clothes/')
     .then(res => res.data)
@@ -53,30 +70,67 @@ export default {
       this.allClothes = clothes
     })
   },
+  computed: {
+    clothesNotInMxM: {
+      get () {
+        return this.allClothes.filter(cloth =>
+          !this.clothesLayout.some(cloth2 => (cloth.id === parseInt(cloth2['i'])))
+        )
+      }
+    }
+  },
   data: function () {
     return {
       mxm: null,
       allClothes: [],
-      clothesInMxM: []
-    }
-  },
-  computed: {
-    clothesNotInMxM () {
-      return this.allClothes.filter(cloth =>
-        !this.clothesInMxM.some(cloth2 => (cloth.id === cloth2.id))
-      )
+      clothesLayout: [],
+
+      // constants for GridLayout
+      col_num: 300,
+      row_height: 10,
+      max_rows: 20
     }
   },
   methods: {
-    removeFromMxM: function (index) {
-      this.mxm.clothes.splice(index, 1)
+    resizedEvent: function (i, H, W, HPx, WPx) {
+      var index = this.clothesLayout.findIndex(item => item['i'] === i)
+      var image = this.$refs.image[index]
+      if (H > this.imageSizeToH(image.clientHeight)) {
+        this.$nextTick(function () {
+          this.clothesLayout[index].h = this.imageSizeToH(image.clientHeight)
+        })
+      }
+      if (W > this.imageSizeToW(image.clientWidth)) {
+        this.$nextTick(function () {
+          this.clothesLayout[index].w = this.imageSizeToW(image.clientWidth)
+        })
+      }
+      /* else if(WPx >= image.clientWidth)
+        image.$parent.clientWidth = image.clientWidth */
+    },
+    getClothById: function (id) {
+      return this.allClothes.find(cloth => cloth.id === parseInt(id))
+    },
+    imageSizeToH: function (imageHeight) {
+      return Math.round(imageHeight / (this.row_height * 2))
+    },
+    imageSizeToW: function (imageWidth) {
+      return Math.round((imageWidth * this.col_num) / this.$refs.gridLayout.width)
     },
     addToMxM: function (index) {
-      this.mxm.clothes.splice(this.mxm.clothes.length, 0, this.clothesNotInMxM[index])
+      var image = this.$refs.notMxMImg[index]
+      var w = this.imageSizeToW(image.clientWidth)
+      var h = this.imageSizeToH(image.clientHeight)
+      var item = {'x': 0, 'y': 0, 'w': w, 'h': h, 'i': String(this.clothesNotInMxM[index].id)}
+      this.clothesLayout.splice(0, 0, item)
+    },
+    removeFromMxM: function (index) {
+      this.clothesLayout.splice(index, 1)
     },
     save: function () {
       axios.patch('/api/mxms/' + this.$route.params.id + '/', {
-        clothes: this.mxm.clothes.map(cloth => cloth.id),
+        clothes: this.clothesLayout.map(cloth => parseInt(cloth.i)),
+        clothes_layout: JSON.stringify(this.clothesLayout),
         description: this.mxm.description
       })
     }
@@ -87,5 +141,13 @@ export default {
 <style scoped>
 h1 {
   color: #42b983;
+}
+.pic {
+  max-width: 100%;
+  max-height: 100%;
+}
+.MxMArea {
+  height: 400px;
+  background-color: #87cefa;
 }
 </style>
