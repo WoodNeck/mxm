@@ -21,6 +21,9 @@
 
       <div id="navbarMenuHeroA" class="navbar-menu" :class="navBurgerClasses">
         <div class="navbar-end">
+          <span class="navbar-item" :class="navBrandClasses">
+            Hello, {{user.username}}!
+          </span>
           <span class="navbar-item" @click="closeBurger">
             <router-link to="/closet" :class="navButtonClasses">
               <b-icon pack="fas" icon="user"></b-icon>
@@ -54,6 +57,7 @@ import { NAVBAR_UPDATE_SCROLL,
 export default {
   computed: {
     ...mapGetters({
+      user: 'user',
       navClasses: 'navClasses',
       navBrandClasses: 'navBrandClasses',
       navBurgerClasses: 'navBurgerClasses',

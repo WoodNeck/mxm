@@ -7,7 +7,7 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import { NAVBAR_CHANGE_PAGE } from '@/store/types'
+import { NAVBAR_CHANGE_PAGE, NAVBAR_INIT } from '@/store/types'
 export default {
   name: 'app',
   components: {
@@ -24,6 +24,7 @@ export default {
     this.$store.commit(NAVBAR_CHANGE_PAGE, {
       path: this.$route.path
     })
+    this.$store.dispatch(NAVBAR_INIT, this.$toast)
   }
 }
 </script>
