@@ -37,9 +37,9 @@ export default {
         let r = parseInt(color.substring(1, 3), 16)
         let g = parseInt(color.substring(3, 5), 16)
         let b = parseInt(color.substring(5, 7), 16)
-        let nThreshold = 105;
+        let nThreshold = 105
         let bgDelta = (r * 0.299) + (g * 0.587) + (b * 0.114)
-        let textColor = ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff"
+        let textColor = ((255 - bgDelta) < nThreshold) ? '#000000' : '#ffffff'
 
         return {
           index: tag.index,
@@ -55,15 +55,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.clothes-image {
-  object-fit: cover;
-  display: block;
-  position: relative;
-}
-.hanger {
-  display: block;
-  margin: auto;
-  max-width: 100%;
-  height: 76px;
-}
+  .clothes-image {
+    object-fit: cover;
+    display: block;
+    position: relative;
+  }
+  .hanger {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: 76px;
+  }
 </style>

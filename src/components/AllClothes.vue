@@ -2,14 +2,21 @@
   <section>
     <div class="level">
       <div class="level-left">
-        <h1 class="title level-item">
-          All Clothes
-        </h1>
+        <div class="level-item" />
       </div>
       <div class="level-right">
-        <router-link to="/closet/clothes/new" class="button is-primary level-item">New</router-link>
+        <router-link to="/closet/clothes/new" class="button is-primary level-item">
+          <b-icon pack="fas" icon="plus-circle" />
+          <span>New</span>
+        </router-link>
       </div>
     </div>
+
+    <section class="hero is-primary" id="header">
+      <div class="hero-body">
+        <h1 class="title is-1" id="header-text">All Clothes</h1>
+      </div>
+    </section>
 
     <div class="section">
       <div id='allCothes-filter-wrapper'>
@@ -20,7 +27,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <section>
       <b-loading :is-full-page="false" :active.sync="isLoading" />
       <div v-for="(clothes, arrayIndex) in clothes_row" v-bind:key="arrayIndex" class="columns is-3">
         <div v-for="cloth in clothes" :key="cloth.id" class="column">
@@ -29,7 +36,7 @@
           </router-link>
         </div>
       </div>
-    </div>
+    </section>
 
     <b-pagination
       :total="total"
@@ -128,5 +135,10 @@ export default {
 
 
 <style scoped>
-
+  #header {
+    margin-bottom: 48px;
+  }
+  #header-text {
+    font-family: 'Rubik Mono One', sans-serif;
+  }
 </style>
