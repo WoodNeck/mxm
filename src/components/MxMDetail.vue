@@ -28,11 +28,16 @@
       <br/>
       allClothes
       <br/>
-      <button v-on:click="allClothesType='normal'">normal</button>
-      <button v-on:click="allClothesType='wildcard'">wildcard</button>
-      <br/>
+      <div class="tabFilterType">
+        <button v-on:click="toggleFilterType($event,'normal')" 
+          :class="[filterType==='normal' ? 'buttonFilterTypeActive' : 'buttonFilterType']">
+           normal</button>
+        <button v-on:click="toggleFilterType($event,'wildcard')" 
+          :class="[filterType==='wildcard' ? 'buttonFilterTypeActive' : 'buttonFilterType']">
+           wildcard</button>
+      </div>
       <div class="clothesNotInMxM">
-        <img v-for="(cloth, key) in clothesNotInMxM" class="pic" ref=notMxMImg
+        <img v-for="(cloth, key) in clothesNotInMxM" ref=notMxMImg
           v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
       </div>
       <br/>
@@ -41,9 +46,9 @@
       <br/>
       <textarea v-model="mxm.description" rows='6' cols='80'  placeholder="add your own description about mxm"></textarea>
       <br/>
-      <router-link :to="`/closet/mxm/all/`" class="is-active">
-        <button v-on:click="save">Save</button>
-        <button>Back</button>
+      <router-link :to="`/closet/mxm/all/`">
+        <button v-on:click="save" class="buttonBottom">Save</button>
+        <button class="buttonBottom">Back</button>
       </router-link>
       <br/>
     </div>
@@ -77,9 +82,9 @@ export default {
     clothesNotInMxM: {
       get () {
         var clothes
-        if (this.allClothesType === 'normal') {
+        if (this.filterType === 'normal') {
           clothes = this.allClothes.filter(cloth => !cloth.is_wildcard)
-        } else if (this.allClothesType === 'wildcard') {
+        } else if (this.filterType === 'wildcard') {
           clothes = this.allClothes.filter(cloth => cloth.is_wildcard)
         }
         return clothes.filter(cloth =>
@@ -93,7 +98,7 @@ export default {
       mxm: null,
       allClothes: [],
       clothesLayout: [],
-      allClothesType: 'normal',
+      filterType: 'normal',
 
       // constants for GridLayout
       col_num: 300,
@@ -143,6 +148,9 @@ export default {
     imageSizeToW: function (imageWidth) {
       return Math.round((imageWidth * this.col_num) / 800)
     },
+    toggleFilterType: function (event, filter) {
+      this.filterType = filter
+    },
     addToMxM: function (index) {
       var image = this.$refs.notMxMImg[index]
       var w = this.imageSizeToW(image.clientWidth)
@@ -190,21 +198,49 @@ h1 {
   width: 100%;
 }
 .MxMArea {
+  border: 2px solid #aaa;
   height: 600px;
   width: 800px;
   background-color: #fceeb4;
 }
-div.clothesNotInMxM {
+.clothesNotInMxM {
   background-color: #a0c0ee;
+  width: 800px;
   overflow: auto;
   white-space: nowrap;
 }
-div.clothesNotInMxM img {
+.clothesNotInMxM img {
   display: inline-block;
   padding: 14px;
   transition: all .3s linear;
 }
-div.clothesNotInMxM img:hover {
+.clothesNotInMxM img:hover {
   background-color: #eed0d0;
+}
+.tabFilterType {
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.buttonFilterType {
+  border-bottom: 25px solid #c0e0ff;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  height: 0;
+  width: 100px;
+}
+.buttonFilterType:hover {
+  border-bottom: 25px solid #b0d0ff;
+}
+.buttonFilterTypeActive {
+  border-bottom: 25px solid #a0c0ee;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  height: 0;
+  width: 100px;
+}
+.buttonBottom {
+  height: 30px;
+  width: 60px;
+  background-color: #ddd;
 }
 </style>
