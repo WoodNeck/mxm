@@ -20,6 +20,14 @@
     </div>
 
     <div class="container">
+      <div id='allCothes-filter-wrapper'>
+       <a class="button" @click="showAll()">ALL</a>
+       <a class="button" v-for="(tag, index) in tags" :vale="index" @click="filterTag(index+1)">
+         {{ tag.content }}
+       </a>
+      </div>
+      <br/><br/>
+
       <div id="allClothes-list-wrapper">
         <ul>
           <li v-for="cloth in clothes">
@@ -36,12 +44,44 @@
 
 <script>
 export default {
+  data () {
+    return {
+      filter: 0
+    }
+  },
   created () {
     this.$store.dispatch('ALLCLOTHES_LOAD')
+    this.$store.dispatch('TAGS_LOAD')
   },
   computed: {
     clothes () {
+      if (this.filter === 0) {
+        return this.all
+      }
+      return this.filtered
+    },
+    all () {
       return this.$store.getters.clothes
+    },
+    filtered () {
+      if (this.filter !== 0) {
+        var filterIndex = this.filter
+        return this.all.filter(function (cloth) {
+          return (cloth.tag.includes(filterIndex))
+        })
+      }
+    },
+    tags () {
+      return this.$store.getters.tags
+    }
+  },
+  methods: {
+    showAll: function () {
+      this.filter = 0
+    },
+    filterTag: function (tagIndex) {
+      this.filter = tagIndex
+      console.log('this filter: ' + this.filter)
     }
   }
 }

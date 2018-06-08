@@ -22,6 +22,7 @@
     "vue-grid-layout": "^2.1.13",
     "vue-router": "^3.0.1",
     "vue-scroll-reveal": "^1.0.8",
+    "vue-star-rating": "^1.6.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

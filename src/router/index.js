@@ -6,6 +6,7 @@ import AllClothes from '@/components/AllClothes'
 import ClothesDetail from '@/components/ClothesDetail'
 import MxMPlaza from '@/components/MxMPlaza'
 import MxMDetail from '@/components/MxMDetail'
+import MxMPlazaDetail from '@/components/MxMPlazaDetail'
 import NewClothes from '@/components/NewClothes'
 import AllMxMs from '@/components/AllMxMs'
 
@@ -50,6 +51,11 @@ export default new Router({
       path: '/plaza',
       name: 'MxMPlaza',
       component: MxMPlaza
+    },
+    {
+      path: '/plaza/detail/:id',
+      name: 'MxMPlazaDetail',
+      component: MxMPlazaDetail
     }
   ]
 })
