@@ -18,8 +18,10 @@
         <grid-item v-for="(item, key) in clothesLayout" ref=grid
           :x="item.x" :y="item.y" :w="item.w" :h="item.h" :maxH="20" :i="item.i"
           @resized="resizedEvent">
-          <img class="pic" ref=image v-bind:src="getClothById(item.i).image" 
-            v-on:dblclick="removeFromMxM(key)">
+          <figure class="tint" v-on:dblclick="removeFromMxM(key)">
+            <img class="pic"
+              ref=image v-bind:src="getClothById(item.i).image">
+          </figure>
         </grid-item>
       </grid-layout>
       <br/>
@@ -29,7 +31,7 @@
       <button v-on:click="allClothesType='normal'">normal</button>
       <button v-on:click="allClothesType='wildcard'">wildcard</button>
       <br/>
-      <div>
+      <div class="clothesNotInMxM">
         <img v-for="(cloth, key) in clothesNotInMxM" class="pic" ref=notMxMImg
           v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
       </div>
@@ -120,14 +122,15 @@ export default {
     resizedEvent: function (i, H, W, HPx, WPx) {
       var index = this.clothesLayout.findIndex(item => item['i'] === i)
       var image = this.$refs.image[index]
-      if (H > this.imageSizeToH(image.clientHeight)) {
+      if (HPx > WPx * image.naturalHeight / image.naturalWidth) {
         this.$nextTick(function () {
-          this.clothesLayout[index].h = this.imageSizeToH(image.clientHeight)
+          var newHPx = WPx * image.naturalHeight / image.naturalWidth
+          this.clothesLayout[index].h = this.imageSizeToH(newHPx)
         })
-      }
-      if (W > this.imageSizeToW(image.clientWidth)) {
+      } else {
         this.$nextTick(function () {
-          this.clothesLayout[index].w = this.imageSizeToW(image.clientWidth)
+          var newWPx = HPx * image.naturalWidth / image.naturalHeight
+          this.clothesLayout[index].w = this.imageSizeToW(newWPx)
         })
       }
     },
@@ -165,13 +168,43 @@ export default {
 h1 {
   color: #42b983;
 }
-.pic {
-  max-width: 100%;
-  max-height: 100%;
+.tint {
+  width: 100%;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.3) 4px 6px 6px;
+}
+.tint:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: none;
+  transition: all .3s linear;
+}
+.tint:hover:before { background: rgba(255, 192, 192, 0.5); }
+.tint .pic {
+  height: 100%;
+  width: 100%;
 }
 .MxMArea {
   height: 600px;
   width: 800px;
   background-color: #fceeb4;
+}
+div.clothesNotInMxM {
+  background-color: #a0c0ee;
+  overflow: auto;
+  white-space: nowrap;
+}
+div.clothesNotInMxM img {
+  display: inline-block;
+  padding: 14px;
+  transition: all .3s linear;
+}
+div.clothesNotInMxM img:hover {
+  background-color: #eed0d0;
 }
 </style>
