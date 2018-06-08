@@ -51,7 +51,8 @@
 <script>
 import Clothes from '@/components/Clothes.vue'
 import { mapGetters } from 'vuex'
-import { ALLCLOTHES_LOAD } from '@/store/types'
+import { ALLCLOTHES_LOAD,
+         ALLCLOTHES_SET_TAG } from '@/store/types'
 export default {
   data () {
     return {
@@ -73,7 +74,7 @@ export default {
       isLoading: 'isLoading'
     }),
     clothes_row () {
-      let clothes = this.clothes()
+      let clothes = this.$store.getters.clothes
       let size = Math.ceil(clothes.length / 4.0)
       let packedClothes = []
       for (let i = 0; i < size; i += 1) {
@@ -87,39 +88,15 @@ export default {
         }
       }
       return packedClothes
-    },
-    clothes () {
-      if (this.filter === 0) {
-        return this.all
-      }
-      return this.filtered
-    },
-    all () {
-      return this.$store.getters.clothes
-    },
-    filtered () {
-      if (this.filter !== 0) {
-        var filterIndex = this.filter
-        return this.all.filter(function (cloth) {
-          return (cloth.tag.includes(filterIndex))
-        })
-      }
-    },
-    tags () {
-      return this.$store.getters.tags
     }
   },
   methods: {
     showAll: function () {
-      this.filter = 0
+      this.$store.commit(ALLCLOTHES_SET_TAG, -1)
     },
     filterTag: function (tagIndex) {
-      this.filter = tagIndex
-      console.log('this filter: ' + this.filter)
-
-    }
-  },
-  methods: {
+      this.$store.commit(ALLCLOTHES_SET_TAG, tagIndex)
+    },
     pageChange (page) {
       this.$store.dispatch(ALLCLOTHES_LOAD, {
         page: page,

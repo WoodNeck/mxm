@@ -5,11 +5,20 @@ const state = {
   clothes: [],
   tags: [],
   total: 1,
-  page: 1
+  page: 1,
+  filter: -1
 }
 
 const getters = {
-  clothes: state => state.clothes,
+  clothes: state => {
+    if (state.filter >= 0) {
+      return state.clothes.filter((cloth) => {
+        return cloth.tag.includes(state.filter)
+      })
+    } else {
+      return state.clothes
+    }
+  },
   tags: state => state.tags,
   total: state => state.total,
   page: state => state.page,
@@ -30,6 +39,9 @@ const mutations = {
   },
   [types.ALLCLOTHES_SET_PAGE] (state, page) {
     state.page = page
+  },
+  [types.ALLCLOTHES_SET_TAG] (state, tag) {
+    state.filter = tag
   }
 }
 
