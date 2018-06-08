@@ -28,6 +28,9 @@
       <br/>
       allClothes
       <br/>
+      <button v-on:click="allClothesType='normal'">normal</button>
+      <button v-on:click="allClothesType='wildcard'">wildcard</button>
+      <br/>
       <div>
         <img v-for="(cloth, key) in clothesNotInMxM" class="pic" ref=notMxMImg
           v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
@@ -62,7 +65,7 @@ export default {
     .then(res => res.data)
     .then(mxm => {
       this.mxm = mxm
-      this.clothesLayout = JSON.parse(mxm.clothes_layout)
+      this.parseAndCheckClothesLayout(mxm)
     })
     axios.get('/api/clothes/')
     .then(res => res.data)
@@ -73,7 +76,13 @@ export default {
   computed: {
     clothesNotInMxM: {
       get () {
-        return this.allClothes.filter(cloth =>
+        var clothes
+        if (this.allClothesType === 'normal') {
+          clothes = this.allClothes.filter(cloth => !cloth.is_wildcard)
+        } else if (this.allClothesType === 'wildcard') {
+          clothes = this.allClothes.filter(cloth => cloth.is_wildcard)
+        }
+        return clothes.filter(cloth =>
           !this.clothesLayout.some(cloth2 => (cloth.id === parseInt(cloth2['i'])))
         )
       }
@@ -84,6 +93,7 @@ export default {
       mxm: null,
       allClothes: [],
       clothesLayout: [],
+      allClothesType: 'normal',
 
       // constants for GridLayout
       col_num: 300,
@@ -92,6 +102,23 @@ export default {
     }
   },
   methods: {
+    parseAndCheckClothesLayout: function (mxm) {
+      var clothesLayout = mxm.clothes_layout
+      var clothes = mxm.clothes
+      if (clothesLayout === '' || clothesLayout === '[]') {
+        this.clothesLayout = []
+      } else this.clothesLayout = JSON.parse(clothesLayout)
+
+      var x = 0
+      for (var i = 0; i < clothes.length; i++) {
+        var cloth = clothes[i]
+        if (this.clothesLayout.every(item => item['i'] !== String(cloth.id))) {
+          var item = {'x': x, 'y': 0, 'w': 50, 'h': 6, 'i': String(cloth.id)}
+          x += 60
+          this.clothesLayout.push(item)
+        }
+      }
+    },
     resizedEvent: function (i, H, W, HPx, WPx) {
       var index = this.clothesLayout.findIndex(item => item['i'] === i)
       var image = this.$refs.image[index]
@@ -105,8 +132,6 @@ export default {
           this.clothesLayout[index].w = this.imageSizeToW(image.clientWidth)
         })
       }
-      /* else if(WPx >= image.clientWidth)
-        image.$parent.clientWidth = image.clientWidth */
     },
     getClothById: function (id) {
       return this.allClothes.find(cloth => cloth.id === parseInt(id))
@@ -115,7 +140,7 @@ export default {
       return Math.round(imageHeight / (this.row_height * 2))
     },
     imageSizeToW: function (imageWidth) {
-      return Math.round((imageWidth * this.col_num) / this.$refs.gridLayout.width)
+      return Math.round((imageWidth * this.col_num) / 600)
     },
     addToMxM: function (index) {
       var image = this.$refs.notMxMImg[index]
@@ -148,6 +173,7 @@ h1 {
 }
 .MxMArea {
   height: 400px;
+  width: 600px;
   background-color: #87cefa;
 }
 </style>
