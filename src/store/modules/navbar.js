@@ -1,12 +1,20 @@
 import * as types from '../types'
+import axios from 'axios'
 
 const state = {
+  user: {
+    id: -1,
+    username: ''
+  },
   isMainPage: true,
   scrolled: false,
   burgerOpen: false
 }
 
 const getters = {
+  user: (state) => {
+    return state.user
+  },
   navClasses: (state, getters) => {
     return {
       'navbar': true,
@@ -70,7 +78,22 @@ const mutations = {
 }
 
 const actions = {
-
+  [types.NAVBAR_INIT] ({commit, state}, toast) {
+    axios.get('/api/myid/')
+    .then(res => {
+      state.user = res.data
+      console.log(res.data)
+    })
+    .catch(error => {
+      console.log(error)
+      toast.open({
+        duration: 5000,
+        message: `Failed to retrieve user info`,
+        position: 'is-bottom',
+        type: 'is-danger'
+      })
+    })
+  }
 }
 
 export default {
