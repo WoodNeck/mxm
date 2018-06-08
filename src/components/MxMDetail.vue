@@ -8,8 +8,6 @@
     </div>
     <div id="mxm-detail-wrapper">
       <br/>
-      {{ clothesLayout }}
-      <br/>
       MxM
       <br/>
       <grid-layout class="MxMArea" :layout="clothesLayout" ref=gridLayout
@@ -98,7 +96,7 @@ export default {
       // constants for GridLayout
       col_num: 300,
       row_height: 10,
-      max_rows: 20
+      max_rows: 30
     }
   },
   methods: {
@@ -140,7 +138,7 @@ export default {
       return Math.round(imageHeight / (this.row_height * 2))
     },
     imageSizeToW: function (imageWidth) {
-      return Math.round((imageWidth * this.col_num) / 600)
+      return Math.round((imageWidth * this.col_num) / 800)
     },
     addToMxM: function (index) {
       var image = this.$refs.notMxMImg[index]
@@ -172,8 +170,8 @@ h1 {
   max-height: 100%;
 }
 .MxMArea {
-  height: 400px;
-  width: 600px;
-  background-color: #87cefa;
+  height: 600px;
+  width: 800px;
+  background-color: #fceeb4;
 }
 </style>
