@@ -1,15 +1,18 @@
 <template>
-  <div class="card" v-if="clothes.id >= 0">
-    <div class="card-image">
-      <figure class="image is-square">
-        <img :src="clothes.image" class="clothes-image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="tags">
-        <span class="tag is-rounded" v-for="tag in tags" :key="tag.index" :style="{'background-color': tag.bgColor, 'color': tag.textColor}">
-          {{tag.name}}
-        </span>
+  <div v-if="clothes.id >= 0">
+    <img class="hanger" :src="require('@/assets/images/hanger.png')" />
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img :src="clothes.image" class="clothes-image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="tags">
+          <span class="tag is-rounded" v-for="tag in tags" :key="tag.index" :style="{'background-color': tag.bgColor, 'color': tag.textColor}">
+            {{tag.name}}
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -54,5 +57,13 @@ export default {
 <style scoped>
 .clothes-image {
   object-fit: cover;
+  display: block;
+  position: relative;
+}
+.hanger {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  height: 76px;
 }
 </style>
