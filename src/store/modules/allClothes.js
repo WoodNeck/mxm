@@ -2,16 +2,21 @@ import * as types from '../types'
 import axios from 'axios'
 
 const state = {
-  clothes: []
+  clothes: [],
+  tags: []
 }
 
 const getters = {
-  clothes: state => state.clothes
+  clothes: state => state.clothes,
+  tags: state => state.tags
 }
 
 const mutations = {
   [types.ALLCLOTHES_LOAD] (state, clothes) {
     state.clothes = clothes
+  },
+  [types.TAGS_LOAD] (state, tags) {
+    state.tags = tags
   }
 }
 
