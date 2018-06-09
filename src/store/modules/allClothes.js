@@ -69,8 +69,8 @@ const actions = {
           clothes: res.data.slice(1, res.data.length)
         })
         commit(types.ALLCLOTHES_SET_PAGE, page)
-        commit(types.ALLCLOTHES_SET_LOADING, false)
       }
+      commit(types.ALLCLOTHES_SET_LOADING, false)
     })
     .catch(error => {
       console.log(error.response)
