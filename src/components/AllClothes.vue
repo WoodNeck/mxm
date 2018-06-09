@@ -18,15 +18,6 @@
       </div>
     </section>
 
-    <div class="section">
-      <div id='allCothes-filter-wrapper'>
-       <a class="button" @click="showAll()">ALL</a>
-       <a class="button" v-for="(tag, index) in tags" :vale="index" @click="filterTag(index+1)">
-         {{ tag.content }}
-       </a>
-      </div>
-    </div>
-
     <section>
       <b-loading :is-full-page="false" :active.sync="isLoading" />
       <div v-for="(clothes, arrayIndex) in clothes_row" v-bind:key="arrayIndex" class="columns is-3">
@@ -54,11 +45,6 @@ import { mapGetters } from 'vuex'
 import { ALLCLOTHES_LOAD,
          ALLCLOTHES_SET_TAG } from '@/store/types'
 export default {
-  data () {
-    return {
-      filter: 0
-    }
-  },
   created () {
     this.$store.dispatch(ALLCLOTHES_LOAD, {
       page: this.page,
@@ -91,12 +77,6 @@ export default {
     }
   },
   methods: {
-    showAll: function () {
-      this.$store.commit(ALLCLOTHES_SET_TAG, -1)
-    },
-    filterTag: function (tagIndex) {
-      this.$store.commit(ALLCLOTHES_SET_TAG, tagIndex)
-    },
     pageChange (page) {
       this.$store.dispatch(ALLCLOTHES_LOAD, {
         page: page,

@@ -5,8 +5,7 @@ const state = {
   clothes: [],
   tags: [],
   total: 1,
-  page: 1,
-  filter: -1
+  page: 1
 }
 
 const getters = {
@@ -39,9 +38,6 @@ const mutations = {
   },
   [types.ALLCLOTHES_SET_PAGE] (state, page) {
     state.page = page
-  },
-  [types.ALLCLOTHES_SET_TAG] (state, tag) {
-    state.filter = tag
   }
 }
 
