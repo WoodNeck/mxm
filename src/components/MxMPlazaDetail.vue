@@ -19,21 +19,25 @@
             <img class="pic" v-bind:src="cloth.image" width='200'>
          </span>
       </div>
-      <br/>
         <textarea v-if= "mxm.is_on_recommendation==true" v-model="reply_content" rows='6' cols='80'  placeholder="Give a recommendation :) "></textarea>
+      <br/>
         <div style="display:inline-block;">
           <star-rating v-if= "mxm.is_on_evaluation==true" v-model = "ratings" v-bind:max-rating="10" :show-rating="false" ></star-rating>
+          <br/>
+          <textarea v-if= "mxm.is_on_evaluation==true" v-model="comment" rows='6' cols='80'  placeholder="Leave a comment :) "></textarea>
         </div>
       <br/>
-        <button v-if= "mxm.is_on_recommendation==true" v-on:click="save_replies">Save</button>
-        <button v-if= "mxm.is_on_evaluation==true" v-on:click="save_ratings">Save</button>
+      <br/>
+        <button class= "button is-medium" v-if= "mxm.is_on_recommendation==true" v-on:click="save_replies">Save</button>
+        <button class= "button is-medium" v-if= "mxm.is_on_evaluation==true" v-on:click="save_ratings">Save</button>
       <router-link :to="`/plaza/`" class="is-active">
-        <button>Back to List</button>
+        <button class = "button is-medium" >Back to List</button>
       </router-link>
     </div>
   </section>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios'
@@ -57,12 +61,47 @@ export default {
         mxm: this.$route.params.id,
         reply_content: this.reply_content
       })
+      .then(response => {
+        this.$toast.open({
+          duration: 3000,
+          message: `Your reply is saved successfully`,
+          position: 'is-top',
+          type: 'is-success'
+        })
+      })
+      .catch(error => {
+        console.log(error.response)
+        this.$toast.open({
+          duration: 3000,
+          message: `Couldn't save your reply.`,
+          position: 'is-bottom',
+          type: 'is-danger'
+        })
+      })
     },
     save_ratings: function () {
       axios.post('/api/ratings/', {
         author: 1,
         mxm: this.$route.params.id,
+        comment: this.comment,
         stars: this.ratings
+      })
+      .then(response => {
+        this.$toast.open({
+          duration: 3000,
+          message: `Your ratings is saved successfully`,
+          position: 'is-top',
+          type: 'is-success'
+        })
+      })
+      .catch(error => {
+        console.log(error.response)
+        this.$toast.open({
+          duration: 3000,
+          message: `Couldn't save your ratings.`,
+          position: 'is-bottom',
+          type: 'is-danger'
+        })
       })
     }
   }

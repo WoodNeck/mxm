@@ -59,6 +59,7 @@ class Rating(models.Model):
         on_delete=models.CASCADE
     )
     stars = models.IntegerField()
+    comment = models.CharField(max_length=1000, default='')
     mxm = models.ForeignKey(
         'MxM', related_name='ratings',
         on_delete=models.CASCADE, default=1
