@@ -46,6 +46,7 @@ class Reply(models.Model):
         on_delete=models.CASCADE
     )
     reply_content = models.CharField(max_length=1000, default='')
+    recommend_clothes = models.ManyToManyField('Clothes')
     mxm = models.ForeignKey(
         'MxM', related_name='replies',
         on_delete=models.CASCADE, default=1
