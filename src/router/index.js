@@ -5,6 +5,7 @@ import Closet from '@/components/Closet'
 import AllClothes from '@/components/AllClothes'
 import ClothesDetail from '@/components/ClothesDetail'
 import MxMPlaza from '@/components/MxMPlaza'
+import MxMDetail from '@/components/MxMDetail'
 import MxMPlazaDetail from '@/components/MxMPlazaDetail'
 import NewClothes from '@/components/NewClothes'
 import AllMxMs from '@/components/AllMxMs'
@@ -39,6 +40,10 @@ export default new Router({
         {
           path: 'mxm/all',
           component: AllMxMs
+        },
+        {
+          path: 'mxm/detail/:id',
+          component: MxMDetail
         }
       ]
     },

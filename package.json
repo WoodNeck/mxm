@@ -20,10 +20,11 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.2",
+    "vue-grid-layout": "^2.1.13",
     "vue-router": "^3.0.1",
     "vue-scroll-reveal": "^1.0.8",
-    "vuex": "^3.0.1",
-    "vue-star-rating": "^1.6.0"
+    "vue-star-rating": "^1.6.0",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/server-test-utils": "^1.0.0-beta.15",
