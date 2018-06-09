@@ -5,7 +5,8 @@ const state = {
   clothes: [],
   tags: [],
   total: 1,
-  page: 1
+  page: 1,
+  isLoading: false
 }
 
 const getters = {
@@ -21,7 +22,7 @@ const getters = {
   tags: state => state.tags,
   total: state => state.total,
   page: state => state.page,
-  isLoading: state => state.clothes.length <= 0
+  isLoading: state => state.isLoading
 }
 
 const mutations = {
@@ -38,6 +39,9 @@ const mutations = {
   },
   [types.ALLCLOTHES_SET_PAGE] (state, page) {
     state.page = page
+  },
+  [types.ALLCLOTHES_SET_LOADING] (state, value) {
+    state.isLoading = value
   }
 }
 
@@ -47,10 +51,7 @@ const actions = {
     const page = payload.page
     const userId = rootGetters.user.id
 
-    commit(types.ALLCLOTHES_CLOTHES_LOAD, {
-      total: state.total,
-      clothes: []
-    })
+    commit(types.ALLCLOTHES_SET_LOADING, true)
 
     if (userId < 0) {
       setTimeout(() => {
@@ -68,6 +69,7 @@ const actions = {
           clothes: res.data.slice(1, res.data.length)
         })
         commit(types.ALLCLOTHES_SET_PAGE, page)
+        commit(types.ALLCLOTHES_SET_LOADING, false)
       }
     })
     .catch(error => {
@@ -78,6 +80,7 @@ const actions = {
         position: 'is-bottom',
         type: 'is-danger'
       })
+      commit(types.ALLCLOTHES_SET_LOADING, false)
     })
 
     axios.get('/api/tag/')

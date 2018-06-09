@@ -42,8 +42,7 @@
 <script>
 import Clothes from '@/components/Clothes.vue'
 import { mapGetters } from 'vuex'
-import { ALLCLOTHES_LOAD,
-         ALLCLOTHES_SET_TAG } from '@/store/types'
+import { ALLCLOTHES_LOAD } from '@/store/types'
 export default {
   created () {
     this.$store.dispatch(ALLCLOTHES_LOAD, {
