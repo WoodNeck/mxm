@@ -21,7 +21,10 @@
           <li v-for="mxm in mxms">
             <input type="checkbox" :id="mxm.id" :value="mxm.id" v-model="checkedMxMs">
               <label :for="mxm.id">
-              MxM #{{ mxm.id }}<br/>
+              <router-link :to="`/closet/mxm/detail/${mxm.id}`" class="is-active"> 
+                MxM #{{ mxm.id }}
+              </router-link>
+              <br/>
               <span v-for="cloth in mxm.clothes">
                 <img class="pic" v-bind:src="cloth.image" width='200'>
               </span><br/>
