@@ -22,7 +22,7 @@ class ClothesSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('content', 'type')
+        fields = ('id', 'content', 'type')
 
 
 class MxMReadSerializer(serializers.ModelSerializer):

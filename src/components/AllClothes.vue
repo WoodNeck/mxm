@@ -20,17 +20,12 @@
     </div>
 
     <div class="container">
-      <div id='allCothes-filter-wrapper'>
-       <a class="button" @click="showAll()">ALL</a>
-       <a class="button" v-for="(tag, index) in tags" :vale="index" @click="filterTag(index+1)">
-         {{ tag.content }}
-       </a>
-      </div>
+      <clothesFilter :clothes="clothes"
+        @applyFilter="applyFilter"/>
       <br/><br/>
-
       <div id="allClothes-list-wrapper">
         <ul>
-          <li v-for="cloth in clothes">
+          <li v-for="cloth in filteredClothes">
             <router-link :to="`/closet/clothes/detail/${cloth.id}`" class="is-active">
               <img class="pic" v-bind:src="cloth.image" width='300'>
             </router-link>
@@ -43,10 +38,14 @@
 </template>
 
 <script>
+import clothesFilter from './ClothesFilter.vue'
 export default {
+  components: {
+    clothesFilter
+  },
   data () {
     return {
-      filter: 0
+      filteredClothes: []
     }
   },
   created () {
@@ -55,33 +54,15 @@ export default {
   },
   computed: {
     clothes () {
-      if (this.filter === 0) {
-        return this.all
-      }
-      return this.filtered
-    },
-    all () {
       return this.$store.getters.clothes
-    },
-    filtered () {
-      if (this.filter !== 0) {
-        var filterIndex = this.filter
-        return this.all.filter(function (cloth) {
-          return (cloth.tag.includes(filterIndex))
-        })
-      }
     },
     tags () {
       return this.$store.getters.tags
     }
   },
   methods: {
-    showAll: function () {
-      this.filter = 0
-    },
-    filterTag: function (tagIndex) {
-      this.filter = tagIndex
-      console.log('this filter: ' + this.filter)
+    applyFilter: function (value) {
+      this.filteredClothes = value
     }
   }
 }

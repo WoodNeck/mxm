@@ -25,7 +25,6 @@
         </grid-item>
       </grid-layout>
       <br/>
-      <br/>
       allClothes
       <br/>
       <div class="tabFilterType">
@@ -37,7 +36,9 @@
            wildcard</button>
       </div>
       <div class="clothesNotInMxM">
-        <img v-for="(cloth, key) in clothesNotInMxM" ref=notMxMImg
+        <clothesFilter :clothes="clothesNotInMxM"
+          @applyFilter="applyFilter"/>
+        <img v-for="(cloth, key) in filteredClothes" ref=notMxMImg
           v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
       </div>
       <br/>
@@ -59,11 +60,13 @@
 <script>
 import axios from 'axios'
 import { GridLayout, GridItem } from 'vue-grid-layout'
+import clothesFilter from './ClothesFilter.vue'
 
 export default {
   components: {
     GridLayout,
-    GridItem
+    GridItem,
+    clothesFilter
   },
   created () {
     if (this.$route.path !== '/closet/mxm/new') {
@@ -81,6 +84,9 @@ export default {
     .then(clothes => {
       this.allClothes = clothes
     })
+  },
+  mounted () {
+    console.log("Hello")
   },
   computed: {
     clothesNotInMxM: {
@@ -102,6 +108,7 @@ export default {
       mxm: null,
       allClothes: [],
       clothesLayout: [],
+      filteredClothes: [],
       filterType: 'normal',
 
       // constants for GridLayout
@@ -112,7 +119,7 @@ export default {
   },
   methods: {
     parseAndCheckClothesLayout: function (mxm) {
-      var clothesLayout = mxm.clothes_layout
+      var clothesLayout = mxm.clothesLayout
       var clothes = mxm.clothes
       if (clothesLayout === '' || clothesLayout === '[]') {
         this.clothesLayout = []
@@ -154,6 +161,9 @@ export default {
     },
     toggleFilterType: function (event, filter) {
       this.filterType = filter
+    },
+    applyFilter: function (value) {
+      this.filteredClothes = value
     },
     addToMxM: function (index) {
       var image = this.$refs.notMxMImg[index]
@@ -218,6 +228,7 @@ h1 {
 .clothesNotInMxM {
   background-color: #a0c0ee;
   width: 800px;
+  min-height: 200px;
   overflow: auto;
   white-space: nowrap;
 }
@@ -237,6 +248,8 @@ h1 {
   border-bottom: 25px solid #c0e0ff;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
+  height: 0;
+  width: 100px;
   height: 0;
   width: 100px;
 }
