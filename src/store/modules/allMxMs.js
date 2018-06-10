@@ -18,11 +18,18 @@ const mutations = {
 }
 
 const actions = {
-  ALLMXMS_LOAD ({
-    commit
-  }) {
+  ALLMXMS_LOAD ({ commit, dispatch, rootGetters }) {
+    const userId = rootGetters.user.id
+
+    if (userId < 0) {
+      setTimeout(() => {
+        dispatch('ALLMXMS_LOAD')
+      }, 1000)
+      return
+    }
+
     axios
-    .get('/api/mxms/')
+    .get(`/api/mxms/user=${userId}/page=1`)
     .then(res => res.data)
     .then(mxms => {
       commit(types.ALLMXMS_LOAD, mxms)
@@ -30,7 +37,6 @@ const actions = {
   },
 
   ALLMXMS_SET_RECOMMEND ({ commit, dispatch }, checkedMxMs) {
-    console.log(checkedMxMs)
     for (var i = 0; i < checkedMxMs.length; i++) {
       axios.patch('api/mxms/' + checkedMxMs[i] + '/', {
         is_on_recommendation: true

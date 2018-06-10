@@ -34,19 +34,4 @@ describe('AllClothes.vue', () => {
     const wrapper = shallow(AllClothes, { localVue, store, router })
     expect(wrapper.isVueInstance()).toBe(true)
   })
-
-  it('has 1 hero section', () => {
-    const wrapper = shallow(AllClothes, { localVue, store, router })
-    expect(wrapper.findAll('.hero').length).toBeGreaterThanOrEqual(1)
-  })
-
-  it('has title named All Clothes', () => {
-    const wrapper = shallow(AllClothes, { localVue, store, router })
-    expect(wrapper.find('.title').text()).toBe('All Clothes')
-  })
-
-  it('has subtitle named Check your clothes', () => {
-    const wrapper = shallow(AllClothes, { localVue, store, router })
-    expect(wrapper.find('.subtitle').text()).toBe('Check your clothes')
-  })
 })

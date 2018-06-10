@@ -7,7 +7,7 @@ import allMxMs from './modules/allMxMs'
 import clothesDetail from './modules/clothesDetail'
 import MxMPlaza from './modules/MxMPlaza'
 import MxMPlazaDetail from './modules/MxMPlazaDetail'
-import newClothes from './modules/new_clothes'
+import newClothes from './modules/newClothes'
 
 Vue.use(Vuex)
 
