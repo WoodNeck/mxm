@@ -44,6 +44,10 @@ export default new Router({
         {
           path: 'mxm/detail/:id',
           component: MxMDetail
+        },
+        {
+          path: 'mxm/new',
+          component: MxMDetail
         }
       ]
     },

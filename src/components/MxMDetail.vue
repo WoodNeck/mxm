@@ -15,7 +15,7 @@
         :verticalCompact="false" :autoSize="false"
         :is-draggable="true" :is-resizable="true" :is-mirrored="false"
         :use-css-transforms="true">
-        <grid-item v-for="(item, key) in clothesLayout" ref=grid
+        <grid-item v-for="(item, key) in clothesLayout" ref=grid :key=key
           :x="item.x" :y="item.y" :w="item.w" :h="item.h" :maxH="20" :i="item.i"
           @resized="resizedEvent">
           <figure class="tint" v-on:dblclick="removeFromMxM(key)">
@@ -66,13 +66,17 @@ export default {
     GridItem
   },
   created () {
-    axios.get('/api/mxms/' + this.$route.params.id)
-    .then(res => res.data)
-    .then(mxm => {
-      this.mxm = mxm
-      this.parseAndCheckClothesLayout(mxm)
-    })
-    axios.get('/api/clothes/')
+    if (this.$route.path !== '/closet/mxm/new') {
+      axios.get('http://localhost:8000/api/mxms/' + this.$route.params.id)
+      .then(res => res.data)
+      .then(mxm => {
+        this.mxm = mxm
+        this.parseAndCheckClothesLayout(mxm)
+      })
+    } else {
+      this.mxm = {}
+    }
+    axios.get('http://localhost:8000/api/clothes/')
     .then(res => res.data)
     .then(clothes => {
       this.allClothes = clothes
@@ -162,11 +166,19 @@ export default {
       this.clothesLayout.splice(index, 1)
     },
     save: function () {
-      axios.patch('/api/mxms/' + this.$route.params.id + '/', {
+      var ownerId = this.$store.getters.user.id
+      var content = {
+        owner: ownerId,
         clothes: this.clothesLayout.map(cloth => parseInt(cloth.i)),
         clothes_layout: JSON.stringify(this.clothesLayout),
         description: this.mxm.description
-      })
+      }
+      if (this.$route.path !== '/closet/mxm/new') {
+        axios.patch('http://localhost:8000/api/mxms/' + this.$route.params.id + '/',
+          content)
+      } else {
+        axios.post('http://localhost:8000/api/mxms/', content)
+      }
     }
   }
 }

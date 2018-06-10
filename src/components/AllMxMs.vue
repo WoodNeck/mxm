@@ -5,7 +5,7 @@
         <div class="level-item" />
       </div>
       <div class="level-right">
-        <router-link to="/mxm/detail/" class="button is-primary level-item">
+        <router-link to="/closet/mxm/new" class="button is-primary level-item">
           <b-icon pack="fas" icon="plus-circle" />
           <span>New</span>
         </router-link>
