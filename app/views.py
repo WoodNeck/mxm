@@ -60,9 +60,12 @@ class ClothesOfUser(APIView):
 
     def get(self, request, userID, page, format=None): #page starts from 1
         page = int(page)
-        clothes = self.get_all_clothes_of_user(userID)[(page-1)*self.cpp : page*self.cpp]
+        all_clothes = self.get_all_clothes_of_user(userID)
+        clothes = all_clothes[(page-1)*self.cpp : page*self.cpp]
         serializer = ClothesSerializer(clothes, many=True)
-        return Response(serializer.data)
+        data = serializer.data
+        data.insert(0, len(all_clothes))
+        return Response(data)
 
     def post(self, request, userID, page, format=None):
         serializer = ClothesSerializer(data=request.data)

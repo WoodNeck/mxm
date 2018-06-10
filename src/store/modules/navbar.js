@@ -82,7 +82,6 @@ const actions = {
     axios.get('/api/myid/')
     .then(res => {
       state.user = res.data
-      console.log(res.data)
     })
     .catch(error => {
       console.log(error)
