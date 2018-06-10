@@ -11,9 +11,9 @@
         <div class="level-item" />
       </div>
     </div>
-    <section class="hero is-primary" id="header">
+    <section class="hero is-success" id="header">
       <div class="hero-body">
-        <h1 class="title is-1" id="header-text">Submit New Clothes</h1>
+        <h1 class="title is-1" id="header-text">New Clothes</h1>
       </div>
     </section>
     <section>
@@ -30,7 +30,7 @@
         </span>
       </b-field>
       <div class="image-preview" v-if="imageData.length > 0">
-        <img class="preview" :src="imageData">
+        <center><img class="preview" :src="imageData"></center>
       </div>
       <b-taginput
         v-model="tags"
@@ -46,7 +46,9 @@
         <div class="level-item" />
       </div>
       <div class="level-right">
-        <a @click="submit" class="button is-primary level-item">Submit</a>
+        <a @click="submit" class="button is-primary is-large">
+          <b-icon pack="fas" icon="paper-plane"></b-icon>
+          <span>SUBMIT</span></a>
       </div>
     </div>
   </div>
