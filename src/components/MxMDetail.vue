@@ -85,9 +85,6 @@ export default {
       this.allClothes = clothes
     })
   },
-  mounted () {
-    console.log("Hello")
-  },
   computed: {
     clothesNotInMxM: {
       get () {
@@ -119,7 +116,7 @@ export default {
   },
   methods: {
     parseAndCheckClothesLayout: function (mxm) {
-      var clothesLayout = mxm.clothesLayout
+      var clothesLayout = mxm.clothes_layout
       var clothes = mxm.clothes
       if (clothesLayout === '' || clothesLayout === '[]') {
         this.clothesLayout = []
