@@ -39,10 +39,10 @@ class MxMReadSerializer(serializers.ModelSerializer):
         if(count == 0):
             return 0
         return float(result) / float(count)
-    
+
     def get_num_replies(self, obj):
         return len(obj.replies.all())
-    
+
     class Meta:
         model = MxM
         fields = (
@@ -64,10 +64,10 @@ class MxMSerializer(serializers.ModelSerializer):
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
-        fields = ('id', 'created_time', 'author', 'reply_content', 'mxm')
+        fields = ('id', 'created_time', 'author', 'reply_content', 'recommend_clothes', 'mxm')
 
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
-        fields = ('id', 'created_time', 'author', 'stars', 'mxm')
+        fields = ('id', 'created_time', 'author', 'stars', 'comment', 'mxm')
