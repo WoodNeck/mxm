@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="columns">
-      <div id="closet-menu-wrapper" class="column is-3">
+      <div id="closet-menu-wrapper" class="column is-2">
         <aside class="menu">
           <ul class="menu-list">
             <li><router-link to="/closet/clothes/all" :class="{'is-active': this.activeMenu === 'clothes'}">All Clothes</router-link></li>
@@ -9,7 +9,7 @@
           </ul>
         </aside>
       </div>
-      <div id="closet-content-wrapper" class="column is-9">
+      <div id="closet-content-wrapper" class="column is-10">
         <router-view />
       </div>
     </div>

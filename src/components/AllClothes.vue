@@ -1,95 +1,100 @@
 <template>
-  <section class="hero">
+  <section>
     <div class="level">
       <div class="level-left">
         <div class="level-item" />
       </div>
       <div class="level-right">
-        <router-link to="/closet/clothes/new" class="button is-primary level-item">New</router-link>
+        <router-link to="/closet/clothes/new" class="button is-primary level-item">
+          <b-icon pack="fas" icon="plus-circle" />
+          <span>New</span>
+        </router-link>
       </div>
     </div>
 
-    <div class="hero-title">
-      <h1 class="title">
-        All Clothes
-      </h1>
-      <h2 class="subtitle">
-        Check your clothes
-      </h2>
-      <br/>
-    </div>
-
-    <div class="container">
-      <div id='allCothes-filter-wrapper'>
-       <a class="button" @click="showAll()">ALL</a>
-       <a class="button" v-for="(tag, index) in tags" :vale="index" @click="filterTag(index+1)">
-         {{ tag.content }}
-       </a>
+    <section class="hero is-primary" id="header">
+      <div class="hero-body">
+        <h1 class="title is-1" id="header-text">All Clothes</h1>
       </div>
-      <br/><br/>
+    </section>
 
-      <div id="allClothes-list-wrapper">
-        <ul>
-          <li v-for="cloth in clothes">
-            <router-link :to="`/closet/clothes/detail/${cloth.id}`" class="is-active">
-              <img class="pic" v-bind:src="cloth.image" width='300'>
-            </router-link>
-            <br/><br/>
-          </li>
-        </ul>
+    <section>
+      <b-loading :is-full-page="false" :active.sync="isLoading" />
+      <div v-for="(clothes, arrayIndex) in clothes_row" v-bind:key="arrayIndex" class="columns is-3">
+        <div v-for="cloth in clothes" :key="cloth.id" class="column">
+          <router-link :to="`/closet/clothes/detail/${cloth.id}`" class="is-active">
+            <clothes :cloth="cloth" />
+          </router-link>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <b-pagination
+      :total="total"
+      :current.sync="page"
+      :rounded="false"
+      :per-page="10"
+      @change="pageChange">
+    </b-pagination>
   </section>
 </template>
 
 <script>
+import Clothes from '@/components/Clothes.vue'
+import { mapGetters } from 'vuex'
+import { ALLCLOTHES_LOAD } from '@/store/types'
 export default {
-  data () {
-    return {
-      filter: 0
-    }
-  },
   created () {
-    this.$store.dispatch('ALLCLOTHES_LOAD')
-    this.$store.dispatch('TAGS_LOAD')
+    this.$store.dispatch(ALLCLOTHES_LOAD, {
+      page: this.page,
+      toast: this.$toast
+    })
   },
   computed: {
-    clothes () {
-      if (this.filter === 0) {
-        return this.all
+    ...mapGetters({
+      clothes: 'clothes',
+      tags: 'tags',
+      total: 'total',
+      page: 'page',
+      isLoading: 'isLoading'
+    }),
+    clothes_row () {
+      let clothes = this.$store.getters.clothes
+      let size = Math.ceil(clothes.length / 4.0)
+      let packedClothes = []
+      for (let i = 0; i < size; i += 1) {
+        packedClothes.push(clothes.slice(4 * i, (4 * i + 4) < clothes.length ? 4 * i + 4 : clothes.length))
       }
-      return this.filtered
-    },
-    all () {
-      return this.$store.getters.clothes
-    },
-    filtered () {
-      if (this.filter !== 0) {
-        var filterIndex = this.filter
-        return this.all.filter(function (cloth) {
-          return (cloth.tag.includes(filterIndex))
-        })
+      if (clothes.length % 4 !== 0) {
+        for (let i = 0; i < 4 - (clothes.length % 4); i += 1) {
+          packedClothes[packedClothes.length - 1].push({
+            id: -1
+          })
+        }
       }
-    },
-    tags () {
-      return this.$store.getters.tags
+      return packedClothes
     }
   },
   methods: {
-    showAll: function () {
-      this.filter = 0
-    },
-    filterTag: function (tagIndex) {
-      this.filter = tagIndex
-      console.log('this filter: ' + this.filter)
+    pageChange (page) {
+      this.$store.dispatch(ALLCLOTHES_LOAD, {
+        page: page,
+        toast: this.$toast
+      })
     }
+  },
+  components: {
+    'Clothes': Clothes
   }
 }
 </script>
 
 
 <style scoped>
-h1 {
-  color: #42b983;
-}
+  #header {
+    margin-bottom: 48px;
+  }
+  #header-text {
+    font-family: 'Rubik Mono One', sans-serif;
+  }
 </style>

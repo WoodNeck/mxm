@@ -13,7 +13,7 @@
     </div>
     <section class="hero is-primary" id="header">
       <div class="hero-body">
-        <h1 class="title is-1">Submit New Clothes</h1>
+        <h1 class="title is-1" id="header-text">Submit New Clothes</h1>
       </div>
     </section>
     <section>
@@ -108,7 +108,9 @@ export default {
   #header {
     margin-bottom: 48px;
   }
-
+  #header-text {
+    font-family: 'Rubik Mono One', sans-serif;
+  }
   #footer {
     margin-top: 48px;
   }
