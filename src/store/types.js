@@ -24,7 +24,6 @@ export const ALLMXMS_SET_RECOMMEND = 'allMxMs/ALLMXMS_SET_RECOMMEND'
 export const ALLMXMS_SET_EVAL = 'allMxMs/ALLMXMS_SET_EVAL'
 export const ALLMXMS_SET_PAGE = 'allMxMs/ALLMxMS_SET_PAGE'
 
-
 // clothesDetail
 export const CLOTHES_LOAD = 'clothesDetail/CLOTHES_LOAD'
 export const TAGS_LOAD = 'clothesDetail/TAGS_LOAD'
@@ -39,3 +38,4 @@ export const MXM_PLAZA_DETAIL_LOAD = 'MxMPlazaDetail/MXM_PLAZA_DETAIL_LOAD'
 export const NEW_CLOTHES_INIT = 'new_clothes/NEW_CLOTHES_INIT'
 export const NEW_CLOTHES_TAG_INPUT = 'new_clothes/NEW_CLOTHES_TAG_INPUT'
 export const NEW_CLOTHES_SUBMIT = 'new_clothes/NEW_CLOTHES_SUBMIT'
+
