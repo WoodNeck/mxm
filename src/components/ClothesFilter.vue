@@ -23,27 +23,10 @@ export default {
       filters: {'Color': null, 'Season': null, 'Texture': null, 'Category': null}
     }
   },
-  props: {
-    clothes: []
-  },
   created () {
     this.$store.dispatch('TAGS_LOAD')
   },
-  mounted () {
-    this.$emit('applyFilter', this.clothes)
-  },
   computed: {
-    filteredClothes () {
-      var result = this.clothes
-      for (var type in this.filters) {
-        var tag = this.filters[type]
-        if (tag === null) {
-          continue
-        }
-        result = result.filter(cloth => (cloth.tag.includes(tag.id)))
-      }
-      return result
-    },
     tags () {
       return this.$store.getters.tags
     },
@@ -64,7 +47,7 @@ export default {
   methods: {
     changeFilter (type, content) {
       this.filters[type] = content
-      this.$emit('applyFilter', this.filteredClothes)
+      this.$emit('applyFilter', this.filters)
     }
   }
 }

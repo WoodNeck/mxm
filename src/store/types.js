@@ -12,6 +12,11 @@ export const CLOSET_CHANGE_MENU = 'closet/CLOSET_CHANGE_MENU'
 
 // allClothes
 export const ALLCLOTHES_LOAD = 'allClothes/ALLCLOTHES_LOAD'
+export const ALLCLOTHES_CLOTHES_LOAD = 'allClothes/ALLCLOTHES_CLOTHES_LOAD'
+export const ALLCLOTHES_TAGS_LOAD = 'allClothes/ALLCLOTHES_TAGS_LOAD'
+export const ALLCLOTHES_CLOTHES_ADD = 'allClothes/ALLCLOTHES_CLOTHES_ADD'
+export const ALLCLOTHES_SET_PAGE = 'allClothes/ALLCLOTHES_SET_PAGE'
+export const ALLCLOTHES_SET_LOADING = 'allClothes/ALLCLOTHES_SET_LOADING'
 
 // allMxMs
 export const ALLMXMS_LOAD = 'allMxMs/ALLMXMS_LOAD'
@@ -25,9 +30,6 @@ export const TAGS_LOAD = 'clothesDetail/TAGS_LOAD'
 
 // mxmPlaza
 export const MXMPLAZA_LOAD = 'MxMPlaza/MXMPLAZA_LOAD'
-
-// mxmPlazaDetail
-export const MXM_PLAZA_DETAIL_LOAD = 'MxMPlazaDetail/MXM_PLAZA_DETAIL_LOAD'
 
 // new_clothes
 export const NEW_CLOTHES_INIT = 'new_clothes/NEW_CLOTHES_INIT'

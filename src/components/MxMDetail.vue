@@ -36,8 +36,7 @@
            wildcard</button>
       </div>
       <div class="clothesNotInMxM">
-        <clothesFilter :clothes="clothesNotInMxM"
-          @applyFilter="applyFilter"/>
+        <clothesFilter :filters="filters" @applyFilter="applyFilter"/>
         <img v-for="(cloth, key) in filteredClothes" ref=notMxMImg
           v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
       </div>
@@ -98,6 +97,19 @@ export default {
           !this.clothesLayout.some(cloth2 => (cloth.id === parseInt(cloth2['i'])))
         )
       }
+    },
+    filteredClothes: {
+      get () {
+        var result = this.clothesNotInMxM
+        for (var type in this.filters) {
+          var tag = this.filters[type]
+          if (tag === null) {
+            continue
+          }
+          result = result.filter(cloth => (cloth.tag.includes(tag.id)))
+        }
+        return result
+      }
     }
   },
   data: function () {
@@ -105,8 +117,8 @@ export default {
       mxm: null,
       allClothes: [],
       clothesLayout: [],
-      filteredClothes: [],
       filterType: 'normal',
+      filters: {'Color': null, 'Season': null, 'Texture': null, 'Category': null},
 
       // constants for GridLayout
       col_num: 300,
@@ -160,7 +172,7 @@ export default {
       this.filterType = filter
     },
     applyFilter: function (value) {
-      this.filteredClothes = value
+      this.filters = value
     },
     addToMxM: function (index) {
       var image = this.$refs.notMxMImg[index]

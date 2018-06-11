@@ -7,8 +7,8 @@ const state = {
 }
 
 const getters = {
-  filteredTags: state => {
-    return state.tags.filter(tag =>
+  filteredTags: (state, _, rootState) => {
+    return rootState.allClothes.tags.filter(tag =>
       tag.content.toLowerCase().indexOf(state.text.toLowerCase()) >= 0
     )
   }
@@ -21,25 +21,7 @@ const mutations = {
 }
 
 const actions = {
-  [types.NEW_CLOTHES_INIT] ({commit, state}, toast) {
-    axios.get('/api/tag/')
-    .then(res => {
-      for (let i = 0; i < res.data.length; i += 1) {
-        res.data[i].index = i
-      }
-      state.tags = res.data
-    })
-    .catch(error => {
-      console.log(error.response)
-      toast.open({
-        duration: 5000,
-        message: `Couldn't connect to backend server`,
-        position: 'is-bottom',
-        type: 'is-danger'
-      })
-    })
-  },
-  [types.NEW_CLOTHES_SUBMIT] ({rootState, rootGetters}, payload) {
+  [types.NEW_CLOTHES_SUBMIT] ({commit, rootState, rootGetters}, payload) {
     let file = payload.file
     let tags = payload.tags
     let toast = payload.toast
@@ -67,9 +49,9 @@ const actions = {
     let formData = new FormData()
     formData.append('image', file)
     formData.append('owner', rootGetters.user.id)
-    formData.append('tag', tags.map(tag => {
-      return tag.index
-    }))
+    tags.forEach(tag => {
+      formData.append('tag', tag.index)
+    })
 
     let sessionid = Cookies.get('sessionid')
     Cookies.remove('sessionid')
@@ -79,7 +61,8 @@ const actions = {
     )
     .then(response => {
       Cookies.set('sessionid', sessionid)
-      rootState.allClothes.clothes = [...rootState.allClothes.clothes, response.data]
+      let newCloth = response.data
+      commit(types.ALLCLOTHES_CLOTHES_ADD, newCloth)
       router.go(-1)
       toast.open({
         duration: 5000,
