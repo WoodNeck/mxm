@@ -56,16 +56,22 @@ export default {
     },
     tags () {
       return this.$store.getters.tags
-    }
-  },
-  methods: {
+    },
     ...mapGetters({
       clothes: 'clothes',
       tags: 'tags',
       total: 'total',
       page: 'page',
       isLoading: 'isLoading'
-    }),
+    })
+  },
+  methods: {
+    pageChange (page) {
+      this.$store.dispatch(ALLCLOTHES_LOAD, {
+        page: page,
+        toast: this.$toast
+      })
+    },
     clothes_row () {
       let clothes = this.$store.getters.clothes
       let size = Math.ceil(clothes.length / 4.0)
@@ -81,12 +87,6 @@ export default {
         }
       }
       return packedClothes
-    },
-    pageChange (page) {
-      this.$store.dispatch(ALLCLOTHES_LOAD, {
-        page: page,
-        toast: this.$toast
-      })
     }
   },
   components: {

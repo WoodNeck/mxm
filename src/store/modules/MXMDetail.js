@@ -21,7 +21,7 @@ const mutations = {
 const actions = {
   MXM_LOAD ({ commit }, id) {
     axios
-    .get('http://localhost:8000/api/mxms/' + id)
+    .get('/api/mxms/' + id)
     .then(res => res.data)
     .then(mxm => {
       commit(types.MXM_LOAD, mxm)

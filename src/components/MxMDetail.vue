@@ -69,7 +69,7 @@ export default {
   },
   created () {
     if (this.$route.path !== '/closet/mxm/new') {
-      axios.get('http://localhost:8000/api/mxms/' + this.$route.params.id)
+      axios.get('/api/mxms/' + this.$route.params.id)
       .then(res => res.data)
       .then(mxm => {
         this.mxm = mxm
@@ -78,7 +78,7 @@ export default {
     } else {
       this.mxm = {}
     }
-    axios.get('http://localhost:8000/api/clothes/')
+    axios.get('/api/clothes/')
     .then(res => res.data)
     .then(clothes => {
       this.allClothes = clothes
@@ -193,10 +193,10 @@ export default {
         description: this.mxm.description
       }
       if (this.$route.path !== '/closet/mxm/new') {
-        axios.patch('http://localhost:8000/api/mxms/' + this.$route.params.id + '/',
+        axios.patch('/api/mxms/' + this.$route.params.id + '/',
           content)
       } else {
-        axios.post('http://localhost:8000/api/mxms/', content)
+        axios.post('/api/mxms/', content)
       }
     }
   }
