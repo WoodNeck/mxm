@@ -2,8 +2,7 @@ import * as types from '../types'
 import axios from 'axios'
 
 const state = {
-  cloth: [],
-  tags: []
+  cloth: []
 }
 
 const getters = {
@@ -31,7 +30,7 @@ const actions = {
   },
   TAGS_LOAD ({ commit }) {
     axios
-    .get('http://localhost:8000/api/tag/')
+    .get('/api/tag/')
     .then(res => res.data)
     .then(tags => {
       commit(types.TAGS_LOAD, tags)

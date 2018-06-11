@@ -51,6 +51,14 @@ export default {
     })
   },
   computed: {
+    clothes () {
+      return this.$store.getters.clothes
+    },
+    tags () {
+      return this.$store.getters.tags
+    }
+  },
+  methods: {
     ...mapGetters({
       clothes: 'clothes',
       tags: 'tags',
@@ -73,9 +81,7 @@ export default {
         }
       }
       return packedClothes
-    }
-  },
-  methods: {
+    },
     pageChange (page) {
       this.$store.dispatch(ALLCLOTHES_LOAD, {
         page: page,

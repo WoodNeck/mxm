@@ -15,7 +15,7 @@
         :verticalCompact="false" :autoSize="false"
         :is-draggable="true" :is-resizable="true" :is-mirrored="false"
         :use-css-transforms="true">
-        <grid-item v-for="(item, key) in clothesLayout" ref=grid
+        <grid-item v-for="(item, key) in clothesLayout" ref=grid :key=key
           :x="item.x" :y="item.y" :w="item.w" :h="item.h" :maxH="20" :i="item.i"
           @resized="resizedEvent">
           <figure class="tint" v-on:dblclick="removeFromMxM(key)">
@@ -24,7 +24,6 @@
           </figure>
         </grid-item>
       </grid-layout>
-      <br/>
       <br/>
       allClothes
       <br/>
@@ -37,7 +36,8 @@
            wildcard</button>
       </div>
       <div class="clothesNotInMxM">
-        <img v-for="(cloth, key) in clothesNotInMxM" ref=notMxMImg
+        <clothesFilter :filters="filters" @applyFilter="applyFilter"/>
+        <img v-for="(cloth, key) in filteredClothes" ref=notMxMImg
           v-bind:src="cloth.image" v-on:click="addToMxM(key)" width="200">
       </div>
       <br/>
@@ -59,20 +59,26 @@
 <script>
 import axios from 'axios'
 import { GridLayout, GridItem } from 'vue-grid-layout'
+import clothesFilter from './ClothesFilter.vue'
 
 export default {
   components: {
     GridLayout,
-    GridItem
+    GridItem,
+    clothesFilter
   },
   created () {
-    axios.get('/api/mxms/' + this.$route.params.id)
-    .then(res => res.data)
-    .then(mxm => {
-      this.mxm = mxm
-      this.parseAndCheckClothesLayout(mxm)
-    })
-    axios.get('/api/clothes/')
+    if (this.$route.path !== '/closet/mxm/new') {
+      axios.get('http://localhost:8000/api/mxms/' + this.$route.params.id)
+      .then(res => res.data)
+      .then(mxm => {
+        this.mxm = mxm
+        this.parseAndCheckClothesLayout(mxm)
+      })
+    } else {
+      this.mxm = {}
+    }
+    axios.get('http://localhost:8000/api/clothes/')
     .then(res => res.data)
     .then(clothes => {
       this.allClothes = clothes
@@ -91,6 +97,19 @@ export default {
           !this.clothesLayout.some(cloth2 => (cloth.id === parseInt(cloth2['i'])))
         )
       }
+    },
+    filteredClothes: {
+      get () {
+        var result = this.clothesNotInMxM
+        for (var type in this.filters) {
+          var tag = this.filters[type]
+          if (tag === null) {
+            continue
+          }
+          result = result.filter(cloth => (cloth.tag.includes(tag.id)))
+        }
+        return result
+      }
     }
   },
   data: function () {
@@ -99,6 +118,7 @@ export default {
       allClothes: [],
       clothesLayout: [],
       filterType: 'normal',
+      filters: {'Color': null, 'Season': null, 'Texture': null, 'Category': null},
 
       // constants for GridLayout
       col_num: 300,
@@ -151,6 +171,9 @@ export default {
     toggleFilterType: function (event, filter) {
       this.filterType = filter
     },
+    applyFilter: function (value) {
+      this.filters = value
+    },
     addToMxM: function (index) {
       var image = this.$refs.notMxMImg[index]
       var w = this.imageSizeToW(image.clientWidth)
@@ -162,11 +185,19 @@ export default {
       this.clothesLayout.splice(index, 1)
     },
     save: function () {
-      axios.patch('/api/mxms/' + this.$route.params.id + '/', {
+      var ownerId = this.$store.getters.user.id
+      var content = {
+        owner: ownerId,
         clothes: this.clothesLayout.map(cloth => parseInt(cloth.i)),
         clothes_layout: JSON.stringify(this.clothesLayout),
         description: this.mxm.description
-      })
+      }
+      if (this.$route.path !== '/closet/mxm/new') {
+        axios.patch('http://localhost:8000/api/mxms/' + this.$route.params.id + '/',
+          content)
+      } else {
+        axios.post('http://localhost:8000/api/mxms/', content)
+      }
     }
   }
 }
@@ -206,6 +237,7 @@ h1 {
 .clothesNotInMxM {
   background-color: #a0c0ee;
   width: 800px;
+  min-height: 200px;
   overflow: auto;
   white-space: nowrap;
 }
@@ -225,6 +257,8 @@ h1 {
   border-bottom: 25px solid #c0e0ff;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
+  height: 0;
+  width: 100px;
   height: 0;
   width: 100px;
 }
