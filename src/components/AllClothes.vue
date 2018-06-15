@@ -20,7 +20,7 @@
 
     <section>
       <b-loading :is-full-page="false" :active.sync="isLoading" />
-      <div v-for="(clothes, arrayIndex) in clothes_row" v-bind:key="arrayIndex" class="columns is-3">
+      <div v-for="(clothes, arrayIndex) in clothes_row" :key="arrayIndex" class="columns is-3">
         <div v-for="cloth in clothes" :key="cloth.id" class="column">
           <router-link :to="`/closet/clothes/detail/${cloth.id}`" class="is-active">
             <clothes :cloth="cloth" />
@@ -51,29 +51,14 @@ export default {
     })
   },
   computed: {
-    clothes () {
-      return this.$store.getters.clothes
-    },
-    tags () {
-      return this.$store.getters.tags
-    },
     ...mapGetters({
-      clothes: 'clothes',
       tags: 'tags',
       total: 'total',
       page: 'page',
       isLoading: 'isLoading'
-    })
-  },
-  methods: {
-    pageChange (page) {
-      this.$store.dispatch(ALLCLOTHES_LOAD, {
-        page: page,
-        toast: this.$toast
-      })
-    },
+    }),
     clothes_row () {
-      let clothes = this.$store.getters.clothes
+      let clothes = this.$store.getters.user_clothes
       let size = Math.ceil(clothes.length / 4.0)
       let packedClothes = []
       for (let i = 0; i < size; i += 1) {
@@ -87,6 +72,14 @@ export default {
         }
       }
       return packedClothes
+    }
+  },
+  methods: {
+    pageChange (page) {
+      this.$store.dispatch(ALLCLOTHES_LOAD, {
+        page: page,
+        toast: this.$toast
+      })
     }
   },
   components: {

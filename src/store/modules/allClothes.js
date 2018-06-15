@@ -10,15 +10,7 @@ const state = {
 }
 
 const getters = {
-  clothes: state => {
-    if (state.filter >= 0) {
-      return state.clothes.filter((cloth) => {
-        return cloth.tag.includes(state.filter)
-      })
-    } else {
-      return state.clothes
-    }
-  },
+  user_clothes: state => state.clothes,
   tags: state => state.tags,
   total: state => state.total,
   page: state => state.page,
