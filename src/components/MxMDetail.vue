@@ -28,10 +28,10 @@
       allClothes
       <br/>
       <div class="tabFilterType">
-        <button v-on:click="toggleFilterType($event,'normal')" 
+        <button v-on:click="toggleFilterType($event,'normal')"
           :class="[filterType==='normal' ? 'buttonFilterTypeActive' : 'buttonFilterType']">
            normal</button>
-        <button v-on:click="toggleFilterType($event,'wildcard')" 
+        <button v-on:click="toggleFilterType($event,'wildcard')"
           :class="[filterType==='wildcard' ? 'buttonFilterTypeActive' : 'buttonFilterType']">
            wildcard</button>
       </div>
@@ -60,6 +60,7 @@
 import axios from 'axios'
 import { GridLayout, GridItem } from 'vue-grid-layout'
 import clothesFilter from './ClothesFilter.vue'
+import { ALLMXMS_MXMS_ADD } from '@/store/types'
 
 export default {
   components: {
@@ -197,6 +198,10 @@ export default {
           content)
       } else {
         axios.post('/api/mxms/', content)
+        .then(res => {
+          let newMxM = res.data
+          this.$store.commit(ALLMXMS_MXMS_ADD, newMxM)
+        })
       }
     }
   }

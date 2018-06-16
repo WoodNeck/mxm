@@ -111,9 +111,12 @@ class MxMsOfUser(APIView):
 
     def get(self, request, userID, page, format=None):
         page = int(page)
-        mxms = self.get_all_mxms_of_user(userID)[(page-1)*self.mpp : page*self.mpp]
+        all_mxms = self.get_all_mxms_of_user(userID)
+        mxms = all_mxms[(page-1)*self.mpp : page*self.mpp]
         serializer = MxMSerializer(mxms, many=True)
-        return Response(serializer.data)
+        data = serializer.data
+        data.insert(0, len(all_mxms))
+        return Response(data)
 
     def post(self, request, userID, page, format=None):
         serializer = MxMSerializer(data=request.data)
@@ -181,5 +184,3 @@ class RatingsOfMxM(APIView):
             serializer.save(mxm=MxM.objects.get(pk=mxmID))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-

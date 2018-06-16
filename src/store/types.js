@@ -20,9 +20,13 @@ export const ALLCLOTHES_SET_LOADING = 'allClothes/ALLCLOTHES_SET_LOADING'
 
 // allMxMs
 export const ALLMXMS_LOAD = 'allMxMs/ALLMXMS_LOAD'
+export const ALLMXMS_MXMS_LOAD = 'allMxMs/ALLMXMS_MXMS_LOAD'
+export const ALLMXMS_CLOTHES_LOAD = 'allMxMs/ALLMXMS_CLOTHES_LOAD'
+export const ALLMXMS_MXMS_ADD = 'allMxMs/ALLMXMS_MXMS_ADD'
 export const ALLMXMS_SET_RECOMMEND = 'allMxMs/ALLMXMS_SET_RECOMMEND'
 export const ALLMXMS_SET_EVAL = 'allMxMs/ALLMXMS_SET_EVAL'
-export const ALLMXMS_SET_PAGE = 'allMxMs/ALLMxMS_SET_PAGE'
+export const ALLMXMS_SET_PAGE = 'allMxMs/ALLMXMS_SET_PAGE'
+export const ALLMXMS_SET_LOADING = 'allClothes/ALLMXMS_SET_LOADING'
 
 // clothesDetail
 export const CLOTHES_LOAD = 'clothesDetail/CLOTHES_LOAD'
