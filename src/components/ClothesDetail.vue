@@ -21,27 +21,19 @@
       <div class="card-image">
         <center><img class="pic" v-bind:src="cloth.image" width='600'><br/><br/></center>
       </div>
-      <div class="card-content">
+      <div class="card-contentv">
         <p class="title is-3">
           <center>MY CLOTHES #{{ cloth.id }}<center> <br/>
-            {{cloth.tag}}
         </p>
-        <center>
-        <div v-for="tag in cloth.tag">
-          {{tag}}<br/>
-          <!-- <div v-if="cloth.tag.includes(tag)"> -->
-            <!-- <span class="tag is-large" is-primary>{{ getTagById(tag).type }}</span>
-            <span class="tag is-large">{{ getTagById(tag).contents }}</span>
-          </div> -->
-        </div> </center>
-        <!-- <div class="field is-grouped is-grouped-multiline">
-          <template v-for="(tag, index) in tags">
-            <div v-if="cloth.tag.includes(index+1)">
-              <span class=
-              {{ tag.type}}: {{ tag.content }}
+        <div class="field is-grouped is-grouped-multiline">
+          <div v-for="tag in tags">
+            <div v-if="cloth.tag.includes(tag.id)">
+              <div class="tags has-addons" id="tags">
+                <span class="tag is-large is-primary">{{ tag.type }}</span>
+                <span class="tag is-large">{{ tag.content }}</span>
+              </div>
             </div>
-          </template>
-        <br/> -->
+          </div> <br/>
       </div>
     </div>
   </section>
@@ -60,13 +52,6 @@ export default {
     tags () {
       return this.$store.getters.tags
     }
-  },
-  method: {
-    getTagById: function (id) {
-      console.log(id)
-      console.log(this.tags)
-      return this.tags.find(tag => tag.id === parseInt(id))
-    }
   }
 }
 </script>
@@ -81,4 +66,8 @@ h1 {
 #header-text {
   font-family: 'Rubik Mono One', sans-serif;
 }
+#tags {
+  align-content: center;
+}
 </style>
+
