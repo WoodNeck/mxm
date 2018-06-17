@@ -24,6 +24,7 @@
         <a class="button is-large" v-on:click="setRecommend(checkedMxMs)">RECOMMENDATION</a>
         <a class="button is-large" v-on:click="setEval(checkedMxMs)">EVALUATION</a>
         <br/><br/>
+      </div>
     </section>
 
     <section>

@@ -23,7 +23,7 @@
       </div>
       <div class="card-contentv">
         <p class="title is-3">
-          <center>MY CLOTHES #{{ cloth.id }}<center> <br/>
+          <center>MY CLOTHES #{{ cloth.id }}</center> <br/>
         </p>
         <div class="field is-grouped is-grouped-multiline">
           <div v-for="tag in tags">
@@ -34,6 +34,7 @@
               </div>
             </div>
           </div> <br/>
+        </div>
       </div>
     </div>
   </section>
