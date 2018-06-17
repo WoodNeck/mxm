@@ -114,11 +114,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      mxms: 'mxms',
-      clothes: 'clothes',
-      page: 'page',
-      total: 'total',
-      isLoading: 'isLoading'
+      mxms: 'allMxM_mxms',
+      clothes: 'allMxM_clothes',
+      page: 'allMxM_page',
+      total: 'allMxM_total',
+      isLoading: 'allMxM_isLoading'
     })
   },
   methods: {

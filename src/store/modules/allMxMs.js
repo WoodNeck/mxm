@@ -12,11 +12,11 @@ const state = {
 }
 
 const getters = {
-  mxms: state => state.mxms,
-  clothes: state => state.clothes,
-  page: stage => state.page,
-  total: state => state.total,
-  isLoading: state => state.isLoading
+  allMxM_mxms: state => state.mxms,
+  allMxM_clothes: state => state.clothes,
+  allMxM_page: stage => state.page,
+  allMxM_total: state => state.total,
+  allMxM_isLoading: state => state.isLoading
 }
 
 const mutations = {
