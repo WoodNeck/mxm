@@ -34,6 +34,7 @@ export const TAGS_LOAD = 'clothesDetail/TAGS_LOAD'
 
 // mxmPlaza
 export const MXMPLAZA_LOAD = 'MxMPlaza/MXMPLAZA_LOAD'
+export const MXMPLAZA_USER_LOAD = 'MxMPlaza/MXMPLAZA_USER_LOAD'
 
 // new_clothes
 export const NEW_CLOTHES_INIT = 'new_clothes/NEW_CLOTHES_INIT'
