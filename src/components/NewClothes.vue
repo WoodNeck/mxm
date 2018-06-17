@@ -11,7 +11,7 @@
         <div class="level-item" />
       </div>
     </div>
-    <section class="hero is-success" id="header">
+    <section class="hero is-primary" id="header">
       <div class="hero-body">
         <h1 class="title is-1" id="header-text">New Clothes</h1>
       </div>
