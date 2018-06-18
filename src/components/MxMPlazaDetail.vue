@@ -37,23 +37,6 @@
           </div>
         </div>
 
-        <div v-if= "mxm.is_on_recommendation==true" class="card" :id="mxm.id">
-          <header class="card-header">
-            <div class="title">
-              Other's Recommendation
-            </div>
-          </header>
-
-          <div class="card-content">
-            <div v-for="rec in reply">
-              <div class="description">
-                Recommedation #{{rec.id}}
-              </div>
-              comment: {{rec.reply_content}}
-            </div>
-          </div>
-        </div>
-
         <div  v-if= "mxm.is_on_recommendation==true" class="card" :id="mxm.id">
           <header class="card-header">
             <div class="title">
@@ -62,6 +45,9 @@
           </header>
 
           <div class="card-content">
+            <div class="description">
+              Select clothes for recommendation
+            </div>
             <button class= "button is-medium" v-on:click="recFromAllClothes">Recommend From All Clothes</button>
             <button class= "button is-medium" v-on:click="recFromUserClothes">Recommend From User's Clothes</button>
             <br/>
@@ -90,47 +76,66 @@
           </div>
         </div>
 
+        <div v-if= "mxm.is_on_recommendation==true" class="card" :id="mxm.id">
+          <header class="card-header">
+            <div class="title">
+              Other's Recommendation
+            </div>
+          </header>
+
+          <div class="card-content">
+            <div v-for="rec in reply">
+              <div class="description">
+                Recommedation #{{rec.id}}
+              </div>
+              <span v-for="cloth in rec.recommend_clothes">
+                  <img class="pic" v-bind:src="cloth.image">
+              </span>
+              <br/>
+              comment: {{rec.reply_content}}
+            </div>
+          </div>
+        </div>
+
+        <div v-if= "mxm.is_on_evaluation==true" class="card" :id="mxm.id">
+          <header class="card-header">
+            <div class="title">
+              Evaluate this MxM
+            </div>
+          </header>
+
+          <div class="card-content">
+            <star-rating v-model = "ratings" v-bind:max-rating="10" :show-rating="false" ></star-rating>
+            <br/>
+            <textarea v-model="comment" rows='6' cols='120'  placeholder="Leave a comment :) "></textarea>
+            <br/>
+              <button class= "button is-medium" v-on:click="save_ratings">Save</button>
+            <router-link :to="`/plaza/`" class="is-active">
+              <button class = "button is-medium" >Back to List</button>
+            </router-link>
+            </div>
+        </div>
+
         <div v-if= "mxm.is_on_evaluation==true" class="card" :id="mxm.id">
           <header class="card-header">
             <div class="title">
               Other's Ratings
             </div>
           </header>
-
-          <div v-if= "mxm.is_on_evaluation==true" class="card" :id="mxm.id">
-            <header class="card-header">
-              <div class="title">
-                Evaluate this MxM
-              </div>
-            </header>
-
-            <div class="card-content">
-              <star-rating v-model = "ratings" v-bind:max-rating="10" :show-rating="false" ></star-rating>
-              <br/>
-              <textarea v-model="comment" rows='6' cols='120'  placeholder="Leave a comment :) "></textarea>
-              <br/>
-                <button class= "button is-medium" v-on:click="save_ratings">Save</button>
-              <router-link :to="`/plaza/`" class="is-active">
-                <button class = "button is-medium" >Back to List</button>
-              </router-link>
-
-            </div>
+        <div class="card-content">
+          <div class="description">
+            Average Ratings
           </div>
-
-          <div class="card-content">
+          <star-rating :rating="mxm.average_rating" v-bind:max-rating="10" :read-only="true" :increment="0.01"></star-rating>
+          <div v-for="rate in rating">
             <div class="description">
-              Average Ratings
+              Ratings#{{rate.id}}
             </div>
-            <star-rating :rating="mxm.average_rating" v-bind:max-rating="10" :read-only="true" :increment="0.01"></star-rating>
-            <div v-for="rate in rating">
-              <div class="description">
-                Ratings#{{rate.id}}
-              </div>
-               <star-rating :rating="rate.stars" v-bind:max-rating="10" :read-only="true"></star-rating>
-               comment: {{rate.comment}}
-            </div>
+             <star-rating :rating="rate.stars" v-bind:max-rating="10" :read-only="true"></star-rating>
+             comment: {{rate.comment}}
           </div>
         </div>
+      </div>
 
       </div>
     </div>
@@ -210,7 +215,7 @@ export default {
       axios.post('/api/replies/', {
         author: this.$store.getters.user.id,
         mxm: this.$route.params.id,
-        recommend_clothes: this.clothesInRec.map(cloth => cloth.id),
+        recommend_clothes: this.clothesInRec.map(cloth => parseInt(cloth.id)),
         reply_content: this.reply_content
       })
       .then(response => {

@@ -2,7 +2,8 @@ from app.models import Clothes, Tag, MxM, Reply, Rating
 from app.serializers import (
     UserSerializer, ClothesSerializer, TagSerializer,
     MxMSerializer, MxMReadSerializer,
-    ReplySerializer, RatingSerializer
+    ReplySerializer, ReplyReadSerializer,
+    RatingSerializer
 )
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -140,16 +141,23 @@ class MxMsOfUser(APIView):
 
 class ReplyList(generics.ListCreateAPIView):
     queryset = Reply.objects.all()
-    serializer_class = ReplySerializer
+    def get_serializer_class(self):
+        if self.request.method in ('GET', ):
+            return ReplyReadSerializer
+        return ReplySerializer
 
 
 class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Reply.objects.all()
-    serializer_class = ReplySerializer
+    def get_serializer_class(self):
+        if self.request.method in ('GET', ):
+            return ReplyReadSerializer
+        return ReplySerializer
 
 
 class RepliesOfMxM(APIView):
     rpp = constants.replies_per_page # number of replies per page
+
     def get_all_replies_of_mxm(self, mxmID):
         return [reply for reply in Reply.objects.all()
             if reply.mxm.id == int(mxmID)]
@@ -157,7 +165,7 @@ class RepliesOfMxM(APIView):
     def get(self, request, mxmID, page, format=None):
         page = int(page)
         replies = self.get_all_replies_of_mxm(mxmID)[(page-1)*self.rpp : page*self.rpp]
-        serializer = ReplySerializer(replies, many=True)
+        serializer = ReplyReadSerializer(replies, many=True)
         return Response(serializer.data)
 
     def post(self, request, mxmID, page, format=None):

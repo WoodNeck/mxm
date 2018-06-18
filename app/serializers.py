@@ -61,6 +61,13 @@ class MxMSerializer(serializers.ModelSerializer):
         )
 
 
+class ReplyReadSerializer(serializers.ModelSerializer):
+    recommend_clothes = ClothesSerializer(many=True)
+    class Meta:
+        model = Reply
+        fields = ('id', 'created_time', 'author', 'reply_content', 'recommend_clothes', 'mxm')
+
+
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
