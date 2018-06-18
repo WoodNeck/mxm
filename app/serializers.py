@@ -46,7 +46,7 @@ class MxMReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = MxM
         fields = (
-            'id', 'owner', 'created_time', 'clothes', 'description', 
+            'id', 'owner', 'created_time', 'clothes', 'description',
             'clothes_layout', 'is_on_recommendation', 'is_on_evaluation',
             'average_rating', 'num_replies'
         )
