@@ -27,9 +27,13 @@
           </header>
 
           <div class="card-content">
-            <span v-for="cloth in mxm.clothes">
-              <img class="pic" v-bind:src="cloth.image">
-            </span>
+            <b-tooltip label="Click to see clothes info">
+              <span v-for="cloth in mxm.clothes">
+                <router-link :to="`/closet/clothes/detail/${cloth.id}`" class="is-active">
+                  <img class="pic" v-bind:src="cloth.image">
+                </router-link>
+              </span>
+            </b-tooltip>
           </div>
         </div>
 
@@ -58,20 +62,21 @@
           </header>
 
           <div class="card-content">
+            <button class= "button is-medium" v-on:click="recFromAllClothes">Recommend From All Clothes</button>
+            <button class= "button is-medium" v-on:click="recFromUserClothes">Recommend From User's Clothes</button>
+            <br/>
+            <b-tooltip label="Click to select">
+              <transition-group>
+                <img v-for="(cloth, index) in clothesNotInRec" class="pic" v-on:click="addToRec(index)" v-bind:src="cloth.image" width='200' :key="cloth.id">
+              </transition-group>
+            </b-tooltip>
+            <br/>
             <div class="description">
               Clothes selected for recommendation
             </div>
             <b-tooltip label="Click to undo">
               <transition-group>
                 <img v-for="(cloth, index) in clothesInRec" class="pic" v-on:click="removeFromRec(index)" v-bind:src="cloth.image" width='200' :key="cloth.id">
-              </transition-group>
-            </b-tooltip>
-            <div class="description">
-              Recommend among user's clothes
-            </div>
-            <b-tooltip label="Click to select">
-              <transition-group>
-                <img v-for="(cloth, index) in clothesNotInRec" class="pic" v-on:click="addToRec(index)" v-bind:src="cloth.image" width='200' :key="cloth.id">
               </transition-group>
             </b-tooltip>
             <br/>
@@ -92,8 +97,30 @@
             </div>
           </header>
 
+          <div v-if= "mxm.is_on_evaluation==true" class="card" :id="mxm.id">
+            <header class="card-header">
+              <div class="title">
+                Evaluate this MxM
+              </div>
+            </header>
+
+            <div class="card-content">
+              <star-rating v-model = "ratings" v-bind:max-rating="10" :show-rating="false" ></star-rating>
+              <br/>
+              <textarea v-model="comment" rows='6' cols='120'  placeholder="Leave a comment :) "></textarea>
+              <br/>
+                <button class= "button is-medium" v-on:click="save_ratings">Save</button>
+              <router-link :to="`/plaza/`" class="is-active">
+                <button class = "button is-medium" >Back to List</button>
+              </router-link>
+
+            </div>
+          </div>
+
           <div class="card-content">
-            Average Ratings
+            <div class="description">
+              Average Ratings
+            </div>
             <star-rating :rating="mxm.average_rating" v-bind:max-rating="10" :read-only="true" :increment="0.01"></star-rating>
             <div v-for="rate in rating">
               <div class="description">
@@ -104,27 +131,6 @@
             </div>
           </div>
         </div>
-
-        <div v-if= "mxm.is_on_evaluation==true" class="card" :id="mxm.id">
-          <header class="card-header">
-            <div class="title">
-              Evaluate this MxM
-            </div>
-          </header>
-
-          <div class="card-content">
-            <star-rating v-model = "ratings" v-bind:max-rating="10" :show-rating="false" ></star-rating>
-            <br/>
-            <textarea v-model="comment" rows='6' cols='120'  placeholder="Leave a comment :) "></textarea>
-            <br/>
-              <button class= "button is-medium" v-on:click="save_ratings">Save</button>
-            <router-link :to="`/plaza/`" class="is-active">
-              <button class = "button is-medium" >Back to List</button>
-            </router-link>
-
-          </div>
-        </div>
-
 
       </div>
     </div>
@@ -144,12 +150,6 @@ export default {
     .then(res => res.data)
     .then(mxm => {
       this.mxm = mxm
-    })
-    axios
-    .get('/api/clothes/user=' + this.$store.getters.user.id + '/')
-    .then(res => res.data)
-    .then(clothesNotInRec => {
-      this.clothesNotInRec = clothesNotInRec
     })
     axios
     .get('/api/ratings/mxm=' + this.$route.params.id + '/page=1')
@@ -182,13 +182,29 @@ export default {
     StarRating
   },
   methods: {
+    recFromUserClothes: function () {
+      axios
+      .get('/api/clothes/user=' + this.mxm.owner + '/')
+      .then(res => res.data)
+      .then(clothesNotInRec => {
+        this.clothesNotInRec = clothesNotInRec
+      })
+    },
+    recFromAllClothes: function () {
+      axios
+      .get('/api/clothes/')
+      .then(res => res.data)
+      .then(clothesNotInRec => {
+        this.clothesNotInRec = clothesNotInRec
+      })
+    },
     removeFromRec: function (index) {
-      this.clothesNotInRec.splice(this.clothesNotInRec.length, 0, this.clothesInRec[index])
+    //  this.clothesNotInRec.splice(this.clothesNotInRec.length, 0, this.clothesInRec[index])
       this.clothesInRec.splice(index, 1)
     },
     addToRec: function (index) {
       this.clothesInRec.splice(this.clothesInRec.length, 0, this.clothesNotInRec[index])
-      this.clothesNotInRec.splice(index, 1)
+    //  this.clothesNotInRec.splice(index, 1)
     },
     save_replies: function () {
       axios.post('/api/replies/', {

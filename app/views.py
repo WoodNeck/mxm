@@ -52,6 +52,18 @@ class ClothesDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ClothesSerializer
 
 
+class AllClothesOfUser(APIView):
+    def get_all_clothes_of_user(self, userID):
+	    return [clothes for clothes in Clothes.objects.all()
+            if clothes.owner.id == int(userID)]
+    def get(self, request, userID, format=None):
+        all_clothes = self.get_all_clothes_of_user(userID)
+        serializer = ClothesSerializer(all_clothes, many=True)
+        data = serializer.data
+        data.insert(0, len(all_clothes))
+        return Response(data)
+
+
 class ClothesOfUser(APIView):
     cpp = constants.clothes_per_page # number of clothes per page
     def get_all_clothes_of_user(self, userID):
