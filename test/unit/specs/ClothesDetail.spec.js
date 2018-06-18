@@ -44,9 +44,4 @@ describe('ClothesDetail.vue', () => {
     const wrapper = shallow(ClothesDetail, { localVue, store, router })
     expect(wrapper.find('.title').text()).toBe('Clothes Detail')
   })
-
-  it('has subtitle named Check your MxMs', () => {
-    const wrapper = shallow(ClothesDetail, { localVue, store, router })
-    expect(wrapper.find('.subtitle').text()).toBe('Check your clothes detail')
-  })
 })
