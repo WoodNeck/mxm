@@ -155,6 +155,24 @@ class ReplyDetail(generics.RetrieveUpdateDestroyAPIView):
         return ReplySerializer
 
 
+class AllRepliesOfMxM(APIView):
+    def get_all_replies_of_mxm(self, mxmID):
+        return [reply for reply in Reply.objects.all()
+            if reply.mxm.id == int(mxmID)]
+
+    def get(self, request, mxmID, format=None):
+        replies = self.get_all_replies_of_mxm(mxmID)
+        serializer = ReplyReadSerializer(replies, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, mxmID, format=None):
+        serializer = ReplySerializer(data=request.data)
+        if(serializer.is_valid()):
+            serializer.save(mxm=MxM.objects.get(pk=mxmID))
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class RepliesOfMxM(APIView):
     rpp = constants.replies_per_page # number of replies per page
 
@@ -168,7 +186,7 @@ class RepliesOfMxM(APIView):
         serializer = ReplyReadSerializer(replies, many=True)
         return Response(serializer.data)
 
-    def post(self, request, mxmID, page, format=None):
+    def post(self, request, mxmID, format=None):
         serializer = ReplySerializer(data=request.data)
         if(serializer.is_valid()):
             serializer.save(mxm=MxM.objects.get(pk=mxmID))
@@ -184,6 +202,24 @@ class RatingList(generics.ListCreateAPIView):
 class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
+
+
+class AllRatingsOfMxM(APIView):
+    def get_all_ratings_of_mxm(self, mxmID):
+        return [rating for rating in Rating.objects.all()
+            if rating.mxm.id == int(mxmID)]
+
+    def get(self, request, mxmID, format=None):
+        ratings = self.get_all_ratings_of_mxm(mxmID)
+        serializer = RatingSerializer(ratings, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, mxmID, page, format=None):
+        serializer = RatingSerializer(data=request.data)
+        if(serializer.is_valid()):
+            serializer.save(mxm=MxM.objects.get(pk=mxmID))
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RatingsOfMxM(APIView):

@@ -157,13 +157,13 @@ export default {
       this.mxm = mxm
     })
     axios
-    .get('/api/ratings/mxm=' + this.$route.params.id + '/page=1')
+    .get('/api/ratings/mxm=' + this.$route.params.id)
     .then(res => res.data)
     .then(rating => {
       this.rating = rating
     })
     axios
-    .get('/api/replies/mxm=' + this.$route.params.id + '/page=1')
+    .get('/api/replies/mxm=' + this.$route.params.id)
     .then(res => res.data)
     .then(reply => {
       this.reply = reply
@@ -204,12 +204,10 @@ export default {
       })
     },
     removeFromRec: function (index) {
-    //  this.clothesNotInRec.splice(this.clothesNotInRec.length, 0, this.clothesInRec[index])
       this.clothesInRec.splice(index, 1)
     },
     addToRec: function (index) {
       this.clothesInRec.splice(this.clothesInRec.length, 0, this.clothesNotInRec[index])
-    //  this.clothesNotInRec.splice(index, 1)
     },
     save_replies: function () {
       axios.post('/api/replies/', {
