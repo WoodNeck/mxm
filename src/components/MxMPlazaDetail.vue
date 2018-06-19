@@ -200,7 +200,7 @@ export default {
       .get('/api/clothes/')
       .then(res => res.data)
       .then(clothesNotInRec => {
-        this.clothesNotInRec = clothesNotInRec
+        this.clothesNotInRec = clothesNotInRec.filter(cloth => !cloth.is_wildcard)
       })
     },
     removeFromRec: function (index) {
